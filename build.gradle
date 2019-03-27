@@ -12,6 +12,12 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'org.asynchttpclient:async-http-client:2.8.1'
+
+    compile 'io.grpc:grpc-netty-shaded:1.19.0'
+    compile 'io.grpc:grpc-protobuf:1.19.0'
+    compile 'io.grpc:grpc-stub:1.19.0'
 }
 
 buildscript {

@@ -6,11 +6,13 @@ public class Config {
     public AsyncHttpClient client;
     public String token;
     public String projectId;
-    public String url;
+    public String host;
+    public int port;
 
-    public Config(String projectId, String url, AsyncHttpClient client) {
+    public Config(String projectId, String host, int port, AsyncHttpClient client) {
         this.projectId = projectId;
-        this.url = url;
+        this.host = host;
+        this.port = port;
         this.client = client;
     }
 }
