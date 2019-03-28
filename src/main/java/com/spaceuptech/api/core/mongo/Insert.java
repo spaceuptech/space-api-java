@@ -13,18 +13,14 @@ public class Insert {
 
     public Insert(Config config, String collection) {
         this.config = config;
-        this.meta = Meta.newBuilder()
-                .setProject(config.projectId)
-                .setCol(collection)
-                .setDbType("mongo")
-                .setToken(config.token).build();
+        this.meta = Transport.makeMeta(config.projectId, collection, "mongo", config.token);
     }
 
-    public GRPCResponse one(Object doc, Utils.ResponseListener listener) {
+    public GRPCResponse one(Object doc) {
         return Transport.create(config.host, config.port, doc, "one", this.meta);
     }
 
-    public GRPCResponse all(Object[] docs, Utils.ResponseListener listener) {
+    public GRPCResponse all(Object[] docs) {
         return Transport.create(config.host, config.port, docs, "all", this.meta);
     }
 }
