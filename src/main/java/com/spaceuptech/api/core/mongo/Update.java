@@ -1,6 +1,5 @@
 package com.spaceuptech.api.core.mongo;
 
-import com.google.gson.Gson;
 import com.spaceuptech.api.core.proto.Meta;
 import com.spaceuptech.api.core.utils.*;
 
@@ -11,7 +10,7 @@ public class Update {
     private Config config;
     private String operation;
     private Meta meta;
-    HashMap<String, Object> find, update;
+    private HashMap<String, Object> find, update;
 
     public Update(Config config, String collection) {
         this.config = config;
@@ -91,18 +90,18 @@ public class Update {
         return this;
     }
 
-    public GRPCResponse one() {
+    public void one(Utils.ResponseListener listener) {
         this.operation = "one";
-        return Transport.update(config.host, config.port, this.find, this.operation, this.update, this.meta);
+        Transport.update(config.host, config.port, this.find, this.operation, this.update, this.meta, listener);
     }
 
-    public GRPCResponse all() {
+    public void all(Utils.ResponseListener listener) {
         this.operation = "all";
-        return Transport.update(config.host, config.port, this.find, this.operation, this.update, this.meta);
+        Transport.update(config.host, config.port, this.find, this.operation, this.update, this.meta, listener);
     }
 
-    public GRPCResponse upsert(Utils.ResponseListener listener) {
+    public void upsert(Utils.ResponseListener listener) {
         this.operation = "upsert";
-        return Transport.update(config.host, config.port, this.find, this.operation, this.update, this.meta);
+        Transport.update(config.host, config.port, this.find, this.operation, this.update, this.meta, listener);
     }
 }

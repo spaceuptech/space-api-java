@@ -6,11 +6,10 @@ public class Config {
     public String host;
     public int port;
 
-    public Config(String projectId, String host, int port, String token) {
+    public Config(String projectId, String host, int port) {
         this.projectId = projectId;
         this.host = host;
         this.port = port;
-        this.token = token;
     }
 }
 

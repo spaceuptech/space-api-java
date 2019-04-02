@@ -10,7 +10,7 @@ public class API {
     private Config config;
 
     public API(String projectId, String host, int port) {
-        this.config = new Config(projectId, host, port, asyncHttpClient());
+        this.config = new Config(projectId, host, port);
     }
 
     public void setToken(String token) {

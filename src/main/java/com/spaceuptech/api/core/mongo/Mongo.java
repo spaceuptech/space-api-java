@@ -1,7 +1,5 @@
 package com.spaceuptech.api.core.mongo;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.spaceuptech.api.core.utils.*;
 
 import java.util.ArrayList;
@@ -129,14 +127,14 @@ public class Mongo {
 //        Utils.fetch(this.config.client, "post", this.config.token, this.config.url + "v1/auth/email/signup",
 //                new Gson().toJson(map), listener1);
 //    }
-//
-    public static String mongoURL(String url, String projectId, String collection, String params) {
-        String temp = url + "v1/mongo/" + projectId + "/" + collection;
-        if (params.length() > 0) {
-            temp += "?" + params;
-        }
-        return temp;
-    }
+////
+//    public static String mongoURL(String url, String projectId, String collection, String params) {
+//        String temp = url + "v1/mongo/" + projectId + "/" + collection;
+//        if (params.length() > 0) {
+//            temp += "?" + params;
+//        }
+//        return temp;
+//    }
 
     public static HashMap<String, Object> generateFind(Condition condition) {
         switch (condition.condType) {

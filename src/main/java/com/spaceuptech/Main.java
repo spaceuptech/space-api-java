@@ -297,8 +297,8 @@ public class Main {
 
 
         /****************************** Mongo ******************************/
-        API api = new API("test", "http://localhost:8080");
-        Mongo mongo = api.Mongo();
+//        API api = new API("test", "http://localhost:8080");
+//        Mongo mongo = api.Mongo();
 //        Utils.MongoAuthListener signUpListener = new Utils.MongoAuthListener() {
 //            @Override
 //            public void onResponse(int statusCode, MongoAuthResponse res) {
@@ -561,35 +561,35 @@ public class Main {
 //        };
 //        mongo.signUp("user1@gmail.com", "User 1", "123", "user", signUpListener);
 
-        Utils.MongoAuthListener mongoAuthListener = new Utils.MongoAuthListener() {
-            @Override
-            public void onResponse(int statusCode, MongoAuthResponse res) {
-                if (statusCode != 200) {
-                    System.out.println("Error in Signin: " + statusCode);
-                    return;
-                }
-                api.setToken(res.token);
-
-                Utils.ResponseListener responseListener = new Utils.ResponseListener() {
-                    @Override
-                    public void onResponse(int statusCode, Response response) {
-                        System.out.println("FaaS Response: " + response.getValue(Object.class));
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        System.out.println("Error: " + e.toString());
-                    }
-                };
-                api.call("echo-engine", "echo", 5000, "FaaS is awesome!", responseListener);
-            }
-
-            @Override
-            public void onError(Exception e) {
-                System.out.println("Error: " + e.toString());
-            }
-        };
-        mongo.signIn("user1@gmail.com", "123", mongoAuthListener);
-
+//        Utils.MongoAuthListener mongoAuthListener = new Utils.MongoAuthListener() {
+//            @Override
+//            public void onResponse(int statusCode, MongoAuthResponse res) {
+//                if (statusCode != 200) {
+//                    System.out.println("Error in Signin: " + statusCode);
+//                    return;
+//                }
+//                api.setToken(res.token);
+//
+//                Utils.ResponseListener responseListener = new Utils.ResponseListener() {
+//                    @Override
+//                    public void onResponse(int statusCode, Response response) {
+//                        System.out.println("FaaS Response: " + response.getValue(Object.class));
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception e) {
+//                        System.out.println("Error: " + e.toString());
+//                    }
+//                };
+//                api.call("echo-engine", "echo", 5000, "FaaS is awesome!", responseListener);
+//            }
+//
+//            @Override
+//            public void onError(Exception e) {
+//                System.out.println("Error: " + e.toString());
+//            }
+//        };
+//        mongo.signIn("user1@gmail.com", "123", mongoAuthListener);
+//
     }
 }

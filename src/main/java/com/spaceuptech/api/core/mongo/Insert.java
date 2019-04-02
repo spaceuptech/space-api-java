@@ -1,10 +1,7 @@
 package com.spaceuptech.api.core.mongo;
 
 import com.spaceuptech.api.core.proto.Meta;
-import com.spaceuptech.api.core.utils.Config;
-import com.spaceuptech.api.core.utils.GRPCResponse;
-import com.spaceuptech.api.core.utils.Transport;
-import com.spaceuptech.api.core.utils.Utils;
+import com.spaceuptech.api.core.utils.*;
 
 public class Insert {
 
@@ -16,11 +13,11 @@ public class Insert {
         this.meta = Transport.makeMeta(config.projectId, collection, "mongo", config.token);
     }
 
-    public GRPCResponse one(Object doc) {
-        return Transport.create(config.host, config.port, doc, "one", this.meta);
+    public void one(Object doc, Utils.ResponseListener listener) {
+        Transport.create(config.host, config.port, doc, "one", this.meta, listener);
     }
 
-    public GRPCResponse all(Object[] docs) {
-        return Transport.create(config.host, config.port, docs, "all", this.meta);
+    public void all(Object[] docs, Utils.ResponseListener listener) {
+        Transport.create(config.host, config.port, docs, "all", this.meta, listener);
     }
 }

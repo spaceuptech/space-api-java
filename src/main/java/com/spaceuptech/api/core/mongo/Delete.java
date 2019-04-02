@@ -23,15 +23,14 @@ public class Delete {
         return this;
     }
 
-    public GRPCResponse one() {
+    public void one(Utils.ResponseListener listener) {
         this.operation = "one";
-        return Transport.delete(config.host, config.port, this.find, this.operation, this.meta);
+        Transport.delete(config.host, config.port, this.find, this.operation, this.meta, listener);
 
     }
 
-    public GRPCResponse all() {
+    public void all(Utils.ResponseListener listener) {
         this.operation = "all";
-        return Transport.delete(config.host, config.port, this.find, this.operation, this.meta);
+        Transport.delete(config.host, config.port, this.find, this.operation, this.meta, listener);
     }
-
 }

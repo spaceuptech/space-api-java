@@ -6,6 +6,7 @@ import com.spaceuptech.api.core.utils.*;
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Get {
 
@@ -13,7 +14,6 @@ public class Get {
     private ReadOptions.Builder readOptions;
     private String operation;
     private HashMap<String, Object> find;
-
     private Config config;
 
     public Get(Config config, String collection) {
@@ -28,13 +28,13 @@ public class Get {
         return this;
     }
 
-    public Get select(HashMap<String, Integer> select) {
-        // TODO set select for readOptions
+    public Get select(Map<String, Integer> select) {
+        this.readOptions.putAllSelect(select);
         return this;
     }
 
-    public Get sort(String... sort) {
-        // TODO set sort for readOptions
+    public Get sort(Map<String, Integer> sort) {
+        this.readOptions.putAllSort(sort);
         return this;
     }
 
@@ -48,24 +48,24 @@ public class Get {
         return this;
     }
 
-    public GRPCResponse one() {
+    public void one(Utils.ResponseListener listener) {
         this.operation = "one";
-        return Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta);
+        Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 
-    public GRPCResponse all() {
+    public void all(Utils.ResponseListener listener) {
         this.operation = "all";
-        return Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta);
+        Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 
-    public GRPCResponse count() {
+    public void count(Utils.ResponseListener listener) {
         this.operation = "count";
-        return Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta);
+        Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 
-    public GRPCResponse distinct(String key) {
+    public void distinct(String key, Utils.ResponseListener listener) {
         this.operation = "distinct";
         this.readOptions.setDistinct(key);
-        return Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta);
+        Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 }

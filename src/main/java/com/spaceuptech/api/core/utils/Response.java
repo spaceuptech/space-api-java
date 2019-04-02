@@ -16,5 +16,4 @@ public class Response {
         JsonElement result = jsonObject.get("result");
         return  gson.fromJson(result, c);
     }
-
 }

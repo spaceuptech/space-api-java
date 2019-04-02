@@ -1,10 +1,12 @@
 package com.spaceuptech.api.core.utils;
 
+import com.google.gson.JsonParser;
 import com.google.protobuf.ByteString;
 import com.spaceuptech.api.core.proto.*;
 import com.spaceuptech.api.core.proto.Response;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.StreamObserver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,42 +20,47 @@ public class Transport {
                 .setToken(token).build();
     }
 
-    private static GRPCResponse getGRPCResponse(Response response) {
-        return new GRPCResponse(
-                response.getStatus(),
-                response.getError(),
-                response.getResult()
-        );
+    private static StreamObserver<Response> makeStreamObserver(Utils.ResponseListener listener, ManagedChannel channel) {
+        return new StreamObserver<Response>() {
+            @Override
+            public void onNext(Response value) {
+                listener.onResponse(value.getStatus(), new com.spaceuptech.api.core.utils.Response(new JsonParser().parse(value.toString()).getAsJsonObject()));
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                listener.onError(new Exception(t));
+            }
+
+            @Override
+            public void onCompleted() {
+                try {
+                    channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        };
     }
 
-    public static GRPCResponse create(String host, int port, Object doc, String operation, Meta meta) {
+    public static void create(String host, int port, Object doc, String operation, Meta meta, Utils.ResponseListener listener) {
 
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-        final SpaceCloudGrpc.SpaceCloudBlockingStub blockingStub = SpaceCloudGrpc.newBlockingStub(channel);
+        final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
 
         CreateRequest createRequest = CreateRequest.newBuilder()
                 .setDocument((ByteString) doc)
                 .setOperation(operation)
                 .setMeta(meta).build();
 
-        GRPCResponse grpcResponse = null;
-        try {
-            Response response = blockingStub.create(createRequest);
-            grpcResponse = getGRPCResponse(response);
-        }
-        finally {
-            try {
-                channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
-            } finally {
-                return grpcResponse;
-            }
-        }
+        stub.create(createRequest, makeStreamObserver(listener, channel));
     }
 
-    public static GRPCResponse read(String host, int port, Object find, String operation, ReadOptions options, Meta meta) {
+    public static void read(String host, int port, Object find, String operation, ReadOptions options, Meta meta, Utils.ResponseListener listener) {
 
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-        final SpaceCloudGrpc.SpaceCloudBlockingStub blockingStub = SpaceCloudGrpc.newBlockingStub(channel);
+        final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
 
         ReadRequest readRequest = ReadRequest.newBuilder()
                 .setFind((ByteString) find)
@@ -61,24 +68,13 @@ public class Transport {
                 .setOptions(options)
                 .setMeta(meta).build();
 
-        GRPCResponse grpcResponse = null;
-        try {
-            Response response = blockingStub.read(readRequest);
-            grpcResponse = getGRPCResponse(response);
-        }
-        finally {
-            try {
-                channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
-            } finally {
-                return grpcResponse;
-            }
-        }
+        stub.read(readRequest, makeStreamObserver(listener, channel));
     }
 
-    public static GRPCResponse update(String host, int port, Object find, String operation, Object update, Meta meta) {
+    public static void update(String host, int port, Object find, String operation, Object update, Meta meta, Utils.ResponseListener listener) {
 
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-        final SpaceCloudGrpc.SpaceCloudBlockingStub blockingStub = SpaceCloudGrpc.newBlockingStub(channel);
+        final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
 
         UpdateRequest updateRequest = UpdateRequest.newBuilder()
                 .setFind((ByteString) find)
@@ -86,41 +82,19 @@ public class Transport {
                 .setUpdate((ByteString) update)
                 .setMeta(meta).build();
 
-        GRPCResponse grpcResponse = null;
-        try {
-            Response response = blockingStub.update(updateRequest);
-            grpcResponse = getGRPCResponse(response);
-        }
-        finally {
-            try {
-                channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
-            } finally {
-                return grpcResponse;
-            }
-        }
+        stub.update(updateRequest, makeStreamObserver(listener, channel));
     }
 
-    public static GRPCResponse delete(String host, int port, Object find, String operation, Meta meta) {
+    public static void delete(String host, int port, Object find, String operation, Meta meta, Utils.ResponseListener listener) {
 
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-        final SpaceCloudGrpc.SpaceCloudBlockingStub blockingStub = SpaceCloudGrpc.newBlockingStub(channel);
+        final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
 
         DeleteRequest deleteRequest = DeleteRequest.newBuilder()
                 .setFind((ByteString) find)
                 .setOperation(operation)
                 .setMeta(meta).build();
 
-        GRPCResponse grpcResponse = null;
-        try {
-            Response response = blockingStub.delete(deleteRequest);
-            grpcResponse = getGRPCResponse(response);
-        }
-        finally {
-            try {
-                channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
-            } finally {
-                return grpcResponse;
-            }
-        }
+        stub.delete(deleteRequest, makeStreamObserver(listener, channel));
     }
 }
