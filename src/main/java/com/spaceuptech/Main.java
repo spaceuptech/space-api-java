@@ -1,33 +1,66 @@
 package com.spaceuptech;
 
+import com.google.gson.JsonObject;
 import com.spaceuptech.api.core.API;
+import com.spaceuptech.api.core.mongo.Insert;
 import com.spaceuptech.api.core.mongo.Mongo;
-import com.spaceuptech.api.core.utils.MongoAuthResponse;
 import com.spaceuptech.api.core.utils.Response;
 import com.spaceuptech.api.core.utils.Utils;
 
+import java.io.Console;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 
-    private static Utils.ResponseListener generateListener(String event, Class c) {
-        Utils.ResponseListener listener = new Utils.ResponseListener() {
-            @Override
-            public void onResponse(int statusCode, Response response) {
-                System.out.println(event + ":: StatusCode: " + statusCode + " Data: " + response.getValue(c));
-            }
-
-            @Override
-            public void onError(Exception e) {
-                System.out.println(event + ":: Error: " + e.toString());
-            }
-        };
-        return  listener;
-    }
+//    private static Utils.ResponseListener generateListener(String event, Class c) {
+//        return new Utils.ResponseListener() {
+//            @Override
+//            public void onResponse(int statusCode, Response response) {
+//                System.out.println(event + ":: StatusCode: " + statusCode + " Data: " + response.getValue(c));
+//            }
+//
+//            @Override
+//            public void onError(Exception e) {
+//                System.out.println(event + ":: Error: " + e.toString());
+//            }
+//        };
+//    }
 
     public static void main(String[] args) {
-        String name = "User 1";
-        String email = "user1@gmail.com";
-        String role = "user";
+
+        // Tests for gRPC API
+        API api = new API("test-project", "localhost", 8081);
+        Mongo mongo = api.Mongo();
+
+        Map<String, String> document = new HashMap<>();
+        document.put("_id", "23");
+        document.put("first_name", "Yash");
+        document.put("last_name", "Jain");
+
+        mongo.insert("test-collection")
+                .one(document, new Utils.ResponseListener() {
+                    @Override
+                    public void onResponse(int statusCode, Response response) {
+                        System.out.println("Status Code: " + statusCode);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+        while (true) {}
+
+
+
+
+
+        // Tests for HTTP API
+//        String name = "User 1";
+//        String email = "user1@gmail.com";
+//        String role = "user";
 
         /****************************** SQL ******************************/
 //        API api = new API("realtime-mysql", "http://localhost:8080");

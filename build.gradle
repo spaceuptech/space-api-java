@@ -1,5 +1,5 @@
 apply plugin: 'java'
-apply plugin: 'com.google.protobuf'
+// apply plugin: 'com.google.protobuf'
 
 group 'com.spaceuptech.api.core'
 version '0.1.0'
@@ -15,34 +15,37 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'org.asynchttpclient:async-http-client:2.8.1'
 
+    compile "org.slf4j:slf4j-api:1.6.1"
+    compile "org.slf4j:slf4j-simple:1.6.1"
+
     compile 'io.grpc:grpc-netty-shaded:1.19.0'
     compile 'io.grpc:grpc-protobuf:1.19.0'
     compile 'io.grpc:grpc-stub:1.19.0'
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        // ASSUMES GRADLE 2.12 OR HIGHER. Use plugin version 0.7.5 with earlier
-        // gradle versions
-        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.0'
-    }
-}
+//buildscript {
+//    repositories {
+//        mavenCentral()
+//    }
+//    dependencies {
+//        // ASSUMES GRADLE 2.12 OR HIGHER. Use plugin version 0.7.5 with earlier
+//        // gradle versions
+//        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.0'
+//    }
+//}
 
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.2.0"
-    }
-    plugins {
-        grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.4.0'
-        }
-    }
-    generateProtoTasks {
-        all()*.plugins {
-            grpc {}
-        }
-    }
-}
+//protobuf {
+//    protoc {
+//        artifact = "com.google.protobuf:protoc:3.2.0"
+//    }
+//    plugins {
+//        grpc {
+//            artifact = 'io.grpc:protoc-gen-grpc-java:1.4.0'
+//        }
+//    }
+//    generateProtoTasks {
+//        all()*.plugins {
+//            grpc {}
+//        }
+//    }
+//}
