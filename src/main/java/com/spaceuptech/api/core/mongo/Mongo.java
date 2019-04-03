@@ -29,25 +29,25 @@ public class Mongo {
     }
 
     // TODO
-    public void profile(String id, Utils.MongoProfileListener listener) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void editProfile(String id, String email, String name, String pass, Utils.ResponseListener listener) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void profiles(Utils.MongoProfilesListener listener) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void signIn(String email, String pass, Utils.MongoAuthListener listener) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void signUp(String email, String name, String pass, String role, Utils.MongoAuthListener listener) {
-        throw new UnsupportedOperationException();
-    }
+//    public void profile(String id, Utils.MongoProfileListener listener) {
+//        throw new UnsupportedOperationException();
+//    }
+//
+//    public void editProfile(String id, String email, String name, String pass, Utils.ResponseListener listener) {
+//        throw new UnsupportedOperationException();
+//    }
+//
+//    public void profiles(Utils.MongoProfilesListener listener) {
+//        throw new UnsupportedOperationException();
+//    }
+//
+//    public void signIn(String email, String pass, Utils.MongoAuthListener listener) {
+//        throw new UnsupportedOperationException();
+//    }
+//
+//    public void signUp(String email, String name, String pass, String role, Utils.MongoAuthListener listener) {
+//        throw new UnsupportedOperationException();
+//    }
 
     public static HashMap<String, Object> generateFind(Condition condition) {
         switch (condition.condType) {

@@ -4,8 +4,6 @@ import com.spaceuptech.api.core.sql.SQL;
 import com.spaceuptech.api.core.utils.Config;
 import com.spaceuptech.api.core.utils.Utils;
 
-import static org.asynchttpclient.Dsl.asyncHttpClient;
-
 public class API {
     private Config config;
 

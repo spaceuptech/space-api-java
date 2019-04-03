@@ -28,27 +28,27 @@ public class SQL {
     }
 
     // TODO
-    public Delete delete(String collection) {
-        return new Delete(this.db, this.config, collection);
-    }
-
-    public void profile(String id, Utils.SQLProfileListener listener) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void editProfile(String id, String email, String name, String pass, Utils.ResponseListener listener) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void profiles(Utils.SQLProfilesListener listener) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void signIn(String email, String pass, Utils.SQLAuthListener listener) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void signUp(String email, String name, String pass, String role, Utils.SQLAuthListener listener) {
-        throw new UnsupportedOperationException();
-    }
+//    public Delete delete(String collection) {
+//        return new Delete(this.db, this.config, collection);
+//    }
+//
+//    public void profile(String id, Utils.SQLProfileListener listener) {
+//        throw new UnsupportedOperationException();
+//    }
+//
+//    public void editProfile(String id, String email, String name, String pass, Utils.ResponseListener listener) {
+//        throw new UnsupportedOperationException();
+//    }
+//
+//    public void profiles(Utils.SQLProfilesListener listener) {
+//        throw new UnsupportedOperationException();
+//    }
+//
+//    public void signIn(String email, String pass, Utils.SQLAuthListener listener) {
+//        throw new UnsupportedOperationException();
+//    }
+//
+//    public void signUp(String email, String name, String pass, String role, Utils.SQLAuthListener listener) {
+//        throw new UnsupportedOperationException();
+//    }
 }

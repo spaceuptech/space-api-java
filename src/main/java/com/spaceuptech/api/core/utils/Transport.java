@@ -1,5 +1,6 @@
 package com.spaceuptech.api.core.utils;
 
+import com.google.gson.*;
 import com.google.protobuf.ByteString;
 import com.spaceuptech.api.core.proto.*;
 import com.spaceuptech.api.core.proto.Response;
@@ -7,10 +8,6 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.concurrent.TimeUnit;
 
 public class Transport {
@@ -32,12 +29,15 @@ public class Transport {
             @Override
             public void onNext(Response value) {
 
-                System.out.println(value);
-
-//                if (value.getStatus() == 200)
-//                    listener.onResponse(value.getStatus(), new com.spaceuptech.api.core.utils.Response(new JsonParser().parse(value.getResult().toString()).getAsJsonObject()));
-//                else
-//                    listener.onResponse(value.getStatus(), new com.spaceuptech.api.core.utils.Response(new JsonParser().parse(value.getError()).getAsJsonObject()));
+                Gson gson = new Gson();
+                if (value.getStatus() == 200) {
+                    String jsonString = gson.toJson(value.getResult().toStringUtf8());
+                    listener.onResponse(value.getStatus(), new com.spaceuptech.api.core.utils.Response(gson.fromJson("{ \"result\": " + jsonString + " }", JsonObject.class)));
+                }
+                else {
+                    String jsonString = gson.toJson(value.getError());
+                    listener.onResponse(value.getStatus(), new com.spaceuptech.api.core.utils.Response(gson.fromJson("{ \"result\": " + jsonString + " }", JsonObject.class)));
+                }
 
                 try {
                     channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
@@ -61,29 +61,16 @@ public class Transport {
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
         final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutput out;
-        try {
-            out = new ObjectOutputStream(bos);
-            out.writeObject(doc);
-            out.flush();
-            byte[] bytes = bos.toByteArray();
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(doc);
+        byte[] bytes = jsonString.getBytes();
 
-            CreateRequest createRequest = CreateRequest.newBuilder()
+        CreateRequest createRequest = CreateRequest.newBuilder()
                     .setDocument(ByteString.copyFrom(bytes))
                     .setOperation(operation)
                     .setMeta(meta).build();
 
             stub.create(createRequest, makeStreamObserver(listener, channel));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                bos.close();
-            } catch (IOException ex) {
-                // ignore close exception
-            }
-        }
     }
 
     public static void read(String host, int port, Object find, String operation, ReadOptions options, Meta meta, Utils.ResponseListener listener) {
@@ -91,8 +78,12 @@ public class Transport {
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
         final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
 
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(find);
+        byte[] bytes = jsonString.getBytes();
+
         ReadRequest readRequest = ReadRequest.newBuilder()
-                .setFind((ByteString) find)
+                .setFind(ByteString.copyFrom(bytes))
                 .setOperation(operation)
                 .setOptions(options)
                 .setMeta(meta).build();
@@ -105,10 +96,16 @@ public class Transport {
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
         final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
 
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(find);
+        byte[] findBytes = jsonString.getBytes();
+        jsonString = gson.toJson(update);
+        byte[] updateBytes = jsonString.getBytes();
+
         UpdateRequest updateRequest = UpdateRequest.newBuilder()
-                .setFind((ByteString) find)
+                .setFind(ByteString.copyFrom(findBytes))
                 .setOperation(operation)
-                .setUpdate((ByteString) update)
+                .setUpdate(ByteString.copyFrom(updateBytes))
                 .setMeta(meta).build();
 
         stub.update(updateRequest, makeStreamObserver(listener, channel));
@@ -119,8 +116,12 @@ public class Transport {
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
         final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
 
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(find);
+        byte[] bytes = jsonString.getBytes();
+
         DeleteRequest deleteRequest = DeleteRequest.newBuilder()
-                .setFind((ByteString) find)
+                .setFind(ByteString.copyFrom(bytes))
                 .setOperation(operation)
                 .setMeta(meta).build();
 

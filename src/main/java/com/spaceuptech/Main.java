@@ -1,13 +1,12 @@
 package com.spaceuptech;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.spaceuptech.api.core.API;
-import com.spaceuptech.api.core.mongo.Insert;
 import com.spaceuptech.api.core.mongo.Mongo;
 import com.spaceuptech.api.core.utils.Response;
 import com.spaceuptech.api.core.utils.Utils;
 
-import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,15 +33,30 @@ public class Main {
         Mongo mongo = api.Mongo();
 
         Map<String, String> document = new HashMap<>();
-        document.put("_id", "23");
-        document.put("first_name", "Yash");
-        document.put("last_name", "Jain");
+        document.put("_id", "12345");
+        document.put("first_name", "John");
+        document.put("last_name", "Doe");
 
         mongo.insert("test-collection")
                 .one(document, new Utils.ResponseListener() {
                     @Override
                     public void onResponse(int statusCode, Response response) {
                         System.out.println("Status Code: " + statusCode);
+                        System.out.println("Response: " + response.getValue(JsonPrimitive.class));
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+        mongo.get("test-collection")
+                .one(new Utils.ResponseListener() {
+                    @Override
+                    public void onResponse(int statusCode, Response response) {
+                        System.out.println("Status Code: " + statusCode);
+                        System.out.println("Response: " + response.getValue(JsonPrimitive.class));
                     }
 
                     @Override

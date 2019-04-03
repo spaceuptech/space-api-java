@@ -13,10 +13,6 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'org.asynchttpclient:async-http-client:2.8.1'
-
-    compile "org.slf4j:slf4j-api:1.6.1"
-    compile "org.slf4j:slf4j-simple:1.6.1"
 
     compile 'io.grpc:grpc-netty-shaded:1.19.0'
     compile 'io.grpc:grpc-protobuf:1.19.0'
