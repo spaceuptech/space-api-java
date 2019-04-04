@@ -1,20 +1,29 @@
 package com.spaceuptech.api.core.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
+import com.google.protobuf.ByteString;
 
 public class Response {
-    public JsonObject jsonObject;
 
-    public Response(JsonObject jsonObject) {
-        this.jsonObject = jsonObject;
+    private com.spaceuptech.api.core.proto.Response res;
+    private int status;
+
+    public Response(com.spaceuptech.api.core.proto.Response res) {
+        this.res = res;
+        this.status = res.getStatus();
     }
 
-    public <T> T getValue(Class<T> c) {
+    public <T> T getResult(Class<T> c) throws Exception {
         Gson gson = new Gson();
-        JsonElement result = jsonObject.get("result");
-        return  gson.fromJson(result, c);
+        if (this.status >= 200 && this.status < 300) {
+            String json = this.res.getResult().toStringUtf8();
+            return gson.fromJson(json, c);
+        } else {
+            throw new Exception("Errors generated");
+        }
     }
 
+    public String getError() {
+        return res.getError();
+    }
 }

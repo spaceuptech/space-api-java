@@ -1,94 +1,71 @@
 package com.spaceuptech.api.core.mongo;
 
-import com.google.gson.Gson;
-import com.spaceuptech.api.core.utils.Condition;
-import com.spaceuptech.api.core.utils.Config;
-import com.spaceuptech.api.core.utils.Utils;
-import com.spaceuptech.api.core.utils.And;
+import com.spaceuptech.api.core.proto.Meta;
+import com.spaceuptech.api.core.proto.ReadOptions;
+import com.spaceuptech.api.core.utils.*;
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Get {
-    private class Params {
-        HashMap<String, Object> find;
-        int skip, limit;
-        String[] sort;
-        HashMap<String, Integer> select;
-        String op, distinct;
-    }
 
-    private String collection;
+    private Meta meta;
+    private ReadOptions.Builder readOptions;
+    private String operation;
+    private HashMap<String, Object> find;
     private Config config;
-
-    private Params params;
 
     public Get(Config config, String collection) {
         this.config = config;
-        this.collection = collection;
-        this.params = new Params();
+        this.meta = Transport.makeMeta(config.projectId, collection, "mongo", config.token);
+        this.readOptions = ReadOptions.newBuilder();
     }
 
     public Get where(Condition... conds) {
-        if (conds.length == 1) this.params.find = Mongo.generateFind(conds[0]);
-        else this.params.find = Mongo.generateFind(And.create(conds));
+        if (conds.length == 1) this.find = Mongo.generateFind(conds[0]);
+        else this.find = Mongo.generateFind(And.create(conds));
         return this;
     }
 
-    public Get select(HashMap<String, Integer> select) {
-        this.params.select = select;
+    public Get select(Map<String, Integer> select) {
+        this.readOptions.putAllSelect(select);
         return this;
     }
 
-    public Get sort(String... sort) {
-        this.params.sort = sort;
+    public Get sort(Map<String, Integer> sort) {
+        this.readOptions.putAllSort(sort);
         return this;
     }
 
     public Get skip(int skip) {
-        this.params.skip = skip;
+        this.readOptions.setSkip(skip);
         return this;
     }
 
     public Get limit(int limit) {
-        this.params.limit = limit;
+        this.readOptions.setLimit(limit);
         return this;
     }
 
     public void one(Utils.ResponseListener listener) {
-        this.params.op = "one";
-
-        Utils.fetch(this.config.client,"get", this.config.token, this.getUrl(), "", listener);
+        this.operation = "one";
+        Transport.read(config.stub, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 
     public void all(Utils.ResponseListener listener) {
-        this.params.op = "all";
-
-        Utils.fetch(this.config.client,"get", this.config.token, this.getUrl(), "", listener);
+        this.operation = "all";
+        Transport.read(config.stub, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 
     public void count(Utils.ResponseListener listener) {
-        this.params.op = "count";
-
-        Utils.fetch(this.config.client,"get", this.config.token, this.getUrl(), "", listener);
+        this.operation = "count";
+        Transport.read(config.stub, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 
     public void distinct(String key, Utils.ResponseListener listener) {
-        this.params.op = "distinct";
-        this.params.distinct = key;
-        Utils.fetch(this.config.client,"get", this.config.token, this.getUrl(), "", listener);
-    }
-
-    private String getUrl() {
-        Gson gson = new Gson();
-
-        String params = "op=" + this.params.op;
-        if (this.params.op == "distinct") params += "&distinct=" + this.params.distinct;
-        params += "&find=" + gson.toJson(this.params.find);
-        if (this.params.select != null && this.params.select.keySet().size() > 0) params += "&select=" + gson.toJson(this.params.select);
-        if (this.params.sort != null && this.params.sort.length > 0) params += "&sort=" + gson.toJson(this.params.sort);
-        if (this.params.limit > 0) params += "&limit=" + this.params.limit;
-        if (this.params.skip > 0) params += "&skip=" + this.params.skip;
-        return Mongo.mongoURL(this.config.url, this.config.projectId, this.collection, params);
+        this.operation = "distinct";
+        this.readOptions.setDistinct(key);
+        Transport.read(config.stub, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 }

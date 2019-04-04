@@ -1,33 +1,91 @@
 package com.spaceuptech;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.spaceuptech.api.core.API;
 import com.spaceuptech.api.core.mongo.Mongo;
-import com.spaceuptech.api.core.utils.MongoAuthResponse;
 import com.spaceuptech.api.core.utils.Response;
 import com.spaceuptech.api.core.utils.Utils;
 
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 
-    private static Utils.ResponseListener generateListener(String event, Class c) {
-        Utils.ResponseListener listener = new Utils.ResponseListener() {
-            @Override
-            public void onResponse(int statusCode, Response response) {
-                System.out.println(event + ":: StatusCode: " + statusCode + " Data: " + response.getValue(c));
-            }
-
-            @Override
-            public void onError(Exception e) {
-                System.out.println(event + ":: Error: " + e.toString());
-            }
-        };
-        return  listener;
-    }
+//    private static Utils.ResponseListener generateListener(String event, Class c) {
+//        return new Utils.ResponseListener() {
+//            @Override
+//            public void onResponse(int statusCode, Response response) {
+//                System.out.println(event + ":: StatusCode: " + statusCode + " Data: " + response.getValue(c));
+//            }
+//
+//            @Override
+//            public void onError(Exception e) {
+//                System.out.println(event + ":: Error: " + e.toString());
+//            }
+//        };
+//    }
 
     public static void main(String[] args) {
-        String name = "User 1";
-        String email = "user1@gmail.com";
-        String role = "user";
+
+        // Tests for gRPC API
+        API api = new API("test-project", "localhost", 8081);
+        Mongo mongo = api.Mongo();
+
+        Map<String, String> document = new HashMap<>();
+        document.put("_id", "123484845");
+        document.put("first_name", "John");
+        document.put("last_name", "Doe");
+
+        mongo.insert("test-collection")
+                .one(document, new Utils.ResponseListener() {
+                    @Override
+                    public void onResponse(int statusCode, Response response) {
+                        System.out.println("Status Code: " + statusCode);
+                        try {
+                            System.out.println("Result: " + response.getResult(JsonObject.class));
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                            System.out.println("Error: " + response.getError());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+        mongo.get("test-collection")
+                .all(new Utils.ResponseListener() {
+                    @Override
+                    public void onResponse(int statusCode, Response response) {
+                        System.out.println("Status Code: " + statusCode);
+                        try {
+                            System.out.println("Result: " + response.getResult(JsonArray.class));
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                            System.out.println("Error: " + response.getError());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+        while (true) {}
+
+
+
+
+
+        // Tests for HTTP API
+//        String name = "User 1";
+//        String email = "user1@gmail.com";
+//        String role = "user";
 
         /****************************** SQL ******************************/
 //        API api = new API("realtime-mysql", "http://localhost:8080");
@@ -297,8 +355,8 @@ public class Main {
 
 
         /****************************** Mongo ******************************/
-        API api = new API("test", "http://localhost:8080");
-        Mongo mongo = api.Mongo();
+//        API api = new API("test", "http://localhost:8080");
+//        Mongo mongo = api.Mongo();
 //        Utils.MongoAuthListener signUpListener = new Utils.MongoAuthListener() {
 //            @Override
 //            public void onResponse(int statusCode, MongoAuthResponse res) {
@@ -561,35 +619,35 @@ public class Main {
 //        };
 //        mongo.signUp("user1@gmail.com", "User 1", "123", "user", signUpListener);
 
-        Utils.MongoAuthListener mongoAuthListener = new Utils.MongoAuthListener() {
-            @Override
-            public void onResponse(int statusCode, MongoAuthResponse res) {
-                if (statusCode != 200) {
-                    System.out.println("Error in Signin: " + statusCode);
-                    return;
-                }
-                api.setToken(res.token);
-
-                Utils.ResponseListener responseListener = new Utils.ResponseListener() {
-                    @Override
-                    public void onResponse(int statusCode, Response response) {
-                        System.out.println("FaaS Response: " + response.getValue(Object.class));
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        System.out.println("Error: " + e.toString());
-                    }
-                };
-                api.call("echo-engine", "echo", 5000, "FaaS is awesome!", responseListener);
-            }
-
-            @Override
-            public void onError(Exception e) {
-                System.out.println("Error: " + e.toString());
-            }
-        };
-        mongo.signIn("user1@gmail.com", "123", mongoAuthListener);
-
+//        Utils.MongoAuthListener mongoAuthListener = new Utils.MongoAuthListener() {
+//            @Override
+//            public void onResponse(int statusCode, MongoAuthResponse res) {
+//                if (statusCode != 200) {
+//                    System.out.println("Error in Signin: " + statusCode);
+//                    return;
+//                }
+//                api.setToken(res.token);
+//
+//                Utils.ResponseListener responseListener = new Utils.ResponseListener() {
+//                    @Override
+//                    public void onResponse(int statusCode, Response response) {
+//                        System.out.println("FaaS Response: " + response.getValue(Object.class));
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception e) {
+//                        System.out.println("Error: " + e.toString());
+//                    }
+//                };
+//                api.call("echo-engine", "echo", 5000, "FaaS is awesome!", responseListener);
+//            }
+//
+//            @Override
+//            public void onError(Exception e) {
+//                System.out.println("Error: " + e.toString());
+//            }
+//        };
+//        mongo.signIn("user1@gmail.com", "123", mongoAuthListener);
+//
     }
 }

@@ -1,17 +1,18 @@
 package com.spaceuptech.api.core.utils;
 
-import org.asynchttpclient.AsyncHttpClient;
+import com.spaceuptech.api.core.proto.SpaceCloudGrpc;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 
 public class Config {
-    public AsyncHttpClient client;
     public String token;
     public String projectId;
-    public String url;
+    public final SpaceCloudGrpc.SpaceCloudStub stub;
 
-    public Config(String projectId, String url, AsyncHttpClient client) {
+    public Config(String projectId, String host, int port) {
         this.projectId = projectId;
-        this.url = url;
-        this.client = client;
+        final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+        stub = SpaceCloudGrpc.newStub(channel);
     }
 }
 

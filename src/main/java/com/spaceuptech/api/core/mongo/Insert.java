@@ -1,40 +1,23 @@
 package com.spaceuptech.api.core.mongo;
 
-import com.google.gson.Gson;
-import com.spaceuptech.api.core.utils.Config;
-import com.spaceuptech.api.core.utils.Utils;
+import com.spaceuptech.api.core.proto.Meta;
+import com.spaceuptech.api.core.utils.*;
 
 public class Insert {
-    private class Params {
-        String op;
-        Object doc;
-    }
 
+    private Meta meta;
     private Config config;
-    private String collection;
-    private Params params;
 
     public Insert(Config config, String collection) {
         this.config = config;
-        this.collection = collection;
-        this.params = new Params();
+        this.meta = Transport.makeMeta(config.projectId, collection, "mongo", config.token);
     }
 
     public void one(Object doc, Utils.ResponseListener listener) {
-        this.params.op = "one";
-        this.params.doc = doc;
-
-        Utils.fetch(this.config.client,"post", this.config.token,
-                Mongo.mongoURL(this.config.url, this.config.projectId, this.collection, ""),
-                new Gson().toJson(this.params), listener);
+        Transport.create(config.stub, doc, "one", this.meta, listener);
     }
 
-    public void all(Object docs[], Utils.ResponseListener listener) {
-        this.params.op = "all";
-        this.params.doc = docs;
-
-        Utils.fetch(this.config.client,"post", this.config.token,
-                Mongo.mongoURL(this.config.url, this.config.projectId, this.collection, ""),
-                new Gson().toJson(this.params), listener);
+    public void all(Object[] docs, Utils.ResponseListener listener) {
+        Transport.create(config.stub, docs, "all", this.meta, listener);
     }
 }
