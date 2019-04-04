@@ -1,4 +1,0 @@
-
-mongo
-sql-mysql
-sql-postgres
