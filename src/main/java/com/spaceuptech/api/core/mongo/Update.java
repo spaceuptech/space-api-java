@@ -92,16 +92,16 @@ public class Update {
 
     public void one(Utils.ResponseListener listener) {
         this.operation = "one";
-        Transport.update(config, this.find, this.operation, this.update, this.meta, listener);
+        Transport.update(config.stub, this.find, this.operation, this.update, this.meta, listener);
     }
 
     public void all(Utils.ResponseListener listener) {
         this.operation = "all";
-        Transport.update(config, this.find, this.operation, this.update, this.meta, listener);
+        Transport.update(config.stub, this.find, this.operation, this.update, this.meta, listener);
     }
 
     public void upsert(Utils.ResponseListener listener) {
         this.operation = "upsert";
-        Transport.update(config, this.find, this.operation, this.update, this.meta, listener);
+        Transport.update(config.stub, this.find, this.operation, this.update, this.meta, listener);
     }
 }

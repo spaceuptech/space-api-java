@@ -27,6 +27,6 @@ public class Delete {
 
     public void all(Utils.ResponseListener listener) {
         this.operation = "all";
-        Transport.delete(config, this.find, this.operation, this.meta, listener);
+        Transport.delete(config.stub, this.find, this.operation, this.meta, listener);
     }
 }

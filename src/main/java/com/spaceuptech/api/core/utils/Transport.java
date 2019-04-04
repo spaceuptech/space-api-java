@@ -41,7 +41,7 @@ public class Transport {
         };
     }
 
-    public static void create(Config config, Object doc, String operation, Meta meta, Utils.ResponseListener listener) {
+    public static void create(SpaceCloudGrpc.SpaceCloudStub stub, Object doc, String operation, Meta meta, Utils.ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(doc);
@@ -52,10 +52,10 @@ public class Transport {
                     .setOperation(operation)
                     .setMeta(meta).build();
 
-        config.stub.create(createRequest, makeStreamObserver(listener));
+        stub.create(createRequest, makeStreamObserver(listener));
     }
 
-    public static void read(Config config, Object find, String operation, ReadOptions options, Meta meta, Utils.ResponseListener listener) {
+    public static void read(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, ReadOptions options, Meta meta, Utils.ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(find);
@@ -67,10 +67,10 @@ public class Transport {
                 .setOptions(options)
                 .setMeta(meta).build();
 
-        config.stub.read(readRequest, makeStreamObserver(listener));
+        stub.read(readRequest, makeStreamObserver(listener));
     }
 
-    public static void update(Config config, Object find, String operation, Object update, Meta meta, Utils.ResponseListener listener) {
+    public static void update(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, Object update, Meta meta, Utils.ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(find);
@@ -84,10 +84,10 @@ public class Transport {
                 .setUpdate(ByteString.copyFrom(updateBytes))
                 .setMeta(meta).build();
 
-        config.stub.update(updateRequest, makeStreamObserver(listener));
+        stub.update(updateRequest, makeStreamObserver(listener));
     }
 
-    public static void delete(Config config, Object find, String operation, Meta meta, Utils.ResponseListener listener) {
+    public static void delete(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, Meta meta, Utils.ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(find);
@@ -98,6 +98,6 @@ public class Transport {
                 .setOperation(operation)
                 .setMeta(meta).build();
 
-        config.stub.delete(deleteRequest, makeStreamObserver(listener));
+        stub.delete(deleteRequest, makeStreamObserver(listener));
     }
 }
