@@ -1,6 +1,5 @@
 package com.spaceuptech.api.core.sql;
 
-import com.google.gson.Gson;
 import com.spaceuptech.api.core.mongo.Mongo;
 import com.spaceuptech.api.core.proto.Meta;
 import com.spaceuptech.api.core.utils.*;
