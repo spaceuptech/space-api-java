@@ -33,13 +33,13 @@ public class Get {
         return this;
     }
 
-    public Get order(Map<String, Integer> order) {
-        this.readOptions.putAllSort(order);
+    public Get sort(Map<String, Integer> sort) {
+        this.readOptions.putAllSort(sort);
         return this;
     }
 
-    public Get offset(int offset) {
-        this.readOptions.setSkip(offset);
+    public Get skip(int skip) {
+        this.readOptions.setSkip(skip);
         return this;
     }
 
