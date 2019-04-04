@@ -24,17 +24,11 @@ public class Transport {
         return metaBuilder.build();
     }
 
-    private static StreamObserver<Response> makeStreamObserver(Utils.ResponseListener listener, ManagedChannel channel) {
+    private static StreamObserver<Response> makeStreamObserver(Utils.ResponseListener listener) {
         return new StreamObserver<Response>() {
             @Override
             public void onNext(Response value) {
                 listener.onResponse(value.getStatus(), new com.spaceuptech.api.core.utils.Response(value));
-
-                try {
-                    channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
 
             @Override
@@ -47,10 +41,7 @@ public class Transport {
         };
     }
 
-    public static void create(String host, int port, Object doc, String operation, Meta meta, Utils.ResponseListener listener) {
-
-        final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-        final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
+    public static void create(Config config, Object doc, String operation, Meta meta, Utils.ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(doc);
@@ -61,13 +52,10 @@ public class Transport {
                     .setOperation(operation)
                     .setMeta(meta).build();
 
-            stub.create(createRequest, makeStreamObserver(listener, channel));
+        config.stub.create(createRequest, makeStreamObserver(listener));
     }
 
-    public static void read(String host, int port, Object find, String operation, ReadOptions options, Meta meta, Utils.ResponseListener listener) {
-
-        final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-        final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
+    public static void read(Config config, Object find, String operation, ReadOptions options, Meta meta, Utils.ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(find);
@@ -79,13 +67,10 @@ public class Transport {
                 .setOptions(options)
                 .setMeta(meta).build();
 
-        stub.read(readRequest, makeStreamObserver(listener, channel));
+        config.stub.read(readRequest, makeStreamObserver(listener));
     }
 
-    public static void update(String host, int port, Object find, String operation, Object update, Meta meta, Utils.ResponseListener listener) {
-
-        final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-        final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
+    public static void update(Config config, Object find, String operation, Object update, Meta meta, Utils.ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(find);
@@ -99,13 +84,10 @@ public class Transport {
                 .setUpdate(ByteString.copyFrom(updateBytes))
                 .setMeta(meta).build();
 
-        stub.update(updateRequest, makeStreamObserver(listener, channel));
+        config.stub.update(updateRequest, makeStreamObserver(listener));
     }
 
-    public static void delete(String host, int port, Object find, String operation, Meta meta, Utils.ResponseListener listener) {
-
-        final ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-        final SpaceCloudGrpc.SpaceCloudStub stub = SpaceCloudGrpc.newStub(channel);
+    public static void delete(Config config, Object find, String operation, Meta meta, Utils.ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(find);
@@ -116,6 +98,6 @@ public class Transport {
                 .setOperation(operation)
                 .setMeta(meta).build();
 
-        stub.delete(deleteRequest, makeStreamObserver(listener, channel));
+        config.stub.delete(deleteRequest, makeStreamObserver(listener));
     }
 }

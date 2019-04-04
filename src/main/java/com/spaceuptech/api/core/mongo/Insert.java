@@ -14,10 +14,10 @@ public class Insert {
     }
 
     public void one(Object doc, Utils.ResponseListener listener) {
-        Transport.create(config.host, config.port, doc, "one", this.meta, listener);
+        Transport.create(config, doc, "one", this.meta, listener);
     }
 
     public void all(Object[] docs, Utils.ResponseListener listener) {
-        Transport.create(config.host, config.port, docs, "all", this.meta, listener);
+        Transport.create(config, docs, "all", this.meta, listener);
     }
 }

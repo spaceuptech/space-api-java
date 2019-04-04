@@ -50,22 +50,22 @@ public class Get {
 
     public void one(Utils.ResponseListener listener) {
         this.operation = "one";
-        Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta, listener);
+        Transport.read(config, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 
     public void all(Utils.ResponseListener listener) {
         this.operation = "all";
-        Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta, listener);
+        Transport.read(config, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 
     public void count(Utils.ResponseListener listener) {
         this.operation = "count";
-        Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta, listener);
+        Transport.read(config, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 
     public void distinct(String key, Utils.ResponseListener listener) {
         this.operation = "distinct";
         this.readOptions.setDistinct(key);
-        Transport.read(config.host, config.port, this.find, this.operation, this.readOptions.build(), this.meta, listener);
+        Transport.read(config, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 }
