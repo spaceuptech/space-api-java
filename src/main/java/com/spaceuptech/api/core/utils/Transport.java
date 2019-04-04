@@ -28,16 +28,7 @@ public class Transport {
         return new StreamObserver<Response>() {
             @Override
             public void onNext(Response value) {
-
-                Gson gson = new Gson();
-                if (value.getStatus() == 200) {
-                    String jsonString = gson.toJson(value.getResult().toStringUtf8());
-                    listener.onResponse(value.getStatus(), new com.spaceuptech.api.core.utils.Response(gson.fromJson("{ \"result\": " + jsonString + " }", JsonObject.class)));
-                }
-                else {
-                    String jsonString = gson.toJson(value.getError());
-                    listener.onResponse(value.getStatus(), new com.spaceuptech.api.core.utils.Response(gson.fromJson("{ \"result\": " + jsonString + " }", JsonObject.class)));
-                }
+                listener.onResponse(value.getStatus(), new com.spaceuptech.api.core.utils.Response(value));
 
                 try {
                     channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);

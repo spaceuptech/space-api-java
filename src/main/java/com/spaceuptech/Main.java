@@ -1,5 +1,6 @@
 package com.spaceuptech;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.spaceuptech.api.core.API;
@@ -33,7 +34,7 @@ public class Main {
         Mongo mongo = api.Mongo();
 
         Map<String, String> document = new HashMap<>();
-        document.put("_id", "12345");
+        document.put("_id", "123484845");
         document.put("first_name", "John");
         document.put("last_name", "Doe");
 
@@ -42,7 +43,12 @@ public class Main {
                     @Override
                     public void onResponse(int statusCode, Response response) {
                         System.out.println("Status Code: " + statusCode);
-                        System.out.println("Response: " + response.getValue(JsonPrimitive.class));
+                        try {
+                            System.out.println("Result: " + response.getResult(JsonObject.class));
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                            System.out.println("Error: " + response.getError());
+                        }
                     }
 
                     @Override
@@ -52,11 +58,16 @@ public class Main {
                 });
 
         mongo.get("test-collection")
-                .one(new Utils.ResponseListener() {
+                .all(new Utils.ResponseListener() {
                     @Override
                     public void onResponse(int statusCode, Response response) {
                         System.out.println("Status Code: " + statusCode);
-                        System.out.println("Response: " + response.getValue(JsonPrimitive.class));
+                        try {
+                            System.out.println("Result: " + response.getResult(JsonArray.class));
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                            System.out.println("Error: " + response.getError());
+                        }
                     }
 
                     @Override
