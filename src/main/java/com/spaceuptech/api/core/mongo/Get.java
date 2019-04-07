@@ -16,7 +16,8 @@ public class Get {
     private HashMap<String, Object> find;
     private Config config;
 
-    public Get(Config config, String collection) {
+    public Get(Config config, String collection, String operation) {
+        this.operation = operation;
         this.config = config;
         this.meta = Transport.makeMeta(config.projectId, collection, "mongo", config.token);
         this.readOptions = ReadOptions.newBuilder();
@@ -48,24 +49,12 @@ public class Get {
         return this;
     }
 
-    public void one(Utils.ResponseListener listener) {
-        this.operation = "one";
-        Transport.read(config.stub, this.find, this.operation, this.readOptions.build(), this.meta, listener);
-    }
-
-    public void all(Utils.ResponseListener listener) {
-        this.operation = "all";
-        Transport.read(config.stub, this.find, this.operation, this.readOptions.build(), this.meta, listener);
-    }
-
-    public void count(Utils.ResponseListener listener) {
-        this.operation = "count";
-        Transport.read(config.stub, this.find, this.operation, this.readOptions.build(), this.meta, listener);
-    }
-
-    public void distinct(String key, Utils.ResponseListener listener) {
-        this.operation = "distinct";
+    public Get distinctKey(String key) {
         this.readOptions.setDistinct(key);
+        return this;
+    }
+
+    public void apply(Utils.ResponseListener listener) {
         Transport.read(config.stub, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 }

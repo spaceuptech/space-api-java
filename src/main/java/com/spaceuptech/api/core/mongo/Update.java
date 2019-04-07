@@ -12,7 +12,8 @@ public class Update {
     private Meta meta;
     private HashMap<String, Object> find, update;
 
-    public Update(Config config, String collection) {
+    public Update(Config config, String collection, String operation) {
+        this.operation = operation;
         this.config = config;
         this.meta = Transport.makeMeta(config.projectId, collection, "mongo", config.token);
         this.update = new HashMap<>();
@@ -90,18 +91,7 @@ public class Update {
         return this;
     }
 
-    public void one(Utils.ResponseListener listener) {
-        this.operation = "one";
-        Transport.update(config.stub, this.find, this.operation, this.update, this.meta, listener);
-    }
-
-    public void all(Utils.ResponseListener listener) {
-        this.operation = "all";
-        Transport.update(config.stub, this.find, this.operation, this.update, this.meta, listener);
-    }
-
-    public void upsert(Utils.ResponseListener listener) {
-        this.operation = "upsert";
+    public void apply(Utils.ResponseListener listener) {
         Transport.update(config.stub, this.find, this.operation, this.update, this.meta, listener);
     }
 }
