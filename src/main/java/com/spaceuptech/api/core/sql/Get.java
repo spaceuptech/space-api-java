@@ -16,7 +16,8 @@ public class Get {
     private HashMap<String, Object> find;
     private Config config;
 
-    public Get(String db, Config config, String table) {
+    public Get(String db, Config config, String table, String operation) {
+        this.operation = operation;
         this.config = config;
         this.meta = Transport.makeMeta(config.projectId, table, db, config.token);
         this.readOptions = ReadOptions.newBuilder();
@@ -48,13 +49,12 @@ public class Get {
         return this;
     }
 
-    public void one(Utils.ResponseListener listener) {
-        this.operation = "one";
-        Transport.read(config.stub, this.find, this.operation, this.readOptions.build(), this.meta, listener);
+    public Get distinctKey(String key) {
+        this.readOptions.setDistinct(key);
+        return this;
     }
 
-    public void all(Utils.ResponseListener listener) {
-        this.operation = "all";
+    public void apply(Utils.ResponseListener listener) {
         Transport.read(config.stub, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }
 }

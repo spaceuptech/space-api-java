@@ -13,7 +13,8 @@ public class Update {
     private Meta meta;
     private HashMap<String, Object> find, update;
 
-    public Update(String db, Config config, String table) {
+    public Update(String db, Config config, String table, String operation) {
+        this.operation = operation;
         this.config = config;
         this.meta = Transport.makeMeta(config.projectId, table, db, config.token);
         this.update = new HashMap<>();
@@ -30,13 +31,7 @@ public class Update {
         return this;
     }
 
-    public void one(Utils.ResponseListener listener) {
-        this.operation = "one";
-        Transport.update(config.stub, this.find, this.operation, this.update, this.meta, listener);
-    }
-
-    public void all(Utils.ResponseListener listener) {
-        this.operation = "all";
+    public void apply(Utils.ResponseListener listener) {
         Transport.update(config.stub, this.find, this.operation, this.update, this.meta, listener);
     }
 }

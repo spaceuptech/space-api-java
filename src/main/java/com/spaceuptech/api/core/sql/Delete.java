@@ -13,7 +13,8 @@ public class Delete {
     private HashMap<String, Object> find;
     private Config config;
 
-    public Delete(String db, Config config, String table) {
+    public Delete(String db, Config config, String table, String operation) {
+        this.operation = operation;
         this.config = config;
         this.meta = Transport.makeMeta(config.projectId, table, db, config.token);
     }
@@ -24,8 +25,7 @@ public class Delete {
         return this;
     }
 
-    public void all(Utils.ResponseListener listener) {
-        this.operation = "all";
+    public void apply(Utils.ResponseListener listener) {
         Transport.delete(config.stub, this.find, this.operation, this.meta, listener);
     }
 }

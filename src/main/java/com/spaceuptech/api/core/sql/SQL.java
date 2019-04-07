@@ -11,20 +11,51 @@ public class SQL {
         this.config = config;
     }
 
-    public Get get(String collection) {
-        return new Get(this.db, this.config, collection);
-    }
-
+    // CREATE
     public Insert insert(String collection) {
         return new Insert(this.db, this.config, collection);
     }
 
-    public Update update(String collection) {
-        return new Update(this.db, this.config, collection);
+
+    // READ
+    public Get get(String collection) {
+        return new Get(this.db, this.config, collection, "all");
     }
 
+    public Get getOne(String collection) {
+        return new Get(this.db, this.config, collection, "one");
+    }
+
+    public Get count(String collection) {
+        return new Get(this.db, this.config, collection, "count");
+    }
+
+    public Get distinct(String collection) {
+        return new Get(this.db, this.config, collection, "distinct");
+    }
+
+
+    // UPDATE
+    public Update update(String collection) {
+        return new Update(this.db, this.config, collection, "all");
+    }
+
+    public Update updateOne(String collection) {
+        return new Update(this.db, this.config, collection, "one");
+    }
+
+    public Update upsert(String collection) {
+        return new Update(this.db, this.config, collection, "upsert");
+    }
+
+
+    // DELETE
     public Delete delete(String collection) {
-        return new Delete(this.db, this.config, collection);
+        return new Delete(this.db, this.config, collection, "all");
+    }
+
+    public Delete deleteOne(String collection) {
+        return new Delete(this.db, this.config, collection, "one");
     }
 
     // TODO
