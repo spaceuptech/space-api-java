@@ -33,12 +33,13 @@ public class Main {
         Mongo mongo = api.Mongo();
 
         Map<String, String> document = new HashMap<>();
-        document.put("_id", "123484845");
+        document.put("_id", "ABCDE");
         document.put("first_name", "John");
         document.put("last_name", "Doe");
 
         mongo.insert("test-collection")
-                .one(document, new Utils.ResponseListener() {
+                .doc(document)
+                .apply(new Utils.ResponseListener() {
                     @Override
                     public void onResponse(int statusCode, Response response) {
                         System.out.println("Status Code: " + statusCode);

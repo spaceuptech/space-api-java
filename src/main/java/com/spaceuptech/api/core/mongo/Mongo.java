@@ -12,18 +12,26 @@ public class Mongo {
         this.config = config;
     }
 
-    public Get get(String collection) {
-        return new Get(this.config, collection);
-    }
 
+    // CREATE
     public Insert insert(String collection) {
         return new Insert(this.config, collection);
     }
 
+
+    // READ
+    public Get get(String collection) {
+        return new Get(this.config, collection);
+    }
+
+
+    // UPADTE
     public Update update(String collection) {
         return new Update(this.config, collection);
     }
 
+
+    // DELETE
     public Delete delete(String collection) {
         return new Delete(this.config, collection);
     }
