@@ -128,4 +128,7 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
+## Ignoring idea
+.idea/
+
 # End of https://www.gitignore.io/api/java,gradle,intellij

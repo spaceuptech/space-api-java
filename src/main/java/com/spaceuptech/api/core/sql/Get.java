@@ -49,11 +49,6 @@ public class Get {
         return this;
     }
 
-    public Get distinctKey(String key) {
-        this.readOptions.setDistinct(key);
-        return this;
-    }
-
     public void apply(Utils.ResponseListener listener) {
         Transport.read(config.stub, this.find, this.operation, this.readOptions.build(), this.meta, listener);
     }

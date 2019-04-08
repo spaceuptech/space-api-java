@@ -30,10 +30,6 @@ public class SQL {
         return new Get(this.db, this.config, collection, "count");
     }
 
-    public Get distinct(String collection) {
-        return new Get(this.db, this.config, collection, "distinct");
-    }
-
 
     // UPDATE
     public Update update(String collection) {
