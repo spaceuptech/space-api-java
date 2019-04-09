@@ -10,6 +10,7 @@ public  final class ReadOptions extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:proto.ReadOptions)
     ReadOptionsOrBuilder {
+private static final long serialVersionUID = 0L;
   // Use ReadOptions.newBuilder() to construct.
   private ReadOptions(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
@@ -23,14 +24,19 @@ public  final class ReadOptions extends
   @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
-    return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    return this.unknownFields;
   }
   private ReadOptions(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     this();
+    if (extensionRegistry == null) {
+      throw new java.lang.NullPointerException();
+    }
     int mutable_bitField0_ = 0;
+    com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+        com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
       boolean done = false;
       while (!done) {
@@ -39,12 +45,6 @@ public  final class ReadOptions extends
           case 0:
             done = true;
             break;
-          default: {
-            if (!input.skipField(tag)) {
-              done = true;
-            }
-            break;
-          }
           case 10: {
             if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
               select_ = com.google.protobuf.MapField.newMapField(
@@ -87,6 +87,13 @@ public  final class ReadOptions extends
             distinct_ = s;
             break;
           }
+          default: {
+            if (!parseUnknownFieldProto3(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
+            }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -95,6 +102,7 @@ public  final class ReadOptions extends
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
   }
@@ -104,6 +112,7 @@ public  final class ReadOptions extends
   }
 
   @SuppressWarnings({"rawtypes"})
+  @java.lang.Override
   protected com.google.protobuf.MapField internalGetMapField(
       int number) {
     switch (number) {
@@ -116,6 +125,7 @@ public  final class ReadOptions extends
             "Invalid map field number: " + number);
     }
   }
+  @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_ReadOptions_fieldAccessorTable
@@ -329,6 +339,7 @@ public  final class ReadOptions extends
   }
 
   private byte memoizedIsInitialized = -1;
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -338,6 +349,7 @@ public  final class ReadOptions extends
     return true;
   }
 
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     com.google.protobuf.GeneratedMessageV3
@@ -361,8 +373,10 @@ public  final class ReadOptions extends
     if (!getDistinctBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 5, distinct_);
     }
+    unknownFields.writeTo(output);
   }
 
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -399,11 +413,11 @@ public  final class ReadOptions extends
     if (!getDistinctBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, distinct_);
     }
+    size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
   }
 
-  private static final long serialVersionUID = 0L;
   @java.lang.Override
   public boolean equals(final java.lang.Object obj) {
     if (obj == this) {
@@ -425,6 +439,7 @@ public  final class ReadOptions extends
         == other.getLimit());
     result = result && getDistinct()
         .equals(other.getDistinct());
+    result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
 
@@ -456,6 +471,17 @@ public  final class ReadOptions extends
     return hash;
   }
 
+  public static com.spaceuptech.api.core.proto.ReadOptions parseFrom(
+      java.nio.ByteBuffer data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+  public static com.spaceuptech.api.core.proto.ReadOptions parseFrom(
+      java.nio.ByteBuffer data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
   public static com.spaceuptech.api.core.proto.ReadOptions parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -515,6 +541,7 @@ public  final class ReadOptions extends
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
@@ -522,6 +549,7 @@ public  final class ReadOptions extends
   public static Builder newBuilder(com.spaceuptech.api.core.proto.ReadOptions prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
@@ -571,6 +599,7 @@ public  final class ReadOptions extends
               "Invalid map field number: " + number);
       }
     }
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_ReadOptions_fieldAccessorTable
@@ -593,6 +622,7 @@ public  final class ReadOptions extends
               .alwaysUseFieldBuilders) {
       }
     }
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       internalGetMutableSelect().clear();
@@ -606,15 +636,18 @@ public  final class ReadOptions extends
       return this;
     }
 
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
       return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_ReadOptions_descriptor;
     }
 
+    @java.lang.Override
     public com.spaceuptech.api.core.proto.ReadOptions getDefaultInstanceForType() {
       return com.spaceuptech.api.core.proto.ReadOptions.getDefaultInstance();
     }
 
+    @java.lang.Override
     public com.spaceuptech.api.core.proto.ReadOptions build() {
       com.spaceuptech.api.core.proto.ReadOptions result = buildPartial();
       if (!result.isInitialized()) {
@@ -623,6 +656,7 @@ public  final class ReadOptions extends
       return result;
     }
 
+    @java.lang.Override
     public com.spaceuptech.api.core.proto.ReadOptions buildPartial() {
       com.spaceuptech.api.core.proto.ReadOptions result = new com.spaceuptech.api.core.proto.ReadOptions(this);
       int from_bitField0_ = bitField0_;
@@ -639,32 +673,39 @@ public  final class ReadOptions extends
       return result;
     }
 
+    @java.lang.Override
     public Builder clone() {
       return (Builder) super.clone();
     }
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        Object value) {
+        java.lang.Object value) {
       return (Builder) super.setField(field, value);
     }
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
       return (Builder) super.clearField(field);
     }
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
       return (Builder) super.clearOneof(oneof);
     }
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, Object value) {
+        int index, java.lang.Object value) {
       return (Builder) super.setRepeatedField(field, index, value);
     }
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        Object value) {
+        java.lang.Object value) {
       return (Builder) super.addRepeatedField(field, value);
     }
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof com.spaceuptech.api.core.proto.ReadOptions) {
         return mergeFrom((com.spaceuptech.api.core.proto.ReadOptions)other);
@@ -690,14 +731,17 @@ public  final class ReadOptions extends
         distinct_ = other.distinct_;
         onChanged();
       }
+      this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
     }
 
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1083,14 +1127,16 @@ public  final class ReadOptions extends
       onChanged();
       return this;
     }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return this;
+      return super.setUnknownFieldsProto3(unknownFields);
     }
 
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return this;
+      return super.mergeUnknownFields(unknownFields);
     }
 
 
@@ -1109,11 +1155,12 @@ public  final class ReadOptions extends
 
   private static final com.google.protobuf.Parser<ReadOptions>
       PARSER = new com.google.protobuf.AbstractParser<ReadOptions>() {
+    @java.lang.Override
     public ReadOptions parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ReadOptions(input, extensionRegistry);
+      return new ReadOptions(input, extensionRegistry);
     }
   };
 
@@ -1126,6 +1173,7 @@ public  final class ReadOptions extends
     return PARSER;
   }
 
+  @java.lang.Override
   public com.spaceuptech.api.core.proto.ReadOptions getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }

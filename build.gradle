@@ -1,5 +1,5 @@
 apply plugin: 'java'
-// apply plugin: 'com.google.protobuf'
+//apply plugin: 'com.google.protobuf'
 
 group 'com.spaceuptech.api.core'
 version '0.1.0'
@@ -24,19 +24,17 @@ dependencies {
 //        mavenCentral()
 //    }
 //    dependencies {
-//        // ASSUMES GRADLE 2.12 OR HIGHER. Use plugin version 0.7.5 with earlier
-//        // gradle versions
-//        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.0'
+//        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
 //    }
 //}
-
+//
 //protobuf {
 //    protoc {
-//        artifact = "com.google.protobuf:protoc:3.2.0"
+//        artifact = "com.google.protobuf:protoc:3.6.1"
 //    }
 //    plugins {
 //        grpc {
-//            artifact = 'io.grpc:protoc-gen-grpc-java:1.4.0'
+//            artifact = 'io.grpc:protoc-gen-grpc-java:1.19.0'
 //        }
 //    }
 //    generateProtoTasks {

@@ -1,24 +1,24 @@
 package com.spaceuptech.api.core.proto;
 
-import static io.grpc.stub.ClientCalls.asyncUnaryCall;
-import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ClientCalls.blockingUnaryCall;
-import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
-import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
-import static io.grpc.stub.ServerCalls.asyncUnaryCall;
-import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncUnaryCall;
+import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
+import static io.grpc.stub.ClientCalls.blockingUnaryCall;
+import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.4.0)",
+    value = "by gRPC proto compiler (version 1.19.0)",
     comments = "Source: server.proto")
 public final class SpaceCloudGrpc {
 
@@ -27,66 +27,229 @@ public final class SpaceCloudGrpc {
   public static final String SERVICE_NAME = "proto.SpaceCloud";
 
   // Static method descriptors that strictly reflect the proto.
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.spaceuptech.api.core.proto.CreateRequest,
-      com.spaceuptech.api.core.proto.Response> METHOD_CREATE =
-      io.grpc.MethodDescriptor.<com.spaceuptech.api.core.proto.CreateRequest, com.spaceuptech.api.core.proto.Response>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "proto.SpaceCloud", "Create"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.spaceuptech.api.core.proto.CreateRequest.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.spaceuptech.api.core.proto.Response.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.spaceuptech.api.core.proto.ReadRequest,
-      com.spaceuptech.api.core.proto.Response> METHOD_READ =
-      io.grpc.MethodDescriptor.<com.spaceuptech.api.core.proto.ReadRequest, com.spaceuptech.api.core.proto.Response>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "proto.SpaceCloud", "Read"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.spaceuptech.api.core.proto.ReadRequest.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.spaceuptech.api.core.proto.Response.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.spaceuptech.api.core.proto.UpdateRequest,
-      com.spaceuptech.api.core.proto.Response> METHOD_UPDATE =
-      io.grpc.MethodDescriptor.<com.spaceuptech.api.core.proto.UpdateRequest, com.spaceuptech.api.core.proto.Response>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "proto.SpaceCloud", "Update"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.spaceuptech.api.core.proto.UpdateRequest.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.spaceuptech.api.core.proto.Response.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.spaceuptech.api.core.proto.DeleteRequest,
-      com.spaceuptech.api.core.proto.Response> METHOD_DELETE =
-      io.grpc.MethodDescriptor.<com.spaceuptech.api.core.proto.DeleteRequest, com.spaceuptech.api.core.proto.Response>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "proto.SpaceCloud", "Delete"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.spaceuptech.api.core.proto.DeleteRequest.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.spaceuptech.api.core.proto.Response.getDefaultInstance()))
-          .build();
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.spaceuptech.api.core.proto.AggregateRequest,
-      com.spaceuptech.api.core.proto.Response> METHOD_AGGREGATE =
-      io.grpc.MethodDescriptor.<com.spaceuptech.api.core.proto.AggregateRequest, com.spaceuptech.api.core.proto.Response>newBuilder()
-          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-          .setFullMethodName(generateFullMethodName(
-              "proto.SpaceCloud", "Aggregate"))
-          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.spaceuptech.api.core.proto.AggregateRequest.getDefaultInstance()))
-          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.spaceuptech.api.core.proto.Response.getDefaultInstance()))
-          .build();
+  private static volatile io.grpc.MethodDescriptor<CreateRequest,
+      Response> getCreateMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Create",
+      requestType = CreateRequest.class,
+      responseType = Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<CreateRequest,
+      Response> getCreateMethod() {
+    io.grpc.MethodDescriptor<CreateRequest, Response> getCreateMethod;
+    if ((getCreateMethod = SpaceCloudGrpc.getCreateMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getCreateMethod = SpaceCloudGrpc.getCreateMethod) == null) {
+          SpaceCloudGrpc.getCreateMethod = getCreateMethod = 
+              io.grpc.MethodDescriptor.<CreateRequest, Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "Create"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  CreateRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("Create"))
+                  .build();
+          }
+        }
+     }
+     return getCreateMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ReadRequest,
+      Response> getReadMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Read",
+      requestType = ReadRequest.class,
+      responseType = Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ReadRequest,
+      Response> getReadMethod() {
+    io.grpc.MethodDescriptor<ReadRequest, Response> getReadMethod;
+    if ((getReadMethod = SpaceCloudGrpc.getReadMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getReadMethod = SpaceCloudGrpc.getReadMethod) == null) {
+          SpaceCloudGrpc.getReadMethod = getReadMethod = 
+              io.grpc.MethodDescriptor.<ReadRequest, Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "Read"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ReadRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("Read"))
+                  .build();
+          }
+        }
+     }
+     return getReadMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<UpdateRequest,
+      Response> getUpdateMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Update",
+      requestType = UpdateRequest.class,
+      responseType = Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UpdateRequest,
+      Response> getUpdateMethod() {
+    io.grpc.MethodDescriptor<UpdateRequest, Response> getUpdateMethod;
+    if ((getUpdateMethod = SpaceCloudGrpc.getUpdateMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getUpdateMethod = SpaceCloudGrpc.getUpdateMethod) == null) {
+          SpaceCloudGrpc.getUpdateMethod = getUpdateMethod = 
+              io.grpc.MethodDescriptor.<UpdateRequest, Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "Update"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  UpdateRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("Update"))
+                  .build();
+          }
+        }
+     }
+     return getUpdateMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<DeleteRequest,
+      Response> getDeleteMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Delete",
+      requestType = DeleteRequest.class,
+      responseType = Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<DeleteRequest,
+      Response> getDeleteMethod() {
+    io.grpc.MethodDescriptor<DeleteRequest, Response> getDeleteMethod;
+    if ((getDeleteMethod = SpaceCloudGrpc.getDeleteMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getDeleteMethod = SpaceCloudGrpc.getDeleteMethod) == null) {
+          SpaceCloudGrpc.getDeleteMethod = getDeleteMethod = 
+              io.grpc.MethodDescriptor.<DeleteRequest, Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "Delete"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  DeleteRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("Delete"))
+                  .build();
+          }
+        }
+     }
+     return getDeleteMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<AggregateRequest,
+      Response> getAggregateMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Aggregate",
+      requestType = AggregateRequest.class,
+      responseType = Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<AggregateRequest,
+      Response> getAggregateMethod() {
+    io.grpc.MethodDescriptor<AggregateRequest, Response> getAggregateMethod;
+    if ((getAggregateMethod = SpaceCloudGrpc.getAggregateMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getAggregateMethod = SpaceCloudGrpc.getAggregateMethod) == null) {
+          SpaceCloudGrpc.getAggregateMethod = getAggregateMethod = 
+              io.grpc.MethodDescriptor.<AggregateRequest, Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "Aggregate"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  AggregateRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("Aggregate"))
+                  .build();
+          }
+        }
+     }
+     return getAggregateMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<BatchRequest,
+      Response> getBatchMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Batch",
+      requestType = BatchRequest.class,
+      responseType = Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<BatchRequest,
+      Response> getBatchMethod() {
+    io.grpc.MethodDescriptor<BatchRequest, Response> getBatchMethod;
+    if ((getBatchMethod = SpaceCloudGrpc.getBatchMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getBatchMethod = SpaceCloudGrpc.getBatchMethod) == null) {
+          SpaceCloudGrpc.getBatchMethod = getBatchMethod = 
+              io.grpc.MethodDescriptor.<BatchRequest, Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "Batch"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  BatchRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("Batch"))
+                  .build();
+          }
+        }
+     }
+     return getBatchMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<FaaSRequest,
+      Response> getCallMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Call",
+      requestType = FaaSRequest.class,
+      responseType = Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<FaaSRequest,
+      Response> getCallMethod() {
+    io.grpc.MethodDescriptor<FaaSRequest, Response> getCallMethod;
+    if ((getCallMethod = SpaceCloudGrpc.getCallMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getCallMethod = SpaceCloudGrpc.getCallMethod) == null) {
+          SpaceCloudGrpc.getCallMethod = getCallMethod = 
+              io.grpc.MethodDescriptor.<FaaSRequest, Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "Call"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  FaaSRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("Call"))
+                  .build();
+          }
+        }
+     }
+     return getCallMethod;
+  }
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -117,76 +280,104 @@ public final class SpaceCloudGrpc {
 
     /**
      */
-    public void create(com.spaceuptech.api.core.proto.CreateRequest request,
-        io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_CREATE, responseObserver);
+    public void create(CreateRequest request,
+                       io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getCreateMethod(), responseObserver);
     }
 
     /**
      */
-    public void read(com.spaceuptech.api.core.proto.ReadRequest request,
-        io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_READ, responseObserver);
+    public void read(ReadRequest request,
+                     io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getReadMethod(), responseObserver);
     }
 
     /**
      */
-    public void update(com.spaceuptech.api.core.proto.UpdateRequest request,
-        io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_UPDATE, responseObserver);
+    public void update(UpdateRequest request,
+                       io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getUpdateMethod(), responseObserver);
     }
 
     /**
      */
-    public void delete(com.spaceuptech.api.core.proto.DeleteRequest request,
-        io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_DELETE, responseObserver);
+    public void delete(DeleteRequest request,
+                       io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getDeleteMethod(), responseObserver);
     }
 
     /**
      */
-    public void aggregate(com.spaceuptech.api.core.proto.AggregateRequest request,
-        io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_AGGREGATE, responseObserver);
+    public void aggregate(AggregateRequest request,
+                          io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getAggregateMethod(), responseObserver);
     }
 
-    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+    /**
+     */
+    public void batch(BatchRequest request,
+                      io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getBatchMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void call(FaaSRequest request,
+                     io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getCallMethod(), responseObserver);
+    }
+
+    @Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            METHOD_CREATE,
+            getCreateMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.spaceuptech.api.core.proto.CreateRequest,
-                com.spaceuptech.api.core.proto.Response>(
+                CreateRequest,
+                Response>(
                   this, METHODID_CREATE)))
           .addMethod(
-            METHOD_READ,
+            getReadMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.spaceuptech.api.core.proto.ReadRequest,
-                com.spaceuptech.api.core.proto.Response>(
+                ReadRequest,
+                Response>(
                   this, METHODID_READ)))
           .addMethod(
-            METHOD_UPDATE,
+            getUpdateMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.spaceuptech.api.core.proto.UpdateRequest,
-                com.spaceuptech.api.core.proto.Response>(
+                UpdateRequest,
+                Response>(
                   this, METHODID_UPDATE)))
           .addMethod(
-            METHOD_DELETE,
+            getDeleteMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.spaceuptech.api.core.proto.DeleteRequest,
-                com.spaceuptech.api.core.proto.Response>(
+                DeleteRequest,
+                Response>(
                   this, METHODID_DELETE)))
           .addMethod(
-            METHOD_AGGREGATE,
+            getAggregateMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.spaceuptech.api.core.proto.AggregateRequest,
-                com.spaceuptech.api.core.proto.Response>(
+                AggregateRequest,
+                Response>(
                   this, METHODID_AGGREGATE)))
+          .addMethod(
+            getBatchMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                BatchRequest,
+                Response>(
+                  this, METHODID_BATCH)))
+          .addMethod(
+            getCallMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                FaaSRequest,
+                Response>(
+                  this, METHODID_CALL)))
           .build();
     }
   }
@@ -203,7 +394,7 @@ public final class SpaceCloudGrpc {
       super(channel, callOptions);
     }
 
-    @java.lang.Override
+    @Override
     protected SpaceCloudStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new SpaceCloudStub(channel, callOptions);
@@ -211,42 +402,58 @@ public final class SpaceCloudGrpc {
 
     /**
      */
-    public void create(com.spaceuptech.api.core.proto.CreateRequest request,
-        io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response> responseObserver) {
+    public void create(CreateRequest request,
+                       io.grpc.stub.StreamObserver<Response> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_CREATE, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getCreateMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void read(com.spaceuptech.api.core.proto.ReadRequest request,
-        io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response> responseObserver) {
+    public void read(ReadRequest request,
+                     io.grpc.stub.StreamObserver<Response> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_READ, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getReadMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void update(com.spaceuptech.api.core.proto.UpdateRequest request,
-        io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response> responseObserver) {
+    public void update(UpdateRequest request,
+                       io.grpc.stub.StreamObserver<Response> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_UPDATE, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getUpdateMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void delete(com.spaceuptech.api.core.proto.DeleteRequest request,
-        io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response> responseObserver) {
+    public void delete(DeleteRequest request,
+                       io.grpc.stub.StreamObserver<Response> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_DELETE, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getDeleteMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void aggregate(com.spaceuptech.api.core.proto.AggregateRequest request,
-        io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response> responseObserver) {
+    public void aggregate(AggregateRequest request,
+                          io.grpc.stub.StreamObserver<Response> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_AGGREGATE, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getAggregateMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void batch(BatchRequest request,
+                      io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getBatchMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void call(FaaSRequest request,
+                     io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getCallMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -262,7 +469,7 @@ public final class SpaceCloudGrpc {
       super(channel, callOptions);
     }
 
-    @java.lang.Override
+    @Override
     protected SpaceCloudBlockingStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new SpaceCloudBlockingStub(channel, callOptions);
@@ -270,37 +477,51 @@ public final class SpaceCloudGrpc {
 
     /**
      */
-    public com.spaceuptech.api.core.proto.Response create(com.spaceuptech.api.core.proto.CreateRequest request) {
+    public Response create(CreateRequest request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_CREATE, getCallOptions(), request);
+          getChannel(), getCreateMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public com.spaceuptech.api.core.proto.Response read(com.spaceuptech.api.core.proto.ReadRequest request) {
+    public Response read(ReadRequest request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_READ, getCallOptions(), request);
+          getChannel(), getReadMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public com.spaceuptech.api.core.proto.Response update(com.spaceuptech.api.core.proto.UpdateRequest request) {
+    public Response update(UpdateRequest request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_UPDATE, getCallOptions(), request);
+          getChannel(), getUpdateMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public com.spaceuptech.api.core.proto.Response delete(com.spaceuptech.api.core.proto.DeleteRequest request) {
+    public Response delete(DeleteRequest request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_DELETE, getCallOptions(), request);
+          getChannel(), getDeleteMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public com.spaceuptech.api.core.proto.Response aggregate(com.spaceuptech.api.core.proto.AggregateRequest request) {
+    public Response aggregate(AggregateRequest request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_AGGREGATE, getCallOptions(), request);
+          getChannel(), getAggregateMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public Response batch(BatchRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getBatchMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public Response call(FaaSRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getCallMethod(), getCallOptions(), request);
     }
   }
 
@@ -316,7 +537,7 @@ public final class SpaceCloudGrpc {
       super(channel, callOptions);
     }
 
-    @java.lang.Override
+    @Override
     protected SpaceCloudFutureStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new SpaceCloudFutureStub(channel, callOptions);
@@ -324,42 +545,58 @@ public final class SpaceCloudGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.spaceuptech.api.core.proto.Response> create(
-        com.spaceuptech.api.core.proto.CreateRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> create(
+        CreateRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_CREATE, getCallOptions()), request);
+          getChannel().newCall(getCreateMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.spaceuptech.api.core.proto.Response> read(
-        com.spaceuptech.api.core.proto.ReadRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> read(
+        ReadRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_READ, getCallOptions()), request);
+          getChannel().newCall(getReadMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.spaceuptech.api.core.proto.Response> update(
-        com.spaceuptech.api.core.proto.UpdateRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> update(
+        UpdateRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_UPDATE, getCallOptions()), request);
+          getChannel().newCall(getUpdateMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.spaceuptech.api.core.proto.Response> delete(
-        com.spaceuptech.api.core.proto.DeleteRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> delete(
+        DeleteRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_DELETE, getCallOptions()), request);
+          getChannel().newCall(getDeleteMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.spaceuptech.api.core.proto.Response> aggregate(
-        com.spaceuptech.api.core.proto.AggregateRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> aggregate(
+        AggregateRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_AGGREGATE, getCallOptions()), request);
+          getChannel().newCall(getAggregateMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<Response> batch(
+        BatchRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getBatchMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<Response> call(
+        FaaSRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getCallMethod(), getCallOptions()), request);
     }
   }
 
@@ -368,6 +605,8 @@ public final class SpaceCloudGrpc {
   private static final int METHODID_UPDATE = 2;
   private static final int METHODID_DELETE = 3;
   private static final int METHODID_AGGREGATE = 4;
+  private static final int METHODID_BATCH = 5;
+  private static final int METHODID_CALL = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -382,37 +621,45 @@ public final class SpaceCloudGrpc {
       this.methodId = methodId;
     }
 
-    @java.lang.Override
-    @java.lang.SuppressWarnings("unchecked")
+    @Override
+    @SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_CREATE:
-          serviceImpl.create((com.spaceuptech.api.core.proto.CreateRequest) request,
-              (io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response>) responseObserver);
+          serviceImpl.create((CreateRequest) request,
+              (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
         case METHODID_READ:
-          serviceImpl.read((com.spaceuptech.api.core.proto.ReadRequest) request,
-              (io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response>) responseObserver);
+          serviceImpl.read((ReadRequest) request,
+              (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
         case METHODID_UPDATE:
-          serviceImpl.update((com.spaceuptech.api.core.proto.UpdateRequest) request,
-              (io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response>) responseObserver);
+          serviceImpl.update((UpdateRequest) request,
+              (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
         case METHODID_DELETE:
-          serviceImpl.delete((com.spaceuptech.api.core.proto.DeleteRequest) request,
-              (io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response>) responseObserver);
+          serviceImpl.delete((DeleteRequest) request,
+              (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
         case METHODID_AGGREGATE:
-          serviceImpl.aggregate((com.spaceuptech.api.core.proto.AggregateRequest) request,
-              (io.grpc.stub.StreamObserver<com.spaceuptech.api.core.proto.Response>) responseObserver);
+          serviceImpl.aggregate((AggregateRequest) request,
+              (io.grpc.stub.StreamObserver<Response>) responseObserver);
+          break;
+        case METHODID_BATCH:
+          serviceImpl.batch((BatchRequest) request,
+              (io.grpc.stub.StreamObserver<Response>) responseObserver);
+          break;
+        case METHODID_CALL:
+          serviceImpl.call((FaaSRequest) request,
+              (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
         default:
           throw new AssertionError();
       }
     }
 
-    @java.lang.Override
-    @java.lang.SuppressWarnings("unchecked")
+    @Override
+    @SuppressWarnings("unchecked")
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
@@ -422,10 +669,38 @@ public final class SpaceCloudGrpc {
     }
   }
 
-  private static final class SpaceCloudDescriptorSupplier implements io.grpc.protobuf.ProtoFileDescriptorSupplier {
-    @java.lang.Override
+  private static abstract class SpaceCloudBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
+    SpaceCloudBaseDescriptorSupplier() {}
+
+    @Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return com.spaceuptech.api.core.proto.SpaceCloudProto.getDescriptor();
+      return SpaceCloudProto.getDescriptor();
+    }
+
+    @Override
+    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
+      return getFileDescriptor().findServiceByName("SpaceCloud");
+    }
+  }
+
+  private static final class SpaceCloudFileDescriptorSupplier
+      extends SpaceCloudBaseDescriptorSupplier {
+    SpaceCloudFileDescriptorSupplier() {}
+  }
+
+  private static final class SpaceCloudMethodDescriptorSupplier
+      extends SpaceCloudBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
+    private final String methodName;
+
+    SpaceCloudMethodDescriptorSupplier(String methodName) {
+      this.methodName = methodName;
+    }
+
+    @Override
+    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
+      return getServiceDescriptor().findMethodByName(methodName);
     }
   }
 
@@ -438,12 +713,14 @@ public final class SpaceCloudGrpc {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new SpaceCloudDescriptorSupplier())
-              .addMethod(METHOD_CREATE)
-              .addMethod(METHOD_READ)
-              .addMethod(METHOD_UPDATE)
-              .addMethod(METHOD_DELETE)
-              .addMethod(METHOD_AGGREGATE)
+              .setSchemaDescriptor(new SpaceCloudFileDescriptorSupplier())
+              .addMethod(getCreateMethod())
+              .addMethod(getReadMethod())
+              .addMethod(getUpdateMethod())
+              .addMethod(getDeleteMethod())
+              .addMethod(getAggregateMethod())
+              .addMethod(getBatchMethod())
+              .addMethod(getCallMethod())
               .build();
         }
       }

@@ -3,6 +3,7 @@ package com.spaceuptech.api.core;
 import com.spaceuptech.api.core.mongo.Mongo;
 import com.spaceuptech.api.core.sql.SQL;
 import com.spaceuptech.api.core.utils.Config;
+import com.spaceuptech.api.core.utils.Transport;
 import com.spaceuptech.api.core.utils.Utils;
 
 public class API {
@@ -33,6 +34,6 @@ public class API {
     }
 
     public void call(String engineName, String funcName, int timeout, Object params, Utils.ResponseListener listener) {
-        throw new UnsupportedOperationException();
+        Transport.call(config.stub, params, timeout, engineName, funcName, config.token, listener);
     }
 }
