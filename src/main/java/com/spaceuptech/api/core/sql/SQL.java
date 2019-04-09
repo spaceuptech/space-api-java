@@ -26,10 +26,6 @@ public class SQL {
         return new Get(this.db, this.config, collection, "one");
     }
 
-    public Get count(String collection) {
-        return new Get(this.db, this.config, collection, "count");
-    }
-
 
     // UPDATE
     public Update update(String collection) {

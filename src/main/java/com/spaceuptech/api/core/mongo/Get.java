@@ -49,7 +49,7 @@ public class Get {
         return this;
     }
 
-    public Get distinctKey(String key) {
+    public Get key(String key) {
         this.readOptions.setDistinct(key);
         return this;
     }
