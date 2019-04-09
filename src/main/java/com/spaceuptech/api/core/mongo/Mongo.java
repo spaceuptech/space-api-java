@@ -12,21 +12,54 @@ public class Mongo {
         this.config = config;
     }
 
-    public Get get(String collection) {
-        return new Get(this.config, collection);
-    }
 
+    // CREATE
     public Insert insert(String collection) {
         return new Insert(this.config, collection);
     }
 
-    public Update update(String collection) {
-        return new Update(this.config, collection);
+
+    // READ
+    public Get get(String collection) {
+        return new Get(this.config, collection, "all");
     }
 
-    public Delete delete(String collection) {
-        return new Delete(this.config, collection);
+    public Get getOne(String collection) {
+        return new Get(this.config, collection, "one");
     }
+
+    public Get count(String collection) {
+        return new Get(this.config, collection, "count");
+    }
+
+    public Get distinct(String collection) {
+        return new Get(this.config, collection, "distinct");
+    }
+
+
+    // UPADTE
+    public Update update(String collection) {
+        return new Update(this.config, collection, "all");
+    }
+
+    public Update updateOne(String collection) {
+        return new Update(this.config, collection, "one");
+    }
+
+    public Update upsert(String collection) {
+        return new Update(this.config, collection, "upsert");
+    }
+
+
+    // DELETE
+    public Delete delete(String collection) {
+        return new Delete(this.config, collection, "all");
+    }
+
+    public Delete deleteOne(String collection) {
+        return new Delete(this.config, collection, "one");
+    }
+
 
     // TODO
 //    public void profile(String id, Utils.MongoProfileListener listener) {

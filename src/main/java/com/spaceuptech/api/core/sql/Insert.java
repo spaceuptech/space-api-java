@@ -9,17 +9,34 @@ public class Insert {
 
     private Meta meta;
     private Config config;
+    private String operation;
+    private Object doc = null;
+    private Object[] docs = null;
 
     public Insert(String db, Config config, String table) {
         this.config = config;
         this.meta = Transport.makeMeta(config.projectId, table, db, config.token);
     }
 
-    public void one(Object record, Utils.ResponseListener listener) {
-        Transport.create(config.stub, record, "one", this.meta, listener);
+    public Insert doc(Object record) {
+        this.operation = "one";
+        this.doc = record;
+        return this;
     }
 
-    public void all(Object records[], Utils.ResponseListener listener) {
-        Transport.create(config.stub, records, "one", this.meta, listener);
+    public Insert docs(Object records[]) {
+        this.operation = "all";
+        this.docs = records;
+        return this;
+    }
+
+    public void apply(Utils.ResponseListener listener) {
+        if (this.operation.equals("one")) {
+            Transport.create(config.stub, this.doc, this.operation, this.meta, listener);
+        } else if (this.operation.equals("all")) {
+            Transport.create(config.stub, this.docs, this.operation, this.meta, listener);
+        } else {
+            listener.onError(new Exception("Operation not specified"));
+        }
     }
 }
