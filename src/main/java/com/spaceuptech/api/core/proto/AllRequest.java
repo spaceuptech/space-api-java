@@ -4,22 +4,24 @@
 package com.spaceuptech.api.core.proto;
 
 /**
- * Protobuf type {@code proto.Meta}
+ * Protobuf type {@code proto.AllRequest}
  */
-public  final class Meta extends
+public  final class AllRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:proto.Meta)
-    MetaOrBuilder {
+    // @@protoc_insertion_point(message_implements:proto.AllRequest)
+    AllRequestOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use Meta.newBuilder() to construct.
-  private Meta(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use AllRequest.newBuilder() to construct.
+  private AllRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private Meta() {
-    project_ = "";
-    dbType_ = "";
+  private AllRequest() {
     col_ = "";
-    token_ = "";
+    document_ = com.google.protobuf.ByteString.EMPTY;
+    operation_ = "";
+    find_ = com.google.protobuf.ByteString.EMPTY;
+    update_ = com.google.protobuf.ByteString.EMPTY;
+    type_ = "";
   }
 
   @java.lang.Override
@@ -27,7 +29,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private Meta(
+  private AllRequest(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -49,25 +51,34 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            project_ = s;
+            col_ = s;
             break;
           }
           case 18: {
-            java.lang.String s = input.readStringRequireUtf8();
 
-            dbType_ = s;
+            document_ = input.readBytes();
             break;
           }
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            col_ = s;
+            operation_ = s;
             break;
           }
           case 34: {
+
+            find_ = input.readBytes();
+            break;
+          }
+          case 42: {
+
+            update_ = input.readBytes();
+            break;
+          }
+          case 50: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            token_ = s;
+            type_ = s;
             break;
           }
           default: {
@@ -91,89 +102,21 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_Meta_descriptor;
+    return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_AllRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_Meta_fieldAccessorTable
+    return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_AllRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.spaceuptech.api.core.proto.Meta.class, com.spaceuptech.api.core.proto.Meta.Builder.class);
+            com.spaceuptech.api.core.proto.AllRequest.class, com.spaceuptech.api.core.proto.AllRequest.Builder.class);
   }
 
-  public static final int PROJECT_FIELD_NUMBER = 1;
-  private volatile java.lang.Object project_;
-  /**
-   * <code>string project = 1;</code>
-   */
-  public java.lang.String getProject() {
-    java.lang.Object ref = project_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      project_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string project = 1;</code>
-   */
-  public com.google.protobuf.ByteString
-      getProjectBytes() {
-    java.lang.Object ref = project_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      project_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int DBTYPE_FIELD_NUMBER = 2;
-  private volatile java.lang.Object dbType_;
-  /**
-   * <code>string dbType = 2;</code>
-   */
-  public java.lang.String getDbType() {
-    java.lang.Object ref = dbType_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      dbType_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string dbType = 2;</code>
-   */
-  public com.google.protobuf.ByteString
-      getDbTypeBytes() {
-    java.lang.Object ref = dbType_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      dbType_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int COL_FIELD_NUMBER = 3;
+  public static final int COL_FIELD_NUMBER = 1;
   private volatile java.lang.Object col_;
   /**
-   * <code>string col = 3;</code>
+   * <code>string col = 1;</code>
    */
   public java.lang.String getCol() {
     java.lang.Object ref = col_;
@@ -188,7 +131,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string col = 3;</code>
+   * <code>string col = 1;</code>
    */
   public com.google.protobuf.ByteString
       getColBytes() {
@@ -204,34 +147,95 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int TOKEN_FIELD_NUMBER = 4;
-  private volatile java.lang.Object token_;
+  public static final int DOCUMENT_FIELD_NUMBER = 2;
+  private com.google.protobuf.ByteString document_;
   /**
-   * <code>string token = 4;</code>
+   * <code>bytes document = 2;</code>
    */
-  public java.lang.String getToken() {
-    java.lang.Object ref = token_;
+  public com.google.protobuf.ByteString getDocument() {
+    return document_;
+  }
+
+  public static final int OPERATION_FIELD_NUMBER = 3;
+  private volatile java.lang.Object operation_;
+  /**
+   * <code>string operation = 3;</code>
+   */
+  public java.lang.String getOperation() {
+    java.lang.Object ref = operation_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      token_ = s;
+      operation_ = s;
       return s;
     }
   }
   /**
-   * <code>string token = 4;</code>
+   * <code>string operation = 3;</code>
    */
   public com.google.protobuf.ByteString
-      getTokenBytes() {
-    java.lang.Object ref = token_;
+      getOperationBytes() {
+    java.lang.Object ref = operation_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      token_ = b;
+      operation_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int FIND_FIELD_NUMBER = 4;
+  private com.google.protobuf.ByteString find_;
+  /**
+   * <code>bytes find = 4;</code>
+   */
+  public com.google.protobuf.ByteString getFind() {
+    return find_;
+  }
+
+  public static final int UPDATE_FIELD_NUMBER = 5;
+  private com.google.protobuf.ByteString update_;
+  /**
+   * <code>bytes update = 5;</code>
+   */
+  public com.google.protobuf.ByteString getUpdate() {
+    return update_;
+  }
+
+  public static final int TYPE_FIELD_NUMBER = 6;
+  private volatile java.lang.Object type_;
+  /**
+   * <code>string type = 6;</code>
+   */
+  public java.lang.String getType() {
+    java.lang.Object ref = type_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      type_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string type = 6;</code>
+   */
+  public com.google.protobuf.ByteString
+      getTypeBytes() {
+    java.lang.Object ref = type_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      type_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -252,17 +256,23 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getProjectBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, project_);
-    }
-    if (!getDbTypeBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, dbType_);
-    }
     if (!getColBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, col_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, col_);
     }
-    if (!getTokenBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, token_);
+    if (!document_.isEmpty()) {
+      output.writeBytes(2, document_);
+    }
+    if (!getOperationBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, operation_);
+    }
+    if (!find_.isEmpty()) {
+      output.writeBytes(4, find_);
+    }
+    if (!update_.isEmpty()) {
+      output.writeBytes(5, update_);
+    }
+    if (!getTypeBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, type_);
     }
     unknownFields.writeTo(output);
   }
@@ -273,17 +283,26 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getProjectBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, project_);
-    }
-    if (!getDbTypeBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, dbType_);
-    }
     if (!getColBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, col_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, col_);
     }
-    if (!getTokenBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, token_);
+    if (!document_.isEmpty()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBytesSize(2, document_);
+    }
+    if (!getOperationBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, operation_);
+    }
+    if (!find_.isEmpty()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBytesSize(4, find_);
+    }
+    if (!update_.isEmpty()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBytesSize(5, update_);
+    }
+    if (!getTypeBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, type_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -295,20 +314,24 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.spaceuptech.api.core.proto.Meta)) {
+    if (!(obj instanceof com.spaceuptech.api.core.proto.AllRequest)) {
       return super.equals(obj);
     }
-    com.spaceuptech.api.core.proto.Meta other = (com.spaceuptech.api.core.proto.Meta) obj;
+    com.spaceuptech.api.core.proto.AllRequest other = (com.spaceuptech.api.core.proto.AllRequest) obj;
 
     boolean result = true;
-    result = result && getProject()
-        .equals(other.getProject());
-    result = result && getDbType()
-        .equals(other.getDbType());
     result = result && getCol()
         .equals(other.getCol());
-    result = result && getToken()
-        .equals(other.getToken());
+    result = result && getDocument()
+        .equals(other.getDocument());
+    result = result && getOperation()
+        .equals(other.getOperation());
+    result = result && getFind()
+        .equals(other.getFind());
+    result = result && getUpdate()
+        .equals(other.getUpdate());
+    result = result && getType()
+        .equals(other.getType());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -320,82 +343,86 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + PROJECT_FIELD_NUMBER;
-    hash = (53 * hash) + getProject().hashCode();
-    hash = (37 * hash) + DBTYPE_FIELD_NUMBER;
-    hash = (53 * hash) + getDbType().hashCode();
     hash = (37 * hash) + COL_FIELD_NUMBER;
     hash = (53 * hash) + getCol().hashCode();
-    hash = (37 * hash) + TOKEN_FIELD_NUMBER;
-    hash = (53 * hash) + getToken().hashCode();
+    hash = (37 * hash) + DOCUMENT_FIELD_NUMBER;
+    hash = (53 * hash) + getDocument().hashCode();
+    hash = (37 * hash) + OPERATION_FIELD_NUMBER;
+    hash = (53 * hash) + getOperation().hashCode();
+    hash = (37 * hash) + FIND_FIELD_NUMBER;
+    hash = (53 * hash) + getFind().hashCode();
+    hash = (37 * hash) + UPDATE_FIELD_NUMBER;
+    hash = (53 * hash) + getUpdate().hashCode();
+    hash = (37 * hash) + TYPE_FIELD_NUMBER;
+    hash = (53 * hash) + getType().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.spaceuptech.api.core.proto.Meta parseFrom(
+  public static com.spaceuptech.api.core.proto.AllRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.spaceuptech.api.core.proto.Meta parseFrom(
+  public static com.spaceuptech.api.core.proto.AllRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.spaceuptech.api.core.proto.Meta parseFrom(
+  public static com.spaceuptech.api.core.proto.AllRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.spaceuptech.api.core.proto.Meta parseFrom(
+  public static com.spaceuptech.api.core.proto.AllRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.spaceuptech.api.core.proto.Meta parseFrom(byte[] data)
+  public static com.spaceuptech.api.core.proto.AllRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.spaceuptech.api.core.proto.Meta parseFrom(
+  public static com.spaceuptech.api.core.proto.AllRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.spaceuptech.api.core.proto.Meta parseFrom(java.io.InputStream input)
+  public static com.spaceuptech.api.core.proto.AllRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.spaceuptech.api.core.proto.Meta parseFrom(
+  public static com.spaceuptech.api.core.proto.AllRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.spaceuptech.api.core.proto.Meta parseDelimitedFrom(java.io.InputStream input)
+  public static com.spaceuptech.api.core.proto.AllRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.spaceuptech.api.core.proto.Meta parseDelimitedFrom(
+  public static com.spaceuptech.api.core.proto.AllRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.spaceuptech.api.core.proto.Meta parseFrom(
+  public static com.spaceuptech.api.core.proto.AllRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.spaceuptech.api.core.proto.Meta parseFrom(
+  public static com.spaceuptech.api.core.proto.AllRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -408,7 +435,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.spaceuptech.api.core.proto.Meta prototype) {
+  public static Builder newBuilder(com.spaceuptech.api.core.proto.AllRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -424,26 +451,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code proto.Meta}
+   * Protobuf type {@code proto.AllRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:proto.Meta)
-      com.spaceuptech.api.core.proto.MetaOrBuilder {
+      // @@protoc_insertion_point(builder_implements:proto.AllRequest)
+      com.spaceuptech.api.core.proto.AllRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_Meta_descriptor;
+      return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_AllRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_Meta_fieldAccessorTable
+      return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_AllRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.spaceuptech.api.core.proto.Meta.class, com.spaceuptech.api.core.proto.Meta.Builder.class);
+              com.spaceuptech.api.core.proto.AllRequest.class, com.spaceuptech.api.core.proto.AllRequest.Builder.class);
     }
 
-    // Construct using com.spaceuptech.api.core.proto.Meta.newBuilder()
+    // Construct using com.spaceuptech.api.core.proto.AllRequest.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -461,13 +488,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      project_ = "";
-
-      dbType_ = "";
-
       col_ = "";
 
-      token_ = "";
+      document_ = com.google.protobuf.ByteString.EMPTY;
+
+      operation_ = "";
+
+      find_ = com.google.protobuf.ByteString.EMPTY;
+
+      update_ = com.google.protobuf.ByteString.EMPTY;
+
+      type_ = "";
 
       return this;
     }
@@ -475,17 +506,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_Meta_descriptor;
+      return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_AllRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.spaceuptech.api.core.proto.Meta getDefaultInstanceForType() {
-      return com.spaceuptech.api.core.proto.Meta.getDefaultInstance();
+    public com.spaceuptech.api.core.proto.AllRequest getDefaultInstanceForType() {
+      return com.spaceuptech.api.core.proto.AllRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.spaceuptech.api.core.proto.Meta build() {
-      com.spaceuptech.api.core.proto.Meta result = buildPartial();
+    public com.spaceuptech.api.core.proto.AllRequest build() {
+      com.spaceuptech.api.core.proto.AllRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -493,12 +524,14 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.spaceuptech.api.core.proto.Meta buildPartial() {
-      com.spaceuptech.api.core.proto.Meta result = new com.spaceuptech.api.core.proto.Meta(this);
-      result.project_ = project_;
-      result.dbType_ = dbType_;
+    public com.spaceuptech.api.core.proto.AllRequest buildPartial() {
+      com.spaceuptech.api.core.proto.AllRequest result = new com.spaceuptech.api.core.proto.AllRequest(this);
       result.col_ = col_;
-      result.token_ = token_;
+      result.document_ = document_;
+      result.operation_ = operation_;
+      result.find_ = find_;
+      result.update_ = update_;
+      result.type_ = type_;
       onBuilt();
       return result;
     }
@@ -537,30 +570,35 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.spaceuptech.api.core.proto.Meta) {
-        return mergeFrom((com.spaceuptech.api.core.proto.Meta)other);
+      if (other instanceof com.spaceuptech.api.core.proto.AllRequest) {
+        return mergeFrom((com.spaceuptech.api.core.proto.AllRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.spaceuptech.api.core.proto.Meta other) {
-      if (other == com.spaceuptech.api.core.proto.Meta.getDefaultInstance()) return this;
-      if (!other.getProject().isEmpty()) {
-        project_ = other.project_;
-        onChanged();
-      }
-      if (!other.getDbType().isEmpty()) {
-        dbType_ = other.dbType_;
-        onChanged();
-      }
+    public Builder mergeFrom(com.spaceuptech.api.core.proto.AllRequest other) {
+      if (other == com.spaceuptech.api.core.proto.AllRequest.getDefaultInstance()) return this;
       if (!other.getCol().isEmpty()) {
         col_ = other.col_;
         onChanged();
       }
-      if (!other.getToken().isEmpty()) {
-        token_ = other.token_;
+      if (other.getDocument() != com.google.protobuf.ByteString.EMPTY) {
+        setDocument(other.getDocument());
+      }
+      if (!other.getOperation().isEmpty()) {
+        operation_ = other.operation_;
+        onChanged();
+      }
+      if (other.getFind() != com.google.protobuf.ByteString.EMPTY) {
+        setFind(other.getFind());
+      }
+      if (other.getUpdate() != com.google.protobuf.ByteString.EMPTY) {
+        setUpdate(other.getUpdate());
+      }
+      if (!other.getType().isEmpty()) {
+        type_ = other.type_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -578,11 +616,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.spaceuptech.api.core.proto.Meta parsedMessage = null;
+      com.spaceuptech.api.core.proto.AllRequest parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.spaceuptech.api.core.proto.Meta) e.getUnfinishedMessage();
+        parsedMessage = (com.spaceuptech.api.core.proto.AllRequest) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -592,147 +630,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object project_ = "";
-    /**
-     * <code>string project = 1;</code>
-     */
-    public java.lang.String getProject() {
-      java.lang.Object ref = project_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        project_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string project = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getProjectBytes() {
-      java.lang.Object ref = project_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        project_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string project = 1;</code>
-     */
-    public Builder setProject(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      project_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string project = 1;</code>
-     */
-    public Builder clearProject() {
-      
-      project_ = getDefaultInstance().getProject();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string project = 1;</code>
-     */
-    public Builder setProjectBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      project_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object dbType_ = "";
-    /**
-     * <code>string dbType = 2;</code>
-     */
-    public java.lang.String getDbType() {
-      java.lang.Object ref = dbType_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        dbType_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string dbType = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDbTypeBytes() {
-      java.lang.Object ref = dbType_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        dbType_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string dbType = 2;</code>
-     */
-    public Builder setDbType(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      dbType_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string dbType = 2;</code>
-     */
-    public Builder clearDbType() {
-      
-      dbType_ = getDefaultInstance().getDbType();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string dbType = 2;</code>
-     */
-    public Builder setDbTypeBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      dbType_ = value;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object col_ = "";
     /**
-     * <code>string col = 3;</code>
+     * <code>string col = 1;</code>
      */
     public java.lang.String getCol() {
       java.lang.Object ref = col_;
@@ -747,7 +647,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string col = 3;</code>
+     * <code>string col = 1;</code>
      */
     public com.google.protobuf.ByteString
         getColBytes() {
@@ -763,7 +663,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string col = 3;</code>
+     * <code>string col = 1;</code>
      */
     public Builder setCol(
         java.lang.String value) {
@@ -776,7 +676,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string col = 3;</code>
+     * <code>string col = 1;</code>
      */
     public Builder clearCol() {
       
@@ -785,7 +685,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string col = 3;</code>
+     * <code>string col = 1;</code>
      */
     public Builder setColBytes(
         com.google.protobuf.ByteString value) {
@@ -799,71 +699,227 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object token_ = "";
+    private com.google.protobuf.ByteString document_ = com.google.protobuf.ByteString.EMPTY;
     /**
-     * <code>string token = 4;</code>
+     * <code>bytes document = 2;</code>
      */
-    public java.lang.String getToken() {
-      java.lang.Object ref = token_;
+    public com.google.protobuf.ByteString getDocument() {
+      return document_;
+    }
+    /**
+     * <code>bytes document = 2;</code>
+     */
+    public Builder setDocument(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      document_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bytes document = 2;</code>
+     */
+    public Builder clearDocument() {
+      
+      document_ = getDefaultInstance().getDocument();
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object operation_ = "";
+    /**
+     * <code>string operation = 3;</code>
+     */
+    public java.lang.String getOperation() {
+      java.lang.Object ref = operation_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        token_ = s;
+        operation_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string token = 4;</code>
+     * <code>string operation = 3;</code>
      */
     public com.google.protobuf.ByteString
-        getTokenBytes() {
-      java.lang.Object ref = token_;
+        getOperationBytes() {
+      java.lang.Object ref = operation_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        token_ = b;
+        operation_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string token = 4;</code>
+     * <code>string operation = 3;</code>
      */
-    public Builder setToken(
+    public Builder setOperation(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      token_ = value;
+      operation_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string token = 4;</code>
+     * <code>string operation = 3;</code>
      */
-    public Builder clearToken() {
+    public Builder clearOperation() {
       
-      token_ = getDefaultInstance().getToken();
+      operation_ = getDefaultInstance().getOperation();
       onChanged();
       return this;
     }
     /**
-     * <code>string token = 4;</code>
+     * <code>string operation = 3;</code>
      */
-    public Builder setTokenBytes(
+    public Builder setOperationBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      token_ = value;
+      operation_ = value;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.ByteString find_ = com.google.protobuf.ByteString.EMPTY;
+    /**
+     * <code>bytes find = 4;</code>
+     */
+    public com.google.protobuf.ByteString getFind() {
+      return find_;
+    }
+    /**
+     * <code>bytes find = 4;</code>
+     */
+    public Builder setFind(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      find_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bytes find = 4;</code>
+     */
+    public Builder clearFind() {
+      
+      find_ = getDefaultInstance().getFind();
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.ByteString update_ = com.google.protobuf.ByteString.EMPTY;
+    /**
+     * <code>bytes update = 5;</code>
+     */
+    public com.google.protobuf.ByteString getUpdate() {
+      return update_;
+    }
+    /**
+     * <code>bytes update = 5;</code>
+     */
+    public Builder setUpdate(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      update_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bytes update = 5;</code>
+     */
+    public Builder clearUpdate() {
+      
+      update_ = getDefaultInstance().getUpdate();
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object type_ = "";
+    /**
+     * <code>string type = 6;</code>
+     */
+    public java.lang.String getType() {
+      java.lang.Object ref = type_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        type_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string type = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTypeBytes() {
+      java.lang.Object ref = type_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        type_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string type = 6;</code>
+     */
+    public Builder setType(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      type_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string type = 6;</code>
+     */
+    public Builder clearType() {
+      
+      type_ = getDefaultInstance().getType();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string type = 6;</code>
+     */
+    public Builder setTypeBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      type_ = value;
       onChanged();
       return this;
     }
@@ -880,41 +936,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:proto.Meta)
+    // @@protoc_insertion_point(builder_scope:proto.AllRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:proto.Meta)
-  private static final com.spaceuptech.api.core.proto.Meta DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:proto.AllRequest)
+  private static final com.spaceuptech.api.core.proto.AllRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.spaceuptech.api.core.proto.Meta();
+    DEFAULT_INSTANCE = new com.spaceuptech.api.core.proto.AllRequest();
   }
 
-  public static com.spaceuptech.api.core.proto.Meta getDefaultInstance() {
+  public static com.spaceuptech.api.core.proto.AllRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<Meta>
-      PARSER = new com.google.protobuf.AbstractParser<Meta>() {
+  private static final com.google.protobuf.Parser<AllRequest>
+      PARSER = new com.google.protobuf.AbstractParser<AllRequest>() {
     @java.lang.Override
-    public Meta parsePartialFrom(
+    public AllRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new Meta(input, extensionRegistry);
+      return new AllRequest(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<Meta> parser() {
+  public static com.google.protobuf.Parser<AllRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<Meta> getParserForType() {
+  public com.google.protobuf.Parser<AllRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.spaceuptech.api.core.proto.Meta getDefaultInstanceForType() {
+  public com.spaceuptech.api.core.proto.AllRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

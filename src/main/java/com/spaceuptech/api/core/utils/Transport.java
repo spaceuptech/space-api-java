@@ -100,4 +100,19 @@ public class Transport {
 
         stub.delete(deleteRequest, makeStreamObserver(listener));
     }
+
+    public static void call(SpaceCloudGrpc.SpaceCloudStub stub, Object params, int timeout, String engine, String function, String token, Utils.ResponseListener listener) {
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(params);
+        byte[] bytes = jsonString.getBytes();
+
+        FaaSRequest faaSRequest = FaaSRequest.newBuilder()
+                .setParams(ByteString.copyFrom(bytes))
+                .setTimeout(timeout)
+                .setEngine(engine)
+                .setFunction(function)
+                .setToken(token).build();
+
+        stub.call(faaSRequest, makeStreamObserver(listener));
+    }
 }

@@ -10,6 +10,7 @@ public  final class AggregateRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:proto.AggregateRequest)
     AggregateRequestOrBuilder {
+private static final long serialVersionUID = 0L;
   // Use AggregateRequest.newBuilder() to construct.
   private AggregateRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
@@ -22,14 +23,19 @@ public  final class AggregateRequest extends
   @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
-    return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    return this.unknownFields;
   }
   private AggregateRequest(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     this();
+    if (extensionRegistry == null) {
+      throw new java.lang.NullPointerException();
+    }
     int mutable_bitField0_ = 0;
+    com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+        com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
       boolean done = false;
       while (!done) {
@@ -38,12 +44,6 @@ public  final class AggregateRequest extends
           case 0:
             done = true;
             break;
-          default: {
-            if (!input.skipField(tag)) {
-              done = true;
-            }
-            break;
-          }
           case 10: {
 
             pipeline_ = input.readBytes();
@@ -68,6 +68,13 @@ public  final class AggregateRequest extends
 
             break;
           }
+          default: {
+            if (!parseUnknownFieldProto3(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
+            }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -76,6 +83,7 @@ public  final class AggregateRequest extends
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
   }
@@ -84,6 +92,7 @@ public  final class AggregateRequest extends
     return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_AggregateRequest_descriptor;
   }
 
+  @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_AggregateRequest_fieldAccessorTable
@@ -156,6 +165,7 @@ public  final class AggregateRequest extends
   }
 
   private byte memoizedIsInitialized = -1;
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -165,6 +175,7 @@ public  final class AggregateRequest extends
     return true;
   }
 
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (!pipeline_.isEmpty()) {
@@ -176,8 +187,10 @@ public  final class AggregateRequest extends
     if (meta_ != null) {
       output.writeMessage(3, getMeta());
     }
+    unknownFields.writeTo(output);
   }
 
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -194,11 +207,11 @@ public  final class AggregateRequest extends
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(3, getMeta());
     }
+    size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
   }
 
-  private static final long serialVersionUID = 0L;
   @java.lang.Override
   public boolean equals(final java.lang.Object obj) {
     if (obj == this) {
@@ -219,6 +232,7 @@ public  final class AggregateRequest extends
       result = result && getMeta()
           .equals(other.getMeta());
     }
+    result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
 
@@ -242,6 +256,17 @@ public  final class AggregateRequest extends
     return hash;
   }
 
+  public static com.spaceuptech.api.core.proto.AggregateRequest parseFrom(
+      java.nio.ByteBuffer data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+  public static com.spaceuptech.api.core.proto.AggregateRequest parseFrom(
+      java.nio.ByteBuffer data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
   public static com.spaceuptech.api.core.proto.AggregateRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -301,6 +326,7 @@ public  final class AggregateRequest extends
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
@@ -308,6 +334,7 @@ public  final class AggregateRequest extends
   public static Builder newBuilder(com.spaceuptech.api.core.proto.AggregateRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
@@ -331,6 +358,7 @@ public  final class AggregateRequest extends
       return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_AggregateRequest_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_AggregateRequest_fieldAccessorTable
@@ -353,6 +381,7 @@ public  final class AggregateRequest extends
               .alwaysUseFieldBuilders) {
       }
     }
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       pipeline_ = com.google.protobuf.ByteString.EMPTY;
@@ -368,15 +397,18 @@ public  final class AggregateRequest extends
       return this;
     }
 
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
       return com.spaceuptech.api.core.proto.SpaceCloudProto.internal_static_proto_AggregateRequest_descriptor;
     }
 
+    @java.lang.Override
     public com.spaceuptech.api.core.proto.AggregateRequest getDefaultInstanceForType() {
       return com.spaceuptech.api.core.proto.AggregateRequest.getDefaultInstance();
     }
 
+    @java.lang.Override
     public com.spaceuptech.api.core.proto.AggregateRequest build() {
       com.spaceuptech.api.core.proto.AggregateRequest result = buildPartial();
       if (!result.isInitialized()) {
@@ -385,6 +417,7 @@ public  final class AggregateRequest extends
       return result;
     }
 
+    @java.lang.Override
     public com.spaceuptech.api.core.proto.AggregateRequest buildPartial() {
       com.spaceuptech.api.core.proto.AggregateRequest result = new com.spaceuptech.api.core.proto.AggregateRequest(this);
       result.pipeline_ = pipeline_;
@@ -398,32 +431,39 @@ public  final class AggregateRequest extends
       return result;
     }
 
+    @java.lang.Override
     public Builder clone() {
       return (Builder) super.clone();
     }
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        Object value) {
+        java.lang.Object value) {
       return (Builder) super.setField(field, value);
     }
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
       return (Builder) super.clearField(field);
     }
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
       return (Builder) super.clearOneof(oneof);
     }
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, Object value) {
+        int index, java.lang.Object value) {
       return (Builder) super.setRepeatedField(field, index, value);
     }
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        Object value) {
+        java.lang.Object value) {
       return (Builder) super.addRepeatedField(field, value);
     }
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof com.spaceuptech.api.core.proto.AggregateRequest) {
         return mergeFrom((com.spaceuptech.api.core.proto.AggregateRequest)other);
@@ -445,14 +485,17 @@ public  final class AggregateRequest extends
       if (other.hasMeta()) {
         mergeMeta(other.getMeta());
       }
+      this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
     }
 
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -685,14 +728,16 @@ public  final class AggregateRequest extends
       }
       return metaBuilder_;
     }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return this;
+      return super.setUnknownFieldsProto3(unknownFields);
     }
 
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return this;
+      return super.mergeUnknownFields(unknownFields);
     }
 
 
@@ -711,11 +756,12 @@ public  final class AggregateRequest extends
 
   private static final com.google.protobuf.Parser<AggregateRequest>
       PARSER = new com.google.protobuf.AbstractParser<AggregateRequest>() {
+    @java.lang.Override
     public AggregateRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AggregateRequest(input, extensionRegistry);
+      return new AggregateRequest(input, extensionRegistry);
     }
   };
 
@@ -728,6 +774,7 @@ public  final class AggregateRequest extends
     return PARSER;
   }
 
+  @java.lang.Override
   public com.spaceuptech.api.core.proto.AggregateRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
