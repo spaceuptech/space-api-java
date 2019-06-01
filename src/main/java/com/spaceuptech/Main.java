@@ -2,11 +2,10 @@ package com.spaceuptech;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import com.spaceuptech.api.core.API;
-import com.spaceuptech.api.core.mongo.Mongo;
-import com.spaceuptech.api.core.utils.Response;
-import com.spaceuptech.api.core.utils.Utils;
+import com.spaceuptech.space_api.API;
+import com.spaceuptech.space_api.mongo.Mongo;
+import com.spaceuptech.space_api.utils.Response;
+import com.spaceuptech.space_api.utils.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -632,7 +631,7 @@ public class Main {
 //                Utils.ResponseListener responseListener = new Utils.ResponseListener() {
 //                    @Override
 //                    public void onResponse(int statusCode, Response response) {
-//                        System.out.println("FaaS Response: " + response.getValue(Object.class));
+//                        System.out.println("Functions Response: " + response.getValue(Object.class));
 //                    }
 //
 //                    @Override
@@ -640,7 +639,7 @@ public class Main {
 //                        System.out.println("Error: " + e.toString());
 //                    }
 //                };
-//                api.call("echo-engine", "echo", 5000, "FaaS is awesome!", responseListener);
+//                api.call("echo-service", "echo", 5000, "FaaS is awesome!", responseListener);
 //            }
 //
 //            @Override
