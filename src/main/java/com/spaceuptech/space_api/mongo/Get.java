@@ -19,7 +19,7 @@ public class Get {
     public Get(Config config, String collection, String operation) {
         this.operation = operation;
         this.config = config;
-        this.meta = Transport.makeMeta(config.projectId, collection, "mongo", config.token);
+        this.meta = Transport.makeMeta(config.projectId, collection, Constants.MONGO, config.token);
         this.readOptions = ReadOptions.newBuilder();
     }
 

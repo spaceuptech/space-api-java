@@ -15,25 +15,25 @@ public class Insert {
 
     public Insert(Config config, String collection) {
         this.config = config;
-        this.meta = Transport.makeMeta(config.projectId, collection, "mongo", config.token);
+        this.meta = Transport.makeMeta(config.projectId, collection, Constants.MONGO, config.token);
     }
 
     public Insert doc(Object doc) {
-        this.operation = "one";
+        this.operation = Constants.ONE;
         this.doc = doc;
         return this;
     }
 
     public Insert docs(Object[] docs) {
-        this.operation = "all";
+        this.operation = Constants.ALL;
         this.docs = docs;
         return this;
     }
 
     public void apply(Utils.ResponseListener listener) {
-        if (this.operation.equals("one")) {
+        if (this.operation.equals(Constants.ONE)) {
             Transport.create(config.stub, doc, this.operation, this.meta, listener);
-        } else if (this.operation.equals("all")) {
+        } else if (this.operation.equals(Constants.ALL)) {
             Transport.create(config.stub, docs, this.operation, this.meta, listener);
         } else {
             listener.onError(new Exception("Operation not specified"));

@@ -4,6 +4,7 @@ import com.spaceuptech.space_api.proto.Meta;
 import com.spaceuptech.space_api.utils.Config;
 import com.spaceuptech.space_api.utils.Transport;
 import com.spaceuptech.space_api.utils.Utils;
+import com.spaceuptech.space_api.utils.Constants;
 
 public class Insert {
 
@@ -19,21 +20,21 @@ public class Insert {
     }
 
     public Insert doc(Object record) {
-        this.operation = "one";
+        this.operation = Constants.ONE;
         this.doc = record;
         return this;
     }
 
     public Insert docs(Object records[]) {
-        this.operation = "all";
+        this.operation = Constants.ALL;
         this.docs = records;
         return this;
     }
 
     public void apply(Utils.ResponseListener listener) {
-        if (this.operation.equals("one")) {
+        if (this.operation.equals(Constants.ONE)) {
             Transport.create(config.stub, this.doc, this.operation, this.meta, listener);
-        } else if (this.operation.equals("all")) {
+        } else if (this.operation.equals(Constants.ALL)) {
             Transport.create(config.stub, this.docs, this.operation, this.meta, listener);
         } else {
             listener.onError(new Exception("Operation not specified"));

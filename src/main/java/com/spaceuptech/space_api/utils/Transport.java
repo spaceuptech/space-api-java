@@ -33,7 +33,8 @@ public class Transport {
             }
 
             @Override
-            public void onCompleted() {}
+            public void onCompleted() {
+            }
         };
     }
 
@@ -44,9 +45,9 @@ public class Transport {
         byte[] bytes = jsonString.getBytes();
 
         CreateRequest createRequest = CreateRequest.newBuilder()
-                    .setDocument(ByteString.copyFrom(bytes))
-                    .setOperation(operation)
-                    .setMeta(meta).build();
+                .setDocument(ByteString.copyFrom(bytes))
+                .setOperation(operation)
+                .setMeta(meta).build();
 
         stub.create(createRequest, makeStreamObserver(listener));
     }
@@ -110,5 +111,56 @@ public class Transport {
                 .setToken(token).build();
 
         stub.call(functionsRequest, makeStreamObserver(listener));
+    }
+
+    public static void profile(SpaceCloudGrpc.SpaceCloudStub stub, String id, Meta meta, Utils.ResponseListener listener) {
+        ProfileRequest profileRequest = ProfileRequest.newBuilder()
+                .setId(id)
+                .setMeta(meta).build();
+        stub.profile(profileRequest, makeStreamObserver(listener));
+    }
+
+    public static void profiles(SpaceCloudGrpc.SpaceCloudStub stub, Meta meta, Utils.ResponseListener listener) {
+        ProfilesRequest profilesRequest = ProfilesRequest.newBuilder()
+                .setMeta(meta).build();
+        stub.profiles(profilesRequest, makeStreamObserver(listener));
+    }
+
+    public static void signIn(SpaceCloudGrpc.SpaceCloudStub stub, String email, String password, Meta meta, Utils.ResponseListener listener) {
+        SignInRequest signInRequest = SignInRequest.newBuilder()
+                .setEmail(email)
+                .setPassword(password)
+                .setMeta(meta).build();
+        stub.signIn(signInRequest, makeStreamObserver(listener));
+    }
+
+    public static void signUp(SpaceCloudGrpc.SpaceCloudStub stub, String email, String name, String password, String role, Meta meta, Utils.ResponseListener listener) {
+        SignUpRequest.Builder builder = SignUpRequest.newBuilder()
+                .setEmail(email)
+                .setName(name)
+                .setPassword(password)
+                .setMeta(meta);
+        if (!role.equals("")) {
+            builder.setRole(role);
+        }
+        SignUpRequest signUpRequest = builder.build();
+        stub.signUp(signUpRequest, makeStreamObserver(listener));
+    }
+
+    public static void editProfile(SpaceCloudGrpc.SpaceCloudStub stub, String id, String email, String name, String password, Meta meta, Utils.ResponseListener listener) {
+        EditProfileRequest.Builder builder = EditProfileRequest.newBuilder()
+                .setId(id)
+                .setMeta(meta);
+        if (email != null) {
+            builder.setEmail(email);
+        }
+        if (name != null) {
+            builder.setName(name);
+        }
+        if (password != null) {
+            builder.setPassword(password);
+        }
+        EditProfileRequest editProfileRequest = builder.build();
+        stub.editProfile(editProfileRequest, makeStreamObserver(listener));
     }
 }
