@@ -28,4 +28,28 @@ public class Delete {
     public void apply(Utils.ResponseListener listener) {
         Transport.delete(config.stub, this.find, this.operation, this.meta, listener);
     }
+
+    String getProjectID() {
+        return config.projectId;
+    }
+
+    String getDBType() {
+        return meta.getDbType();
+    }
+
+    String getToken() {
+        return config.token;
+    }
+
+    String getCollection() {
+        return meta.getCol();
+    }
+
+    String getOperation() {
+        return operation;
+    }
+
+    Object getFind() {
+        return find;
+    }
 }

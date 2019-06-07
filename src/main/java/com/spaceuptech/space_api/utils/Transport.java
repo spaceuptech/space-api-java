@@ -6,6 +6,8 @@ import com.spaceuptech.space_api.proto.*;
 import com.spaceuptech.space_api.proto.Response;
 import io.grpc.stub.StreamObserver;
 
+import java.util.ArrayList;
+
 public class Transport {
 
     public static Meta makeMeta(String project, String collection, String dbType, String token) {
@@ -96,6 +98,11 @@ public class Transport {
                 .setMeta(meta).build();
 
         stub.delete(deleteRequest, makeStreamObserver(listener));
+    }
+
+    public static void batch(SpaceCloudGrpc.SpaceCloudStub stub, ArrayList<AllRequest> requests, Meta meta, Utils.ResponseListener listener) {
+        BatchRequest batchRequest = BatchRequest.newBuilder().setMeta(meta).addAllBatchrequest(requests).build();
+        stub.batch(batchRequest, makeStreamObserver(listener));
     }
 
     public static void call(SpaceCloudGrpc.SpaceCloudStub stub, Object params, int timeout, String service, String function, String token, Utils.ResponseListener listener) {

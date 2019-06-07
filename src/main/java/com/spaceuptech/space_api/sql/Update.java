@@ -14,8 +14,8 @@ public class Update {
     private HashMap<String, Object> find, update;
 
     public Update(String db, Config config, String table, String operation) {
-        this.operation = operation;
         this.config = config;
+        this.operation = operation;
         this.meta = Transport.makeMeta(config.projectId, table, db, config.token);
         this.update = new HashMap<>();
     }
@@ -34,4 +34,33 @@ public class Update {
     public void apply(Utils.ResponseListener listener) {
         Transport.update(config.stub, this.find, this.operation, this.update, this.meta, listener);
     }
+
+    String getProjectID() {
+        return config.projectId;
+    }
+
+    String getDBType() {
+        return meta.getDbType();
+    }
+
+    String getToken() {
+        return config.token;
+    }
+
+    String getCollection() {
+        return meta.getCol();
+    }
+
+    String getOperation() {
+        return operation;
+    }
+
+    Object getFind() {
+        return find;
+    }
+
+    Object getUpdate() {
+        return update;
+    }
+
 }

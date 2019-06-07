@@ -60,6 +60,9 @@ public class Mongo {
         return new Delete(this.config, collection, Constants.ONE);
     }
 
+    public Batch beginBatch() {
+        return new Batch(Constants.MONGO, this.config);
+    }
 
     public void profile(String id, Utils.ResponseListener listener) {
         Meta meta = Transport.makeMeta(config.projectId, null, Constants.MONGO, config.token);

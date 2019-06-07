@@ -41,6 +41,10 @@ public class SQL {
         return new Update(this.db, this.config, collection, Constants.UPSERT);
     }
 
+    public Batch beginBatch() {
+        return new Batch(this.db, this.config);
+    }
+
 
     // DELETE
     public Delete delete(String collection) {
