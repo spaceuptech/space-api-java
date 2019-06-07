@@ -1,7 +1,7 @@
 apply plugin: 'java'
-//apply plugin: 'com.google.protobuf'
+apply plugin: 'com.google.protobuf'
 
-group 'com.spaceuptech.api.core'
+group 'com.spaceuptech.space_api'
 version '0.1.0'
 
 sourceCompatibility = 1.8
@@ -10,36 +10,59 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    implementation 'com.google.code.gson:gson:2.8.5'
+def grpcVersion = '1.21.0' // CURRENT_GRPC_VERSION
 
-    compile 'io.grpc:grpc-netty-shaded:1.19.0'
-    compile 'io.grpc:grpc-protobuf:1.19.0'
-    compile 'io.grpc:grpc-stub:1.19.0'
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.5'
+    compile "com.google.api.grpc:proto-google-common-protos:0.1.9"
+    compile "io.grpc:grpc-netty:${grpcVersion}"
+    compile "io.grpc:grpc-protobuf:${grpcVersion}"
+    compile "io.grpc:grpc-stub:${grpcVersion}"
+
+//    testCompile "io.grpc:grpc-testing:${grpcVersion}"
+    testCompile "junit:junit:4.12"
 }
 
-//buildscript {
-//    repositories {
-//        mavenCentral()
-//    }
-//    dependencies {
-//        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
-//    }
-//}
-//
-//protobuf {
-//    protoc {
-//        artifact = "com.google.protobuf:protoc:3.6.1"
-//    }
-//    plugins {
-//        grpc {
-//            artifact = 'io.grpc:protoc-gen-grpc-java:1.19.0'
-//        }
-//    }
-//    generateProtoTasks {
-//        all()*.plugins {
-//            grpc {}
-//        }
-//    }
-//}
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
+    }
+}
+
+protobuf {
+    protoc {
+//        artifact = 'com.google.protobuf:protoc:3.4.0'
+        artifact = 'com.google.protobuf:protoc:3.7.0'
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+    generatedFilesBaseDir = "$projectDir/src/main/java"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/grpc'
+            srcDirs 'build/generated/source/proto/main/java'
+        }
+    }
+}
+
+// Generate IntelliJ IDEA's .idea & .iml project files
+apply plugin: 'idea'
+
+// Provide convenience executables for trying out the examples.
+//apply plugin: 'application'
+
+//startScripts.enabled = false
