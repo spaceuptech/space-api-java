@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import com.spaceuptech.space_api.API;
 import com.spaceuptech.space_api.mongo.Mongo;
 import com.spaceuptech.space_api.utils.Response;
+import com.spaceuptech.space_api.utils.Service;
+import com.spaceuptech.space_api.utils.ServiceFunction;
 import com.spaceuptech.space_api.utils.Utils;
 
 import java.util.HashMap;
@@ -26,57 +28,65 @@ public class Main {
 //        };
 //    }
 
-    public static void main(String[] args) {
-
-        // Tests for gRPC API
-        API api = new API("test-project", "localhost", 8081);
-        Mongo mongo = api.Mongo();
-
-        Map<String, String> document = new HashMap<>();
-        document.put("_id", "ABCDE");
-        document.put("first_name", "John");
-        document.put("last_name", "Doe");
-
-        mongo.insert("test-collection")
-                .doc(document)
-                .apply(new Utils.ResponseListener() {
-                    @Override
-                    public void onResponse(int statusCode, Response response) {
-                        System.out.println("Status Code: " + statusCode);
-                        try {
-                            System.out.println("Result: " + response.getResult(JsonObject.class));
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                            System.out.println("Error: " + response.getError());
-                        }
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-
-        mongo.get("test-collection")
-                .apply(new Utils.ResponseListener() {
-                    @Override
-                    public void onResponse(int statusCode, Response response) {
-                        System.out.println("Status Code: " + statusCode);
-                        try {
-                            System.out.println("Result: " + response.getResult(JsonArray.class));
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                            System.out.println("Error: " + response.getError());
-                        }
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-
-        while (true) {}
+    public static void main(String[] args) throws Throwable {
+        API api = new API("grpc", "localhost", 8081);
+        Service service = api.service("service");
+        service.registerFunction("echo_function", new ServiceFunction() {
+            @Override
+            public String run(String params, String auth) {
+                return params;
+            }
+        });
+        service.start();
+//        // Tests for gRPC API
+//        API api = new API("test-project", "localhost", 8081);
+//        Mongo mongo = api.Mongo();
+//
+//        Map<String, String> document = new HashMap<>();
+//        document.put("_id", "ABCDE");
+//        document.put("first_name", "John");
+//        document.put("last_name", "Doe");
+//
+//        mongo.insert("test-collection")
+//                .doc(document)
+//                .apply(new Utils.ResponseListener() {
+//                    @Override
+//                    public void onResponse(int statusCode, Response response) {
+//                        System.out.println("Status Code: " + statusCode);
+//                        try {
+//                            System.out.println("Result: " + response.getResult(JsonObject.class));
+//                        } catch (Exception e) {
+//                            System.out.println(e.getMessage());
+//                            System.out.println("Error: " + response.getError());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                });
+//
+//        mongo.get("test-collection")
+//                .apply(new Utils.ResponseListener() {
+//                    @Override
+//                    public void onResponse(int statusCode, Response response) {
+//                        System.out.println("Status Code: " + statusCode);
+//                        try {
+//                            System.out.println("Result: " + response.getResult(JsonArray.class));
+//                        } catch (Exception e) {
+//                            System.out.println(e.getMessage());
+//                            System.out.println("Error: " + response.getError());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                });
+//
+//        while (true) {}
 
 
 

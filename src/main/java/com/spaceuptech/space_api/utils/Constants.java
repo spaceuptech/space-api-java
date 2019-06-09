@@ -10,6 +10,9 @@ public class Constants {
     public static final String COUNT = "count";
     public static final String DISTINCT = "distinct";
 
+    public static final String TYPE_SERVICE_REGISTER = "service-register";
+    public static final String TYPE_SERVICE_UNREGISTER = "service-unregister";
+    public static final String TYPE_SERVICE_REQUEST = "service-request";
 
     public static final String MONGO = "mongo";
 

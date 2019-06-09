@@ -34,8 +34,7 @@ buildscript {
 
 protobuf {
     protoc {
-//        artifact = 'com.google.protobuf:protoc:3.4.0'
-        artifact = 'com.google.protobuf:protoc:3.7.0'
+        artifact = 'com.google.protobuf:protoc:3.8.0'
     }
     plugins {
         grpc {
