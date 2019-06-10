@@ -2,5 +2,5 @@ package com.spaceuptech.space_api.utils;
 
 @FunctionalInterface
 public interface ServiceFunction {
-    String run(String params, String auth);
+    void onInvocation(Message params, Message auth, ReturnCallback cb);
 }

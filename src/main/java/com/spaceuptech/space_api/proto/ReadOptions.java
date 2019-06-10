@@ -20,13 +20,6 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  @SuppressWarnings({"unused"})
-  protected java.lang.Object newInstance(
-      UnusedPrivateParameter unused) {
-    return new ReadOptions();
-  }
-
-  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
     return this.unknownFields;
@@ -138,6 +131,7 @@ private static final long serialVersionUID = 0L;
             com.spaceuptech.space_api.proto.ReadOptions.class, com.spaceuptech.space_api.proto.ReadOptions.Builder.class);
   }
 
+  private int bitField0_;
   public static final int SELECT_FIELD_NUMBER = 1;
   private static final class SelectDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
@@ -663,6 +657,7 @@ private static final long serialVersionUID = 0L;
     public com.spaceuptech.space_api.proto.ReadOptions buildPartial() {
       com.spaceuptech.space_api.proto.ReadOptions result = new com.spaceuptech.space_api.proto.ReadOptions(this);
       int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
       result.select_ = internalGetSelect();
       result.select_.makeImmutable();
       result.sort_ = internalGetSort();
@@ -670,6 +665,7 @@ private static final long serialVersionUID = 0L;
       result.skip_ = skip_;
       result.limit_ = limit_;
       result.distinct_ = distinct_;
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }

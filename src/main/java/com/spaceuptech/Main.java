@@ -4,10 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.spaceuptech.space_api.API;
 import com.spaceuptech.space_api.mongo.Mongo;
-import com.spaceuptech.space_api.utils.Response;
-import com.spaceuptech.space_api.utils.Service;
-import com.spaceuptech.space_api.utils.ServiceFunction;
-import com.spaceuptech.space_api.utils.Utils;
+import com.spaceuptech.space_api.utils.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,14 +27,16 @@ public class Main {
 
     public static void main(String[] args) throws Throwable {
         API api = new API("grpc", "localhost", 8081);
+        api.setToken("my_secret");
         Service service = api.service("service");
-        service.registerFunction("echo_function", new ServiceFunction() {
+        service.registerFunc("echo_func", new ServiceFunction() {
             @Override
-            public String run(String params, String auth) {
-                return params;
+            public void onInvocation(Message params, Message auth, ReturnCallback cb) {
+                cb.send("response", params.getValue(Object.class));
             }
         });
         service.start();
+
 //        // Tests for gRPC API
 //        API api = new API("test-project", "localhost", 8081);
 //        Mongo mongo = api.Mongo();
