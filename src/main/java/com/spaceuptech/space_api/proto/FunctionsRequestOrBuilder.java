@@ -46,4 +46,14 @@ public interface FunctionsRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getTokenBytes();
+
+  /**
+   * <code>string project = 6;</code>
+   */
+  java.lang.String getProject();
+  /**
+   * <code>string project = 6;</code>
+   */
+  com.google.protobuf.ByteString
+      getProjectBytes();
 }

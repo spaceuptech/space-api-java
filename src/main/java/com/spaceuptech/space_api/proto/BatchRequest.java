@@ -20,13 +20,6 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  @SuppressWarnings({"unused"})
-  protected java.lang.Object newInstance(
-      UnusedPrivateParameter unused) {
-    return new BatchRequest();
-  }
-
-  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
     return this.unknownFields;
@@ -107,6 +100,7 @@ private static final long serialVersionUID = 0L;
             com.spaceuptech.space_api.proto.BatchRequest.class, com.spaceuptech.space_api.proto.BatchRequest.Builder.class);
   }
 
+  private int bitField0_;
   public static final int BATCHREQUEST_FIELD_NUMBER = 1;
   private java.util.List<com.spaceuptech.space_api.proto.AllRequest> batchrequest_;
   /**
@@ -414,6 +408,7 @@ private static final long serialVersionUID = 0L;
     public com.spaceuptech.space_api.proto.BatchRequest buildPartial() {
       com.spaceuptech.space_api.proto.BatchRequest result = new com.spaceuptech.space_api.proto.BatchRequest(this);
       int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
       if (batchrequestBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0)) {
           batchrequest_ = java.util.Collections.unmodifiableList(batchrequest_);
@@ -428,6 +423,7 @@ private static final long serialVersionUID = 0L;
       } else {
         result.meta_ = metaBuilder_.build();
       }
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }

@@ -66,4 +66,24 @@ public interface FunctionsPayloadOrBuilder extends
    */
   com.google.protobuf.ByteString
       getErrorBytes();
+
+  /**
+   * <code>string project = 8;</code>
+   */
+  java.lang.String getProject();
+  /**
+   * <code>string project = 8;</code>
+   */
+  com.google.protobuf.ByteString
+      getProjectBytes();
+
+  /**
+   * <code>string token = 9;</code>
+   */
+  java.lang.String getToken();
+  /**
+   * <code>string token = 9;</code>
+   */
+  com.google.protobuf.ByteString
+      getTokenBytes();
 }
