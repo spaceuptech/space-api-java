@@ -64,6 +64,10 @@ public class Mongo {
         return new Batch(Constants.MONGO, this.config);
     }
 
+    public LiveQuery liveQuery(String collection) {
+        return new LiveQuery(this.config, collection, Constants.MONGO);
+    }
+
     public void profile(String id, Utils.ResponseListener listener) {
         Meta meta = Transport.makeMeta(config.projectId, null, Constants.MONGO, config.token);
         Transport.profile(config.stub, id, meta, listener);

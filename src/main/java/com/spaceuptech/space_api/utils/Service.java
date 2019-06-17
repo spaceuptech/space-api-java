@@ -51,8 +51,8 @@ public class Service {
                                             .setParams(Utils.objectToByteString(answer))
                                             .build());
                                 } else {
-                                    finishedLatch.countDown();
                                     throwables[0] = new Throwable("type must be 'response'");
+                                    finishedLatch.countDown();
                                 }
                             }
                         });
@@ -103,10 +103,10 @@ public class Service {
         new Runnable() {
             @Override
             public void run() {
-                finishedLatch = new CountDownLatch(1);
                 ManagedChannel channel = (ManagedChannel) config.stub.getChannel();
                 ConnectivityState currentState = channel.getState(true);
                 if (currentState.toString().equals(STATE_READY)) {
+                    finishedLatch = new CountDownLatch(1);
                     StreamObserver<FunctionsPayload> sendStream = config.stub.service(receiveStream);
                     sendStreamRef.set(sendStream);
                     sendStream.onNext(FunctionsPayload.newBuilder()
@@ -125,10 +125,12 @@ public class Service {
                             } else {
                                 closeLatch.countDown();
                             }
+                        } else {
+                            closeLatch.countDown();
                         }
                     } catch (InterruptedException e) {
-                        closeLatch.countDown();
                         throwables[0] = new Throwable(e);
+                        closeLatch.countDown();
                     }
                 } else {
                     channel.notifyWhenStateChanged(currentState, this);
@@ -136,7 +138,7 @@ public class Service {
             }
         }.run();
         closeLatch.await();
-        if(throwables[0] != null) {
+        if (throwables[0] != null) {
             throw throwables[0];
         }
     }

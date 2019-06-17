@@ -1,11 +1,7 @@
 package com.spaceuptech.space_api.sql;
 
 import com.spaceuptech.space_api.proto.Meta;
-import com.spaceuptech.space_api.utils.Config;
-import com.spaceuptech.space_api.utils.Transport;
-import com.spaceuptech.space_api.utils.Utils;
-import com.spaceuptech.space_api.utils.ProfileParams;
-import com.spaceuptech.space_api.utils.Constants;
+import com.spaceuptech.space_api.utils.*;
 
 public class SQL {
     private Config config;
@@ -49,6 +45,10 @@ public class SQL {
     // DELETE
     public Delete delete(String collection) {
         return new Delete(this.db, this.config, collection, Constants.ALL);
+    }
+
+    public LiveQuery liveQuery(String collection) {
+        return new LiveQuery(this.config, collection, this.db);
     }
 
     public void profile(String id, Utils.ResponseListener listener) {
