@@ -14,6 +14,13 @@ public class Constants {
     public static final String TYPE_SERVICE_UNREGISTER = "service-unregister";
     public static final String TYPE_SERVICE_REQUEST = "service-request";
 
+    public static final String TYPE_REALTIME_SUBSCRIBE = "realtime-subscribe";
+    public static final String TYPE_REALTIME_UNSUBSCRIBE = "realtime-unsubscribe";
+    public static final String TYPE_REALTIME_FEED = "realtime-feed";
+
     public static final String MONGO = "mongo";
 
+    public static final String TYPE_DELETE = "delete";
+    public static final String TYPE_UPDATE = "update";
+    public static final String TYPE_INSERT = "insert";
 }

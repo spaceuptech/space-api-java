@@ -1,13 +1,10 @@
 package com.spaceuptech;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.spaceuptech.space_api.API;
-import com.spaceuptech.space_api.mongo.Mongo;
+import com.spaceuptech.space_api.sql.SQL;
 import com.spaceuptech.space_api.utils.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 public class Main {
 
@@ -25,17 +22,66 @@ public class Main {
 //        };
 //    }
 
+
+    static class Book {
+        private int id;
+        private String name, author;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAuthor() {
+            return author;
+        }
+
+        public void setAuthor(String author) {
+            this.author = author;
+        }
+    }
+
     public static void main(String[] args) throws Throwable {
         API api = new API("grpc", "localhost", 8081);
         api.setToken("my_secret");
-        Service service = api.service("service");
-        service.registerFunc("echo_func", new ServiceFunction() {
+        SQL db = api.MySQL();
+        CountDownLatch finishLatch = new CountDownLatch(1);
+        LiveQueryUnsubscribe unsubscribe = db.liveQuery("books").subscribe(new LiveDataListener() {
             @Override
-            public void onInvocation(Message params, Message auth, ReturnCallback cb) {
-                cb.send("response", params.getValue(Object.class));
+            public void onSnapshot(LiveData data, String type) {
+                System.out.println(type);
+                for (Book book : data.getValue(Book.class)) {
+                    System.out.printf("ID:%d, Name:%s, Author:%s\n", book.getId(), book.getName(), book.getAuthor());
+                }
+                System.out.println();
+            }
+
+            @Override
+            public void onError(String error) {
+                System.out.println(error);
             }
         });
-        service.start();
+        finishLatch.await();
+
+//        Service service = api.service("service");
+//        service.registerFunc("echo_func", new ServiceFunction() {
+//            @Override
+//            public void onInvocation(Message params, Message auth, ReturnCallback cb) {
+//                cb.send("response", params.getValue(Object.class));
+//            }
+//        });
+//        service.start();
 
 //        // Tests for gRPC API
 //        API api = new API("test-project", "localhost", 8081);
@@ -86,9 +132,6 @@ public class Main {
 //                });
 //
 //        while (true) {}
-
-
-
 
 
         // Tests for HTTP API
@@ -360,7 +403,6 @@ public class Main {
 //            }
 //        };
 //        mySQL.signUp("user1@gmail.com", "User 1", "123", "user", signUpListener);
-
 
 
         /****************************** Mongo ******************************/
