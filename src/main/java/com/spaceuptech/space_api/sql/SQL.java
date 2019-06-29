@@ -32,10 +32,13 @@ public class SQL {
     public Update update(String collection) {
         return new Update(this.db, this.config, collection, Constants.ALL);
     }
-
-    public Update upsert(String collection) {
-        return new Update(this.db, this.config, collection, Constants.UPSERT);
+    public Update updateOne(String collection) {
+        return new Update(this.db, this.config, collection, Constants.ONE);
     }
+
+//    public Update upsert(String collection) {
+//        return new Update(this.db, this.config, collection, Constants.UPSERT);
+//    }
 
     public Batch beginBatch() {
         return new Batch(this.db, this.config);
@@ -45,6 +48,9 @@ public class SQL {
     // DELETE
     public Delete delete(String collection) {
         return new Delete(this.db, this.config, collection, Constants.ALL);
+    }
+    public Delete deleteOne(String collection) {
+        return new Delete(this.db, this.config, collection, Constants.ONE);
     }
 
     public LiveQuery liveQuery(String collection) {

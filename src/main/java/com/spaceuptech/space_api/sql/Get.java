@@ -34,8 +34,16 @@ public class Get {
         return this;
     }
 
-    public Get sort(Map<String, Integer> sort) {
-        this.readOptions.putAllSort(sort);
+    public Get sort(String... sort) {
+        HashMap<String, Integer> s = new HashMap<>();
+        for (String condition: sort) {
+            if(condition.startsWith("-")) {
+                s.put(condition.substring(1), -1);
+            } else {
+                s.put(condition, 1);
+            }
+        }
+        this.readOptions.putAllSort(s);
         return this;
     }
 

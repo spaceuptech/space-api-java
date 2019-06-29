@@ -109,13 +109,13 @@ public class Service {
                     finishedLatch = new CountDownLatch(1);
                     StreamObserver<FunctionsPayload> sendStream = config.stub.service(receiveStream);
                     sendStreamRef.set(sendStream);
-                    sendStream.onNext(FunctionsPayload.newBuilder()
+                    FunctionsPayload.Builder builder = FunctionsPayload.newBuilder()
                             .setService(serviceName)
                             .setType(Constants.TYPE_SERVICE_REGISTER)
                             .setId(uuid)
-                            .setProject(config.projectId)
-                            .setToken(config.token)
-                            .build());
+                            .setProject(config.projectId);
+                    if (config.token != null) builder.setToken(config.token);
+                    sendStream.onNext(builder.build());
                     try {
                         finishedLatch.await();
                         sendStream.onCompleted();
