@@ -6,6 +6,7 @@ import com.spaceuptech.space_api.utils.Config;
 import com.spaceuptech.space_api.utils.Transport;
 import com.spaceuptech.space_api.utils.Utils;
 import com.spaceuptech.space_api.utils.Service;
+import com.spaceuptech.space_api.utils.FileStore;
 
 public class API {
     private Config config;
@@ -41,4 +42,9 @@ public class API {
     public Service service(String serviceName) {
         return new Service(config, serviceName);
     }
+
+    public FileStore fileStore() {
+        return new FileStore(config);
+    }
+
 }

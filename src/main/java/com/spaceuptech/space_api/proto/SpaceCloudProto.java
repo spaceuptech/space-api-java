@@ -124,6 +124,36 @@ public final class SpaceCloudProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_proto_SignUpRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_CreateFolderRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_proto_CreateFolderRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_ListFilesRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_proto_ListFilesRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_DeleteFileRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_proto_DeleteFileRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_DownloadFileRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_proto_DownloadFileRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_UploadFileRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_proto_UploadFileRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_FilePayload_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_proto_FilePayload_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -184,28 +214,46 @@ public final class SpaceCloudProto {
       "assword\030\002 \001(\t\022\031\n\004meta\030\003 \001(\0132\013.proto.Meta" +
       "\"g\n\rSignUpRequest\022\r\n\005email\030\001 \001(\t\022\014\n\004name" +
       "\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\022\014\n\004role\030\004 \001(\t\022\031" +
-      "\n\004meta\030\005 \001(\0132\013.proto.Meta2\207\006\n\nSpaceCloud" +
-      "\0221\n\006Create\022\024.proto.CreateRequest\032\017.proto" +
-      ".Response\"\000\022-\n\004Read\022\022.proto.ReadRequest\032" +
-      "\017.proto.Response\"\000\0221\n\006Update\022\024.proto.Upd" +
-      "ateRequest\032\017.proto.Response\"\000\0221\n\006Delete\022" +
-      "\024.proto.DeleteRequest\032\017.proto.Response\"\000" +
-      "\0227\n\tAggregate\022\027.proto.AggregateRequest\032\017" +
-      ".proto.Response\"\000\022/\n\005Batch\022\023.proto.Batch" +
-      "Request\032\017.proto.Response\"\000\0222\n\004Call\022\027.pro" +
-      "to.FunctionsRequest\032\017.proto.Response\"\000\022A" +
-      "\n\010RealTime\022\026.proto.RealTimeRequest\032\027.pro" +
-      "to.RealTimeResponse\"\000(\0010\001\022A\n\007Service\022\027.p" +
-      "roto.FunctionsPayload\032\027.proto.FunctionsP" +
-      "ayload\"\000(\0010\001\0223\n\007Profile\022\025.proto.ProfileR" +
-      "equest\032\017.proto.Response\"\000\0225\n\010Profiles\022\026." +
-      "proto.ProfilesRequest\032\017.proto.Response\"\000" +
-      "\022;\n\013EditProfile\022\031.proto.EditProfileReque" +
-      "st\032\017.proto.Response\"\000\0221\n\006SignIn\022\024.proto." +
-      "SignInRequest\032\017.proto.Response\"\000\0221\n\006Sign" +
-      "Up\022\024.proto.SignUpRequest\032\017.proto.Respons" +
-      "e\"\000B4\n\037com.spaceuptech.space_api.protoB\017" +
-      "SpaceCloudProtoP\001b\006proto3"
+      "\n\004meta\030\005 \001(\0132\013.proto.Meta\"L\n\023CreateFolde" +
+      "rRequest\022\014\n\004path\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\031\n\004" +
+      "meta\030\003 \001(\0132\013.proto.Meta\";\n\020ListFilesRequ" +
+      "est\022\014\n\004path\030\001 \001(\t\022\031\n\004meta\030\002 \001(\0132\013.proto." +
+      "Meta\"<\n\021DeleteFileRequest\022\014\n\004path\030\001 \001(\t\022" +
+      "\031\n\004meta\030\002 \001(\0132\013.proto.Meta\">\n\023DownloadFi" +
+      "leRequest\022\014\n\004path\030\001 \001(\t\022\031\n\004meta\030\002 \001(\0132\013." +
+      "proto.Meta\"[\n\021UploadFileRequest\022\014\n\004path\030" +
+      "\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\017\n\007payload\030\003 \001(\014\022\031\n\004" +
+      "meta\030\004 \001(\0132\013.proto.Meta\"=\n\013FilePayload\022\016" +
+      "\n\006status\030\001 \001(\005\022\r\n\005error\030\002 \001(\t\022\017\n\007payload" +
+      "\030\003 \001(\0142\273\010\n\nSpaceCloud\0221\n\006Create\022\024.proto." +
+      "CreateRequest\032\017.proto.Response\"\000\022-\n\004Read" +
+      "\022\022.proto.ReadRequest\032\017.proto.Response\"\000\022" +
+      "1\n\006Update\022\024.proto.UpdateRequest\032\017.proto." +
+      "Response\"\000\0221\n\006Delete\022\024.proto.DeleteReque" +
+      "st\032\017.proto.Response\"\000\0227\n\tAggregate\022\027.pro" +
+      "to.AggregateRequest\032\017.proto.Response\"\000\022/" +
+      "\n\005Batch\022\023.proto.BatchRequest\032\017.proto.Res" +
+      "ponse\"\000\0222\n\004Call\022\027.proto.FunctionsRequest" +
+      "\032\017.proto.Response\"\000\022A\n\010RealTime\022\026.proto." +
+      "RealTimeRequest\032\027.proto.RealTimeResponse" +
+      "\"\000(\0010\001\022A\n\007Service\022\027.proto.FunctionsPaylo" +
+      "ad\032\027.proto.FunctionsPayload\"\000(\0010\001\0223\n\007Pro" +
+      "file\022\025.proto.ProfileRequest\032\017.proto.Resp" +
+      "onse\"\000\0225\n\010Profiles\022\026.proto.ProfilesReque" +
+      "st\032\017.proto.Response\"\000\022;\n\013EditProfile\022\031.p" +
+      "roto.EditProfileRequest\032\017.proto.Response" +
+      "\"\000\0221\n\006SignIn\022\024.proto.SignInRequest\032\017.pro" +
+      "to.Response\"\000\0221\n\006SignUp\022\024.proto.SignUpRe" +
+      "quest\032\017.proto.Response\"\000\022=\n\014CreateFolder" +
+      "\022\032.proto.CreateFolderRequest\032\017.proto.Res" +
+      "ponse\"\000\0227\n\tListFiles\022\027.proto.ListFilesRe" +
+      "quest\032\017.proto.Response\"\000\0229\n\nDeleteFile\022\030" +
+      ".proto.DeleteFileRequest\032\017.proto.Respons" +
+      "e\"\000\022;\n\nUploadFile\022\030.proto.UploadFileRequ" +
+      "est\032\017.proto.Response\"\000(\001\022B\n\014DownloadFile" +
+      "\022\032.proto.DownloadFileRequest\032\022.proto.Fil" +
+      "ePayload\"\0000\001B4\n\037com.spaceuptech.space_ap" +
+      "i.protoB\017SpaceCloudProtoP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -351,6 +399,42 @@ public final class SpaceCloudProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_proto_SignUpRequest_descriptor,
         new java.lang.String[] { "Email", "Name", "Password", "Role", "Meta", });
+    internal_static_proto_CreateFolderRequest_descriptor =
+      getDescriptor().getMessageTypes().get(20);
+    internal_static_proto_CreateFolderRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_proto_CreateFolderRequest_descriptor,
+        new java.lang.String[] { "Path", "Name", "Meta", });
+    internal_static_proto_ListFilesRequest_descriptor =
+      getDescriptor().getMessageTypes().get(21);
+    internal_static_proto_ListFilesRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_proto_ListFilesRequest_descriptor,
+        new java.lang.String[] { "Path", "Meta", });
+    internal_static_proto_DeleteFileRequest_descriptor =
+      getDescriptor().getMessageTypes().get(22);
+    internal_static_proto_DeleteFileRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_proto_DeleteFileRequest_descriptor,
+        new java.lang.String[] { "Path", "Meta", });
+    internal_static_proto_DownloadFileRequest_descriptor =
+      getDescriptor().getMessageTypes().get(23);
+    internal_static_proto_DownloadFileRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_proto_DownloadFileRequest_descriptor,
+        new java.lang.String[] { "Path", "Meta", });
+    internal_static_proto_UploadFileRequest_descriptor =
+      getDescriptor().getMessageTypes().get(24);
+    internal_static_proto_UploadFileRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_proto_UploadFileRequest_descriptor,
+        new java.lang.String[] { "Path", "Name", "Payload", "Meta", });
+    internal_static_proto_FilePayload_descriptor =
+      getDescriptor().getMessageTypes().get(25);
+    internal_static_proto_FilePayload_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_proto_FilePayload_descriptor,
+        new java.lang.String[] { "Status", "Error", "Payload", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

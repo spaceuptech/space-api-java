@@ -23,4 +23,6 @@ public class Constants {
     public static final String TYPE_DELETE = "delete";
     public static final String TYPE_UPDATE = "update";
     public static final String TYPE_INSERT = "insert";
+
+    public static final int PAYLOAD_SIZE = 256 * 1024; // 256 kB
 }
