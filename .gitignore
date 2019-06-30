@@ -1,4 +1,5 @@
 protoc-gen-grpc-java.exe
+src/main/java/com/spaceuptech/Test.java
 
 # Created by https://www.gitignore.io/api/java,gradle,intellij
 # Edit at https://www.gitignore.io/?templates=java,gradle,intellij

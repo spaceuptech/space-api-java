@@ -89,15 +89,15 @@ public class LiveQuery {
                     finishedLatch = new CountDownLatch(1);
                     StreamObserver<RealTimeRequest> sendStream = config.stub.realTime(receiveStream);
                     sendStreamRef.set(sendStream);
-                    sendStream.onNext(RealTimeRequest.newBuilder()
-                            .setToken(config.token)
+                    RealTimeRequest.Builder builder = RealTimeRequest.newBuilder()
                             .setDbType(dbType)
                             .setProject(config.projectId)
                             .setGroup(col)
                             .setType(Constants.TYPE_REALTIME_SUBSCRIBE)
                             .setId(uuid)
-                            .setWhere(ByteString.copyFrom(gson.toJson(find).getBytes()))
-                            .build());
+                            .setWhere(ByteString.copyFrom(gson.toJson(find).getBytes()));
+                    if (config.token != null) builder.setToken(config.token);
+                    sendStream.onNext(builder.build());
                     try {
                         finishedLatch.await();
                         if (msgs[0] != null) {
@@ -107,15 +107,15 @@ public class LiveQuery {
                                 if (!msgs[0].equals(UNSUBSCRIBE)) {
                                     liveDataListener.onError(msgs[0]);
                                 }
-                                sendStream.onNext(RealTimeRequest.newBuilder()
-                                        .setToken(config.token)
+                                RealTimeRequest.Builder builder1 = RealTimeRequest.newBuilder()
                                         .setDbType(dbType)
                                         .setProject(config.projectId)
                                         .setGroup(col)
                                         .setType(Constants.TYPE_REALTIME_UNSUBSCRIBE)
                                         .setId(uuid)
-                                        .setWhere(ByteString.copyFrom(gson.toJson(find).getBytes()))
-                                        .build());
+                                        .setWhere(ByteString.copyFrom(gson.toJson(find).getBytes()));
+                                if (config.token != null) builder1.setToken(config.token);
+                                sendStream.onNext(builder.build());
                             }
                         } else {
                             // onCompleted of receive stream called
@@ -135,7 +135,8 @@ public class LiveQuery {
     private void snapshotCallback(List<FeedData> feedDataList) {
         if (!feedDataList.isEmpty()) {
             for (FeedData feedData : feedDataList) {
-                updateStore: switch (feedData.getType()) {
+                updateStore:
+                switch (feedData.getType()) {
                     case Constants.TYPE_INSERT:
                     case Constants.TYPE_UPDATE:
                         for (Storage storage : store) {

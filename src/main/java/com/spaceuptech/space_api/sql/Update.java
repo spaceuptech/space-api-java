@@ -27,7 +27,7 @@ public class Update {
     }
 
     public Update set(HashMap<String, Object> obj) {
-        this.update = obj;
+        this.update.put("$set", obj);
         return this;
     }
 

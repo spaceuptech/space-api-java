@@ -22,6 +22,16 @@ public class Response {
         }
     }
 
+    public <T> T[] getResults(Class<T[]> c) throws Exception {
+        Gson gson = new Gson();
+        if (this.status >= 200 && this.status < 300) {
+            String json = this.res.getResult().toStringUtf8();
+            return gson.fromJson(json, c);
+        } else {
+            throw new Exception("Errors generated");
+        }
+    }
+
     public String getError() {
         return res.getError();
     }

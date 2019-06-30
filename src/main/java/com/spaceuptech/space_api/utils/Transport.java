@@ -7,6 +7,7 @@ import com.spaceuptech.space_api.proto.Response;
 import io.grpc.stub.StreamObserver;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Transport {
 
@@ -69,7 +70,7 @@ public class Transport {
         stub.read(readRequest, makeStreamObserver(listener));
     }
 
-    public static void update(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, Object update, Meta meta, Utils.ResponseListener listener) {
+    public static void update(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, HashMap<String, Object> update, Meta meta, Utils.ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(find);
@@ -110,14 +111,13 @@ public class Transport {
         String jsonString = gson.toJson(params);
         byte[] bytes = jsonString.getBytes();
 
-        FunctionsRequest functionsRequest = FunctionsRequest.newBuilder()
+        FunctionsRequest.Builder builder = FunctionsRequest.newBuilder()
                 .setParams(ByteString.copyFrom(bytes))
                 .setTimeout(timeout)
                 .setService(service)
-                .setFunction(function)
-                .setToken(token).build();
-
-        stub.call(functionsRequest, makeStreamObserver(listener));
+                .setFunction(function);
+        if (token != null) builder.setToken(token);
+        stub.call(builder.build(), makeStreamObserver(listener));
     }
 
     public static void profile(SpaceCloudGrpc.SpaceCloudStub stub, String id, Meta meta, Utils.ResponseListener listener) {
