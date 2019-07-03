@@ -12,7 +12,11 @@ public class FileMan {
         fileStore.createFolder("\\", "aNewFolder", new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
-                System.out.println(statusCode);
+                if (statusCode == 200) {
+                    System.out.println("Success");
+                } else {
+                    System.out.println(response.getError());
+                }
             }
 
             @Override
@@ -29,7 +33,11 @@ public class FileMan {
         fileStore.deleteFile("\\aNewFolder", new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
-                System.out.println(statusCode);
+                if (statusCode == 200) {
+                    System.out.println("Success");
+                } else {
+                    System.out.println(response.getError());
+                }
             }
 
             @Override
@@ -47,10 +55,10 @@ public class FileMan {
             @Override
             public void onResponse(int statusCode, Response response) {
                 System.out.println(statusCode);
-                if(statusCode==200) {
+                if (statusCode == 200) {
                     try {
                         Map[] files = response.getResults(Map[].class);
-                        for (Map file: files) {
+                        for (Map file : files) {
                             System.out.println("Name: " + file.get("name"));
                             System.out.println("Type: " + file.get("type"));
                         }
@@ -76,7 +84,11 @@ public class FileMan {
         fileStore.uploadFile("\\", "file.txt", inputStream, new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
-                System.out.println(statusCode);
+                if (statusCode == 200) {
+                    System.out.println("Success");
+                } else {
+                    System.out.println(response.getError());
+                }
             }
 
             @Override
@@ -93,7 +105,11 @@ public class FileMan {
         fileStore.downloadFile("\\file.txt", outputStream, new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
-                System.out.println(statusCode);
+                if (statusCode == 200) {
+                    System.out.println("Success");
+                } else {
+                    System.out.println(response.getError());
+                }
             }
 
             @Override

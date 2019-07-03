@@ -1,10 +1,7 @@
 package com.spaceuptech.space_api.utils;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.protobuf.ByteString;
-import com.spaceuptech.space_api.mongo.Mongo;
 import com.spaceuptech.space_api.proto.*;
 import io.grpc.ConnectivityState;
 import io.grpc.ManagedChannel;
@@ -68,8 +65,8 @@ public class LiveQuery {
     }
 
     public LiveQuery where(Condition... conds) {
-        if (conds.length == 1) this.find = Mongo.generateFind(conds[0]);
-        else this.find = Mongo.generateFind(And.create(conds));
+        if (conds.length == 1) this.find = Condition.generateFind(conds[0]);
+        else this.find = Condition.generateFind(And.create(conds));
         return this;
     }
 
