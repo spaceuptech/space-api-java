@@ -108,6 +108,21 @@ public class Transport {
         stub.delete(deleteRequest, makeStreamObserver(listener));
     }
 
+    public static void aggregate(SpaceCloudGrpc.SpaceCloudStub stub, Object pipe, String operation, Meta meta, Utils.ResponseListener listener) {
+
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(pipe);
+        byte[] bytes = jsonString.getBytes();
+
+        AggregateRequest aggregateRequest = AggregateRequest.newBuilder()
+                .setPipeline(ByteString.copyFrom(bytes))
+                .setOperation(operation)
+                .setMeta(meta)
+                .build();
+
+        stub.aggregate(aggregateRequest, makeStreamObserver(listener));
+    }
+
     public static void batch(SpaceCloudGrpc.SpaceCloudStub stub, ArrayList<AllRequest> requests, Meta meta, Utils.ResponseListener listener) {
         BatchRequest batchRequest = BatchRequest.newBuilder().setMeta(meta).addAllBatchrequest(requests).build();
         stub.batch(batchRequest, makeStreamObserver(listener));

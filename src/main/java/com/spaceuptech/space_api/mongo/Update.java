@@ -20,8 +20,8 @@ public class Update {
     }
 
     public Update where(Condition... conds) {
-        if (conds.length == 1) this.find = Mongo.generateFind(conds[0]);
-        else this.find = Mongo.generateFind(And.create(conds));
+        if (conds.length == 1) this.find = Condition.generateFind(conds[0]);
+        else this.find = Condition.generateFind(And.create(conds));
         return this;
     }
 
