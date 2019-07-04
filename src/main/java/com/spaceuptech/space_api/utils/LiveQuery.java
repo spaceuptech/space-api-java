@@ -7,6 +7,7 @@ import io.grpc.ConnectivityState;
 import io.grpc.ManagedChannel;
 import io.grpc.stub.StreamObserver;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ public class LiveQuery {
     private String col, dbType, uuid;
     private HashMap<String, Object> find;
     private Gson gson;
+    private LiveQueryOptions options = LiveQueryOptions.Builder().setChangesOnly(false);
     private final String[] msgs = new String[1];
     private AtomicReference<StreamObserver<RealTimeRequest>> sendStreamRef;
     private CountDownLatch finishedLatch;
@@ -75,6 +77,11 @@ public class LiveQuery {
         finishedLatch.countDown();
     }
 
+    public LiveQuery options(LiveQueryOptions options) {
+        this.options = options;
+        return this;
+    }
+
     public LiveQueryUnsubscribe subscribe(LiveDataListener listener) {
         liveDataListener = listener;
         new Runnable() {
@@ -86,12 +93,15 @@ public class LiveQuery {
                     finishedLatch = new CountDownLatch(1);
                     StreamObserver<RealTimeRequest> sendStream = config.stub.realTime(receiveStream);
                     sendStreamRef.set(sendStream);
+                    HashMap<String, Object> opts = new HashMap<>();
+                    opts.put("skipInitial", options.getSkipInitial());
                     RealTimeRequest.Builder builder = RealTimeRequest.newBuilder()
                             .setDbType(dbType)
                             .setProject(config.projectId)
                             .setGroup(col)
-                            .setType(Constants.TYPE_REALTIME_SUBSCRIBE)
                             .setId(uuid)
+                            .setType(Constants.TYPE_REALTIME_SUBSCRIBE)
+                            .setOptions(ByteString.copyFrom(gson.toJson(opts).getBytes()))
                             .setWhere(ByteString.copyFrom(gson.toJson(find).getBytes()));
                     if (config.token != null) builder.setToken(config.token);
                     sendStream.onNext(builder.build());
@@ -110,6 +120,7 @@ public class LiveQuery {
                                         .setGroup(col)
                                         .setType(Constants.TYPE_REALTIME_UNSUBSCRIBE)
                                         .setId(uuid)
+                                        .setOptions(ByteString.copyFrom(gson.toJson(opts).getBytes()))
                                         .setWhere(ByteString.copyFrom(gson.toJson(find).getBytes()));
                                 if (config.token != null) builder1.setToken(config.token);
                                 sendStream.onNext(builder.build());
@@ -131,36 +142,56 @@ public class LiveQuery {
 
     private void snapshotCallback(List<FeedData> feedDataList) {
         if (!feedDataList.isEmpty()) {
-            for (FeedData feedData : feedDataList) {
-                updateStore:
-                switch (feedData.getType()) {
-                    case Constants.TYPE_INSERT:
-                    case Constants.TYPE_UPDATE:
-                        for (Storage storage : store) {
-                            if (storage.id.equals(feedData.getDocId())) {
-                                if (storage.time <= feedData.getTimeStamp()) {
-                                    storage.time = feedData.getTimeStamp();
-                                    storage.payload = feedData.getPayload();
-                                    storage.isDeleted = false;
-                                }
-                                break updateStore;
-                            }
+            if (options.getChangesOnly()) {
+                for (FeedData feedData : feedDataList) {
+                    if (!feedData.getType().equals(Constants.TYPE_DELETE)) {
+                        this.liveDataListener.onSnapshot(new LiveData(new Storage(feedData.getDocId(), feedData.getTimeStamp(), feedData.getPayload(), false)), feedData.getType());
+                    } else {
+                        if (dbType.equals(Constants.MONGO)) {
+                            String str = "{\"_id\":"+feedData.getDocId()+"}";
+                            ByteString b = ByteString.copyFrom(str.getBytes(StandardCharsets.UTF_8));
+                            this.liveDataListener.onSnapshot(new LiveData(new Storage(feedData.getDocId(), feedData.getTimeStamp(), b, false)), feedData.getType());
+                        } else {
+                            String str = "{\"id\": " + Integer.parseInt(feedData.getDocId()) + "}";
+                            ByteString b = ByteString.copyFrom(str.getBytes(StandardCharsets.UTF_8));
+                            this.liveDataListener.onSnapshot(new LiveData(new Storage(feedData.getDocId(), feedData.getTimeStamp(), b, false)), feedData.getType());
                         }
-                        store.add(new Storage(feedData.getDocId(), feedData.getTimeStamp(), feedData.getPayload(), false));
-                        break;
-                    case Constants.TYPE_DELETE:
-                        for (Storage storage : store) {
-                            if (storage.id.equals(feedData.getDocId()) && storage.time <= feedData.getTimeStamp()) {
-                                storage.time = feedData.getTimeStamp();
-                                storage.payload = null;
-                                storage.isDeleted = true;
-                            }
-                        }
-                        break;
+                    }
                 }
+            } else {
+                for (FeedData feedData : feedDataList) {
+                    updateStore:
+                    switch (feedData.getType()) {
+                        case Constants.TYPE_INITIAL:
+                            store.add(new Storage(feedData.getDocId(), feedData.getTimeStamp(), feedData.getPayload(), false));
+                        case Constants.TYPE_INSERT:
+                        case Constants.TYPE_UPDATE:
+                            for (Storage storage : store) {
+                                if (storage.id.equals(feedData.getDocId())) {
+                                    if (storage.time <= feedData.getTimeStamp()) {
+                                        storage.time = feedData.getTimeStamp();
+                                        storage.payload = feedData.getPayload();
+                                        storage.isDeleted = false;
+                                    }
+                                    break updateStore;
+                                }
+                            }
+                            store.add(new Storage(feedData.getDocId(), feedData.getTimeStamp(), feedData.getPayload(), false));
+                            break;
+                        case Constants.TYPE_DELETE:
+                            for (Storage storage : store) {
+                                if (storage.id.equals(feedData.getDocId()) && storage.time <= feedData.getTimeStamp()) {
+                                    storage.time = feedData.getTimeStamp();
+                                    storage.payload = null;
+                                    storage.isDeleted = true;
+                                }
+                            }
+                            break;
+                    }
+                }
+                String changeType = feedDataList.get(0).getType();
+                this.liveDataListener.onSnapshot(new LiveData(store), changeType);
             }
-            String changeType = feedDataList.size() == 1 ? feedDataList.get(0).getType() : "initial";
-            this.liveDataListener.onSnapshot(new LiveData(store), changeType);
         }
     }
 
