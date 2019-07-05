@@ -199,61 +199,62 @@ public final class SpaceCloudProto {
       "edData\022\017\n\007queryId\030\001 \001(\t\022\r\n\005docId\030\002 \001(\t\022\014" +
       "\n\004type\030\003 \001(\t\022\r\n\005group\030\004 \001(\t\022\016\n\006dbType\030\005 " +
       "\001(\t\022\017\n\007payload\030\006 \001(\014\022\021\n\ttimeStamp\030\007 \001(\003\"" +
-      "y\n\017RealTimeRequest\022\r\n\005token\030\001 \001(\t\022\016\n\006dbT" +
-      "ype\030\002 \001(\t\022\017\n\007project\030\003 \001(\t\022\r\n\005group\030\004 \001(" +
-      "\t\022\014\n\004type\030\005 \001(\t\022\n\n\002id\030\006 \001(\t\022\r\n\005where\030\007 \001" +
-      "(\014\"l\n\020RealTimeResponse\022\r\n\005group\030\001 \001(\t\022\n\n" +
-      "\002id\030\002 \001(\t\022\013\n\003ack\030\003 \001(\010\022\r\n\005error\030\004 \001(\t\022!\n" +
-      "\010feedData\030\005 \003(\0132\017.proto.FeedData\"7\n\016Prof" +
-      "ileRequest\022\n\n\002id\030\001 \001(\t\022\031\n\004meta\030\002 \001(\0132\013.p" +
-      "roto.Meta\",\n\017ProfilesRequest\022\031\n\004meta\030\001 \001" +
-      "(\0132\013.proto.Meta\"j\n\022EditProfileRequest\022\n\n" +
-      "\002id\030\001 \001(\t\022\r\n\005email\030\002 \001(\t\022\014\n\004name\030\003 \001(\t\022\020" +
-      "\n\010password\030\004 \001(\t\022\031\n\004meta\030\005 \001(\0132\013.proto.M" +
-      "eta\"K\n\rSignInRequest\022\r\n\005email\030\001 \001(\t\022\020\n\010p" +
-      "assword\030\002 \001(\t\022\031\n\004meta\030\003 \001(\0132\013.proto.Meta" +
-      "\"g\n\rSignUpRequest\022\r\n\005email\030\001 \001(\t\022\014\n\004name" +
-      "\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\022\014\n\004role\030\004 \001(\t\022\031" +
-      "\n\004meta\030\005 \001(\0132\013.proto.Meta\"L\n\023CreateFolde" +
-      "rRequest\022\014\n\004path\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\031\n\004" +
-      "meta\030\003 \001(\0132\013.proto.Meta\";\n\020ListFilesRequ" +
+      "\212\001\n\017RealTimeRequest\022\r\n\005token\030\001 \001(\t\022\016\n\006db" +
+      "Type\030\002 \001(\t\022\017\n\007project\030\003 \001(\t\022\r\n\005group\030\004 \001" +
+      "(\t\022\014\n\004type\030\005 \001(\t\022\n\n\002id\030\006 \001(\t\022\r\n\005where\030\007 " +
+      "\001(\014\022\017\n\007options\030\010 \001(\014\"l\n\020RealTimeResponse" +
+      "\022\r\n\005group\030\001 \001(\t\022\n\n\002id\030\002 \001(\t\022\013\n\003ack\030\003 \001(\010" +
+      "\022\r\n\005error\030\004 \001(\t\022!\n\010feedData\030\005 \003(\0132\017.prot" +
+      "o.FeedData\"7\n\016ProfileRequest\022\n\n\002id\030\001 \001(\t" +
+      "\022\031\n\004meta\030\002 \001(\0132\013.proto.Meta\",\n\017ProfilesR" +
+      "equest\022\031\n\004meta\030\001 \001(\0132\013.proto.Meta\"j\n\022Edi" +
+      "tProfileRequest\022\n\n\002id\030\001 \001(\t\022\r\n\005email\030\002 \001" +
+      "(\t\022\014\n\004name\030\003 \001(\t\022\020\n\010password\030\004 \001(\t\022\031\n\004me" +
+      "ta\030\005 \001(\0132\013.proto.Meta\"K\n\rSignInRequest\022\r" +
+      "\n\005email\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\022\031\n\004meta\030" +
+      "\003 \001(\0132\013.proto.Meta\"g\n\rSignUpRequest\022\r\n\005e" +
+      "mail\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\020\n\010password\030\003 \001" +
+      "(\t\022\014\n\004role\030\004 \001(\t\022\031\n\004meta\030\005 \001(\0132\013.proto.M" +
+      "eta\"L\n\023CreateFolderRequest\022\014\n\004path\030\001 \001(\t" +
+      "\022\014\n\004name\030\002 \001(\t\022\031\n\004meta\030\003 \001(\0132\013.proto.Met" +
+      "a\";\n\020ListFilesRequest\022\014\n\004path\030\001 \001(\t\022\031\n\004m" +
+      "eta\030\002 \001(\0132\013.proto.Meta\"<\n\021DeleteFileRequ" +
       "est\022\014\n\004path\030\001 \001(\t\022\031\n\004meta\030\002 \001(\0132\013.proto." +
-      "Meta\"<\n\021DeleteFileRequest\022\014\n\004path\030\001 \001(\t\022" +
-      "\031\n\004meta\030\002 \001(\0132\013.proto.Meta\">\n\023DownloadFi" +
-      "leRequest\022\014\n\004path\030\001 \001(\t\022\031\n\004meta\030\002 \001(\0132\013." +
-      "proto.Meta\"[\n\021UploadFileRequest\022\014\n\004path\030" +
-      "\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\017\n\007payload\030\003 \001(\014\022\031\n\004" +
-      "meta\030\004 \001(\0132\013.proto.Meta\"=\n\013FilePayload\022\016" +
-      "\n\006status\030\001 \001(\005\022\r\n\005error\030\002 \001(\t\022\017\n\007payload" +
-      "\030\003 \001(\0142\273\010\n\nSpaceCloud\0221\n\006Create\022\024.proto." +
-      "CreateRequest\032\017.proto.Response\"\000\022-\n\004Read" +
-      "\022\022.proto.ReadRequest\032\017.proto.Response\"\000\022" +
-      "1\n\006Update\022\024.proto.UpdateRequest\032\017.proto." +
-      "Response\"\000\0221\n\006Delete\022\024.proto.DeleteReque" +
-      "st\032\017.proto.Response\"\000\0227\n\tAggregate\022\027.pro" +
-      "to.AggregateRequest\032\017.proto.Response\"\000\022/" +
-      "\n\005Batch\022\023.proto.BatchRequest\032\017.proto.Res" +
-      "ponse\"\000\0222\n\004Call\022\027.proto.FunctionsRequest" +
-      "\032\017.proto.Response\"\000\022A\n\010RealTime\022\026.proto." +
-      "RealTimeRequest\032\027.proto.RealTimeResponse" +
-      "\"\000(\0010\001\022A\n\007Service\022\027.proto.FunctionsPaylo" +
-      "ad\032\027.proto.FunctionsPayload\"\000(\0010\001\0223\n\007Pro" +
-      "file\022\025.proto.ProfileRequest\032\017.proto.Resp" +
-      "onse\"\000\0225\n\010Profiles\022\026.proto.ProfilesReque" +
-      "st\032\017.proto.Response\"\000\022;\n\013EditProfile\022\031.p" +
-      "roto.EditProfileRequest\032\017.proto.Response" +
-      "\"\000\0221\n\006SignIn\022\024.proto.SignInRequest\032\017.pro" +
-      "to.Response\"\000\0221\n\006SignUp\022\024.proto.SignUpRe" +
-      "quest\032\017.proto.Response\"\000\022=\n\014CreateFolder" +
-      "\022\032.proto.CreateFolderRequest\032\017.proto.Res" +
-      "ponse\"\000\0227\n\tListFiles\022\027.proto.ListFilesRe" +
-      "quest\032\017.proto.Response\"\000\0229\n\nDeleteFile\022\030" +
-      ".proto.DeleteFileRequest\032\017.proto.Respons" +
-      "e\"\000\022;\n\nUploadFile\022\030.proto.UploadFileRequ" +
-      "est\032\017.proto.Response\"\000(\001\022B\n\014DownloadFile" +
-      "\022\032.proto.DownloadFileRequest\032\022.proto.Fil" +
-      "ePayload\"\0000\001B4\n\037com.spaceuptech.space_ap" +
-      "i.protoB\017SpaceCloudProtoP\001b\006proto3"
+      "Meta\">\n\023DownloadFileRequest\022\014\n\004path\030\001 \001(" +
+      "\t\022\031\n\004meta\030\002 \001(\0132\013.proto.Meta\"[\n\021UploadFi" +
+      "leRequest\022\014\n\004path\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\017\n" +
+      "\007payload\030\003 \001(\014\022\031\n\004meta\030\004 \001(\0132\013.proto.Met" +
+      "a\"=\n\013FilePayload\022\016\n\006status\030\001 \001(\005\022\r\n\005erro" +
+      "r\030\002 \001(\t\022\017\n\007payload\030\003 \001(\0142\273\010\n\nSpaceCloud\022" +
+      "1\n\006Create\022\024.proto.CreateRequest\032\017.proto." +
+      "Response\"\000\022-\n\004Read\022\022.proto.ReadRequest\032\017" +
+      ".proto.Response\"\000\0221\n\006Update\022\024.proto.Upda" +
+      "teRequest\032\017.proto.Response\"\000\0221\n\006Delete\022\024" +
+      ".proto.DeleteRequest\032\017.proto.Response\"\000\022" +
+      "7\n\tAggregate\022\027.proto.AggregateRequest\032\017." +
+      "proto.Response\"\000\022/\n\005Batch\022\023.proto.BatchR" +
+      "equest\032\017.proto.Response\"\000\0222\n\004Call\022\027.prot" +
+      "o.FunctionsRequest\032\017.proto.Response\"\000\022A\n" +
+      "\010RealTime\022\026.proto.RealTimeRequest\032\027.prot" +
+      "o.RealTimeResponse\"\000(\0010\001\022A\n\007Service\022\027.pr" +
+      "oto.FunctionsPayload\032\027.proto.FunctionsPa" +
+      "yload\"\000(\0010\001\0223\n\007Profile\022\025.proto.ProfileRe" +
+      "quest\032\017.proto.Response\"\000\0225\n\010Profiles\022\026.p" +
+      "roto.ProfilesRequest\032\017.proto.Response\"\000\022" +
+      ";\n\013EditProfile\022\031.proto.EditProfileReques" +
+      "t\032\017.proto.Response\"\000\0221\n\006SignIn\022\024.proto.S" +
+      "ignInRequest\032\017.proto.Response\"\000\0221\n\006SignU" +
+      "p\022\024.proto.SignUpRequest\032\017.proto.Response" +
+      "\"\000\022=\n\014CreateFolder\022\032.proto.CreateFolderR" +
+      "equest\032\017.proto.Response\"\000\0227\n\tListFiles\022\027" +
+      ".proto.ListFilesRequest\032\017.proto.Response" +
+      "\"\000\0229\n\nDeleteFile\022\030.proto.DeleteFileReque" +
+      "st\032\017.proto.Response\"\000\022;\n\nUploadFile\022\030.pr" +
+      "oto.UploadFileRequest\032\017.proto.Response\"\000" +
+      "(\001\022B\n\014DownloadFile\022\032.proto.DownloadFileR" +
+      "equest\032\022.proto.FilePayload\"\0000\001B4\n\037com.sp" +
+      "aceuptech.space_api.protoB\017SpaceCloudPro" +
+      "toP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -362,7 +363,7 @@ public final class SpaceCloudProto {
     internal_static_proto_RealTimeRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_proto_RealTimeRequest_descriptor,
-        new java.lang.String[] { "Token", "DbType", "Project", "Group", "Type", "Id", "Where", });
+        new java.lang.String[] { "Token", "DbType", "Project", "Group", "Type", "Id", "Where", "Options", });
     internal_static_proto_RealTimeResponse_descriptor =
       getDescriptor().getMessageTypes().get(14);
     internal_static_proto_RealTimeResponse_fieldAccessorTable = new

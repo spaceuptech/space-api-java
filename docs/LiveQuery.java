@@ -36,14 +36,21 @@ public class LiveQuery {
     }
 
     public static void main(String[] args) throws Throwable {
+        // WITH DEFAULT OPTIONS
         API api = new API("books-app", "localhost", 8081);
         SQL db = api.MySQL();
         LiveQueryUnsubscribe unsubscribe = db.liveQuery("books").subscribe(new LiveDataListener() {
             @Override
-            public void onSnapshot(LiveData data, String type) {
+            public void onSnapshot(LiveData data, String type, ChangedData changedData) {
                 System.out.println(type);
                 for (Book book : data.getValue(Book.class)) {
                     System.out.printf("ID:%d, Name:%s, Author:%s\n", book.getId(), book.getName(), book.getAuthor());
+                }
+                Book book = changedData.getValue(Book.class);
+                if (book!=null) {
+                    System.out.println("CHANGED: ");
+                    System.out.printf("ID:%d, Name:%s, Author:%s\n", book.getId(), book.getName(), book.getAuthor());
+                    System.out.println();
                 }
                 System.out.println();
             }
@@ -54,6 +61,35 @@ public class LiveQuery {
             }
         });
 
+        // After some condition
+        unsubscribe.unsubscribe();
+
+
+        // WITH ADDITIONAL OPTIONS
+        API api = new API("books-app", "localhost", 8081);
+        SQL db = api.MySQL();
+        LiveQueryUnsubscribe unsubscribe = db.liveQuery("books")
+                .options(LiveQueryOptions.Builder().setChangesOnly(false)).subscribe(new LiveDataListener() {
+                    @Override
+                    public void onSnapshot(LiveData data, String type, ChangedData changedData) {
+                        System.out.println(type);
+                        for (Book book : data.getValue(Book.class)) {
+                            System.out.printf("ID:%d, Name:%s, Author:%s\n", book.getId(), book.getName(), book.getAuthor());
+                        }
+                        Book book = changedData.getValue(Book.class);
+                        if (book!=null) {
+                            System.out.println("CHANGED: ");
+                            System.out.printf("ID:%d, Name:%s, Author:%s\n", book.getId(), book.getName(), book.getAuthor());
+                            System.out.println();
+                        }
+                        System.out.println();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        System.out.println(error);
+                    }
+                });
         // After some condition
         unsubscribe.unsubscribe();
     }

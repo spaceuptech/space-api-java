@@ -23,6 +23,7 @@ private static final long serialVersionUID = 0L;
     type_ = "";
     id_ = "";
     where_ = com.google.protobuf.ByteString.EMPTY;
+    options_ = com.google.protobuf.ByteString.EMPTY;
   }
 
   @java.lang.Override
@@ -88,6 +89,11 @@ private static final long serialVersionUID = 0L;
           case 58: {
 
             where_ = input.readBytes();
+            break;
+          }
+          case 66: {
+
+            options_ = input.readBytes();
             break;
           }
           default: {
@@ -335,6 +341,15 @@ private static final long serialVersionUID = 0L;
     return where_;
   }
 
+  public static final int OPTIONS_FIELD_NUMBER = 8;
+  private com.google.protobuf.ByteString options_;
+  /**
+   * <code>bytes options = 8;</code>
+   */
+  public com.google.protobuf.ByteString getOptions() {
+    return options_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -370,6 +385,9 @@ private static final long serialVersionUID = 0L;
     if (!where_.isEmpty()) {
       output.writeBytes(7, where_);
     }
+    if (!options_.isEmpty()) {
+      output.writeBytes(8, options_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -401,6 +419,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeBytesSize(7, where_);
     }
+    if (!options_.isEmpty()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBytesSize(8, options_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -430,6 +452,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getId())) return false;
     if (!getWhere()
         .equals(other.getWhere())) return false;
+    if (!getOptions()
+        .equals(other.getOptions())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -455,6 +479,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getId().hashCode();
     hash = (37 * hash) + WHERE_FIELD_NUMBER;
     hash = (53 * hash) + getWhere().hashCode();
+    hash = (37 * hash) + OPTIONS_FIELD_NUMBER;
+    hash = (53 * hash) + getOptions().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -602,6 +628,8 @@ private static final long serialVersionUID = 0L;
 
       where_ = com.google.protobuf.ByteString.EMPTY;
 
+      options_ = com.google.protobuf.ByteString.EMPTY;
+
       return this;
     }
 
@@ -635,6 +663,7 @@ private static final long serialVersionUID = 0L;
       result.type_ = type_;
       result.id_ = id_;
       result.where_ = where_;
+      result.options_ = options_;
       onBuilt();
       return result;
     }
@@ -709,6 +738,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getWhere() != com.google.protobuf.ByteString.EMPTY) {
         setWhere(other.getWhere());
+      }
+      if (other.getOptions() != com.google.protobuf.ByteString.EMPTY) {
+        setOptions(other.getOptions());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -1178,6 +1210,35 @@ private static final long serialVersionUID = 0L;
     public Builder clearWhere() {
       
       where_ = getDefaultInstance().getWhere();
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.ByteString options_ = com.google.protobuf.ByteString.EMPTY;
+    /**
+     * <code>bytes options = 8;</code>
+     */
+    public com.google.protobuf.ByteString getOptions() {
+      return options_;
+    }
+    /**
+     * <code>bytes options = 8;</code>
+     */
+    public Builder setOptions(com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      options_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bytes options = 8;</code>
+     */
+    public Builder clearOptions() {
+      
+      options_ = getDefaultInstance().getOptions();
       onChanged();
       return this;
     }
