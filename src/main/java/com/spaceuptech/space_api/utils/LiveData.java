@@ -12,11 +12,6 @@ public class LiveData {
         this.dataList = dataList;
     }
 
-    LiveData(LiveQuery.Storage data) {
-        this.dataList = new ArrayList<>();
-        dataList.add(data);
-    }
-
     public <T> List<T> getValue(Class<T> c) {
         Gson gson = new Gson();
         ArrayList<T> data = new ArrayList<>();

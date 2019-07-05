@@ -144,17 +144,17 @@ public class LiveQuery {
         if (!feedDataList.isEmpty()) {
             if (options.getChangesOnly()) {
                 for (FeedData feedData : feedDataList) {
-                    if (!feedData.getType().equals(Constants.TYPE_DELETE)) {
-                        this.liveDataListener.onSnapshot(new LiveData(new Storage(feedData.getDocId(), feedData.getTimeStamp(), feedData.getPayload(), false)), feedData.getType());
-                    } else {
-                        if (dbType.equals(Constants.MONGO)) {
-                            String str = "{\"_id\":"+feedData.getDocId()+"}";
-                            ByteString b = ByteString.copyFrom(str.getBytes(StandardCharsets.UTF_8));
-                            this.liveDataListener.onSnapshot(new LiveData(new Storage(feedData.getDocId(), feedData.getTimeStamp(), b, false)), feedData.getType());
+                    if (!(options.getSkipInitial() && feedData.getType().equals(Constants.TYPE_INITIAL))) {
+                        if (!feedData.getType().equals(Constants.TYPE_DELETE)) {
+                            this.liveDataListener.onSnapshot(new LiveData(new ArrayList<>()), feedData.getType(), new ChangedData(feedData.getPayload()));
                         } else {
-                            String str = "{\"id\": " + Integer.parseInt(feedData.getDocId()) + "}";
-                            ByteString b = ByteString.copyFrom(str.getBytes(StandardCharsets.UTF_8));
-                            this.liveDataListener.onSnapshot(new LiveData(new Storage(feedData.getDocId(), feedData.getTimeStamp(), b, false)), feedData.getType());
+                            if (dbType.equals(Constants.MONGO)) {
+                                ByteString b = ByteString.copyFromUtf8("{\"_id\":" + feedData.getDocId() + "}");
+                                this.liveDataListener.onSnapshot(new LiveData(new ArrayList<>()), feedData.getType(), new ChangedData(b));
+                            } else {
+                                ByteString b = ByteString.copyFromUtf8("{\"id\": " + Integer.parseInt(feedData.getDocId()) + "}");
+                                this.liveDataListener.onSnapshot(new LiveData(new ArrayList<>()), feedData.getType(), new ChangedData(b));
+                            }
                         }
                     }
                 }
@@ -190,7 +190,23 @@ public class LiveQuery {
                     }
                 }
                 String changeType = feedDataList.get(0).getType();
-                this.liveDataListener.onSnapshot(new LiveData(store), changeType);
+                if (changeType.equals(Constants.TYPE_INITIAL)) {
+                    if (!options.getSkipInitial()) {
+                        this.liveDataListener.onSnapshot(new LiveData(store), changeType, new ChangedData());
+                    }
+                } else { // There is definitely only 1 row
+                    if (!changeType.equals(Constants.TYPE_DELETE)) {
+                        this.liveDataListener.onSnapshot(new LiveData(store), changeType, new ChangedData(feedDataList.get(0).getPayload()));
+                    } else {
+                        if (dbType.equals(Constants.MONGO)) {
+                            ByteString b = ByteString.copyFromUtf8("{\"_id\":" + feedDataList.get(0).getDocId() + "}");
+                            this.liveDataListener.onSnapshot(new LiveData(store), changeType, new ChangedData(b));
+                        } else {
+                            ByteString b = ByteString.copyFromUtf8("{\"id\": " + Integer.parseInt(feedDataList.get(0).getDocId()) + "}");
+                            this.liveDataListener.onSnapshot(new LiveData(store), changeType, new ChangedData(b));
+                        }
+                    }
+                }
             }
         }
     }
