@@ -9,7 +9,7 @@ public class Aggregate {
 
     private Meta meta;
     private String operation;
-    private HashMap<String, Object> params;
+    private HashMap<String, Object>[] params;
     private Config config;
 
     Aggregate(Config config, String collection, String operation) {
@@ -18,7 +18,7 @@ public class Aggregate {
         this.meta = Transport.makeMeta(config.projectId, collection, Constants.MONGO, config.token);
     }
 
-    public Aggregate pipe(HashMap<String, Object> pipeObj) {
+    public Aggregate pipe(HashMap<String, Object>[] pipeObj) {
         params = pipeObj;
         return this;
     }

@@ -266,5 +266,43 @@ public class Get {
                 System.out.println(e.getMessage());
             }
         });
+
+        // Aggregate
+        API api = new API("books-app", "localhost", 8081);
+        Mongo db = api.Mongo();
+        HashMap[] pipe = new HashMap[2];
+        HashMap<String, Object> hm1 = new HashMap<>();
+        HashMap<String, Object> h1 = new HashMap<>();
+        h1.put("status", "A");
+        hm1.put("$match", h1);
+        pipe[0] = hm1;
+        HashMap<String, Object> hm2 = new HashMap<>();
+        HashMap<String, Object> h2 = new HashMap<>();
+        HashMap<String, Object> h3 = new HashMap<>();
+        h2.put("_id", "$cust_id");
+        h2.put("$sum", "$amount");
+        h2.put("total", h3);
+        hm2.put("$group", h2);
+        pipe[1] = hm2;
+        db.aggr("books").pipe(pipe).apply(new Utils.ResponseListener() {
+            @Override
+            public void onResponse(int statusCode, Response response) {
+                if (statusCode == 200) {
+                    try {
+                        Book[] books = response.getResults(Book[].class);
+                        System.out.println(books);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println(response.getError());
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
     }
 }
