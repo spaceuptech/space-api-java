@@ -1,11 +1,7 @@
 package com.spaceuptech.space_api.sql;
 
 import com.spaceuptech.space_api.proto.Meta;
-import com.spaceuptech.space_api.utils.Config;
-import com.spaceuptech.space_api.utils.Transport;
-import com.spaceuptech.space_api.utils.Utils;
-import com.spaceuptech.space_api.utils.ProfileParams;
-import com.spaceuptech.space_api.utils.Constants;
+import com.spaceuptech.space_api.utils.*;
 
 public class SQL {
     private Config config;
@@ -36,15 +32,29 @@ public class SQL {
     public Update update(String collection) {
         return new Update(this.db, this.config, collection, Constants.ALL);
     }
+    public Update updateOne(String collection) {
+        return new Update(this.db, this.config, collection, Constants.ONE);
+    }
 
-    public Update upsert(String collection) {
-        return new Update(this.db, this.config, collection, Constants.UPSERT);
+//    public Update upsert(String collection) {
+//        return new Update(this.db, this.config, collection, Constants.UPSERT);
+//    }
+
+    public Batch beginBatch() {
+        return new Batch(this.db, this.config);
     }
 
 
     // DELETE
     public Delete delete(String collection) {
         return new Delete(this.db, this.config, collection, Constants.ALL);
+    }
+    public Delete deleteOne(String collection) {
+        return new Delete(this.db, this.config, collection, Constants.ONE);
+    }
+
+    public LiveQuery liveQuery(String collection) {
+        return new LiveQuery(this.config, collection, this.db);
     }
 
     public void profile(String id, Utils.ResponseListener listener) {

@@ -5,6 +5,8 @@ import com.spaceuptech.space_api.sql.SQL;
 import com.spaceuptech.space_api.utils.Config;
 import com.spaceuptech.space_api.utils.Transport;
 import com.spaceuptech.space_api.utils.Utils;
+import com.spaceuptech.space_api.utils.Service;
+import com.spaceuptech.space_api.utils.FileStore;
 
 public class API {
     private Config config;
@@ -36,4 +38,13 @@ public class API {
     public void call(String serviceName, String funcName, int timeout, Object params, Utils.ResponseListener listener) {
         Transport.call(config.stub, params, timeout, serviceName, funcName, config.token, listener);
     }
+
+    public Service service(String serviceName) {
+        return new Service(config, serviceName);
+    }
+
+    public FileStore fileStore() {
+        return new FileStore(config);
+    }
+
 }

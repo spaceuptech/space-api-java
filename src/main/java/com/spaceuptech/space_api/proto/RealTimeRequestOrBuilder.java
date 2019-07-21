@@ -71,4 +71,9 @@ public interface RealTimeRequestOrBuilder extends
    * <code>bytes where = 7;</code>
    */
   com.google.protobuf.ByteString getWhere();
+
+  /**
+   * <code>bytes options = 8;</code>
+   */
+  com.google.protobuf.ByteString getOptions();
 }

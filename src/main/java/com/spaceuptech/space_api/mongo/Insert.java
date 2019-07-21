@@ -2,6 +2,7 @@ package com.spaceuptech.space_api.mongo;
 
 import com.spaceuptech.space_api.proto.Meta;
 import com.spaceuptech.space_api.utils.Config;
+import com.spaceuptech.space_api.utils.Constants;
 import com.spaceuptech.space_api.utils.Transport;
 import com.spaceuptech.space_api.utils.Utils;
 
@@ -37,6 +38,34 @@ public class Insert {
             Transport.create(config.stub, docs, this.operation, this.meta, listener);
         } else {
             listener.onError(new Exception("Operation not specified"));
+        }
+    }
+
+    String getProjectID() {
+        return config.projectId;
+    }
+
+    String getDBType() {
+        return meta.getDbType();
+    }
+
+    String getToken() {
+        return config.token;
+    }
+
+    String getCollection() {
+        return meta.getCol();
+    }
+
+    String getOperation() {
+        return operation;
+    }
+
+    Object getAllDocs() {
+        if (this.operation.equals(Constants.ONE)) {
+            return doc;
+        } else {
+            return docs;
         }
     }
 }

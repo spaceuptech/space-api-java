@@ -475,6 +475,166 @@ public final class SpaceCloudGrpc {
      return getSignUpMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.CreateFolderRequest,
+      com.spaceuptech.space_api.proto.Response> getCreateFolderMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CreateFolder",
+      requestType = com.spaceuptech.space_api.proto.CreateFolderRequest.class,
+      responseType = com.spaceuptech.space_api.proto.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.CreateFolderRequest,
+      com.spaceuptech.space_api.proto.Response> getCreateFolderMethod() {
+    io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.CreateFolderRequest, com.spaceuptech.space_api.proto.Response> getCreateFolderMethod;
+    if ((getCreateFolderMethod = SpaceCloudGrpc.getCreateFolderMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getCreateFolderMethod = SpaceCloudGrpc.getCreateFolderMethod) == null) {
+          SpaceCloudGrpc.getCreateFolderMethod = getCreateFolderMethod = 
+              io.grpc.MethodDescriptor.<com.spaceuptech.space_api.proto.CreateFolderRequest, com.spaceuptech.space_api.proto.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "CreateFolder"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.CreateFolderRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("CreateFolder"))
+                  .build();
+          }
+        }
+     }
+     return getCreateFolderMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.ListFilesRequest,
+      com.spaceuptech.space_api.proto.Response> getListFilesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ListFiles",
+      requestType = com.spaceuptech.space_api.proto.ListFilesRequest.class,
+      responseType = com.spaceuptech.space_api.proto.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.ListFilesRequest,
+      com.spaceuptech.space_api.proto.Response> getListFilesMethod() {
+    io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.ListFilesRequest, com.spaceuptech.space_api.proto.Response> getListFilesMethod;
+    if ((getListFilesMethod = SpaceCloudGrpc.getListFilesMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getListFilesMethod = SpaceCloudGrpc.getListFilesMethod) == null) {
+          SpaceCloudGrpc.getListFilesMethod = getListFilesMethod = 
+              io.grpc.MethodDescriptor.<com.spaceuptech.space_api.proto.ListFilesRequest, com.spaceuptech.space_api.proto.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "ListFiles"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.ListFilesRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("ListFiles"))
+                  .build();
+          }
+        }
+     }
+     return getListFilesMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.DeleteFileRequest,
+      com.spaceuptech.space_api.proto.Response> getDeleteFileMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DeleteFile",
+      requestType = com.spaceuptech.space_api.proto.DeleteFileRequest.class,
+      responseType = com.spaceuptech.space_api.proto.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.DeleteFileRequest,
+      com.spaceuptech.space_api.proto.Response> getDeleteFileMethod() {
+    io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.DeleteFileRequest, com.spaceuptech.space_api.proto.Response> getDeleteFileMethod;
+    if ((getDeleteFileMethod = SpaceCloudGrpc.getDeleteFileMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getDeleteFileMethod = SpaceCloudGrpc.getDeleteFileMethod) == null) {
+          SpaceCloudGrpc.getDeleteFileMethod = getDeleteFileMethod = 
+              io.grpc.MethodDescriptor.<com.spaceuptech.space_api.proto.DeleteFileRequest, com.spaceuptech.space_api.proto.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "DeleteFile"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.DeleteFileRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("DeleteFile"))
+                  .build();
+          }
+        }
+     }
+     return getDeleteFileMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.UploadFileRequest,
+      com.spaceuptech.space_api.proto.Response> getUploadFileMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UploadFile",
+      requestType = com.spaceuptech.space_api.proto.UploadFileRequest.class,
+      responseType = com.spaceuptech.space_api.proto.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+  public static io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.UploadFileRequest,
+      com.spaceuptech.space_api.proto.Response> getUploadFileMethod() {
+    io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.UploadFileRequest, com.spaceuptech.space_api.proto.Response> getUploadFileMethod;
+    if ((getUploadFileMethod = SpaceCloudGrpc.getUploadFileMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getUploadFileMethod = SpaceCloudGrpc.getUploadFileMethod) == null) {
+          SpaceCloudGrpc.getUploadFileMethod = getUploadFileMethod = 
+              io.grpc.MethodDescriptor.<com.spaceuptech.space_api.proto.UploadFileRequest, com.spaceuptech.space_api.proto.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "UploadFile"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.UploadFileRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("UploadFile"))
+                  .build();
+          }
+        }
+     }
+     return getUploadFileMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.DownloadFileRequest,
+      com.spaceuptech.space_api.proto.FilePayload> getDownloadFileMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DownloadFile",
+      requestType = com.spaceuptech.space_api.proto.DownloadFileRequest.class,
+      responseType = com.spaceuptech.space_api.proto.FilePayload.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.DownloadFileRequest,
+      com.spaceuptech.space_api.proto.FilePayload> getDownloadFileMethod() {
+    io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.DownloadFileRequest, com.spaceuptech.space_api.proto.FilePayload> getDownloadFileMethod;
+    if ((getDownloadFileMethod = SpaceCloudGrpc.getDownloadFileMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getDownloadFileMethod = SpaceCloudGrpc.getDownloadFileMethod) == null) {
+          SpaceCloudGrpc.getDownloadFileMethod = getDownloadFileMethod = 
+              io.grpc.MethodDescriptor.<com.spaceuptech.space_api.proto.DownloadFileRequest, com.spaceuptech.space_api.proto.FilePayload>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "DownloadFile"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.DownloadFileRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.FilePayload.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("DownloadFile"))
+                  .build();
+          }
+        }
+     }
+     return getDownloadFileMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -600,6 +760,41 @@ public final class SpaceCloudGrpc {
       asyncUnimplementedUnaryCall(getSignUpMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void createFolder(com.spaceuptech.space_api.proto.CreateFolderRequest request,
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getCreateFolderMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void listFiles(com.spaceuptech.space_api.proto.ListFilesRequest request,
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getListFilesMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void deleteFile(com.spaceuptech.space_api.proto.DeleteFileRequest request,
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getDeleteFileMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.UploadFileRequest> uploadFile(
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response> responseObserver) {
+      return asyncUnimplementedStreamingCall(getUploadFileMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void downloadFile(com.spaceuptech.space_api.proto.DownloadFileRequest request,
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.FilePayload> responseObserver) {
+      asyncUnimplementedUnaryCall(getDownloadFileMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -700,6 +895,41 @@ public final class SpaceCloudGrpc {
                 com.spaceuptech.space_api.proto.SignUpRequest,
                 com.spaceuptech.space_api.proto.Response>(
                   this, METHODID_SIGN_UP)))
+          .addMethod(
+            getCreateFolderMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.spaceuptech.space_api.proto.CreateFolderRequest,
+                com.spaceuptech.space_api.proto.Response>(
+                  this, METHODID_CREATE_FOLDER)))
+          .addMethod(
+            getListFilesMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.spaceuptech.space_api.proto.ListFilesRequest,
+                com.spaceuptech.space_api.proto.Response>(
+                  this, METHODID_LIST_FILES)))
+          .addMethod(
+            getDeleteFileMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.spaceuptech.space_api.proto.DeleteFileRequest,
+                com.spaceuptech.space_api.proto.Response>(
+                  this, METHODID_DELETE_FILE)))
+          .addMethod(
+            getUploadFileMethod(),
+            asyncClientStreamingCall(
+              new MethodHandlers<
+                com.spaceuptech.space_api.proto.UploadFileRequest,
+                com.spaceuptech.space_api.proto.Response>(
+                  this, METHODID_UPLOAD_FILE)))
+          .addMethod(
+            getDownloadFileMethod(),
+            asyncServerStreamingCall(
+              new MethodHandlers<
+                com.spaceuptech.space_api.proto.DownloadFileRequest,
+                com.spaceuptech.space_api.proto.FilePayload>(
+                  this, METHODID_DOWNLOAD_FILE)))
           .build();
     }
   }
@@ -833,6 +1063,46 @@ public final class SpaceCloudGrpc {
       asyncUnaryCall(
           getChannel().newCall(getSignUpMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void createFolder(com.spaceuptech.space_api.proto.CreateFolderRequest request,
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getCreateFolderMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void listFiles(com.spaceuptech.space_api.proto.ListFilesRequest request,
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getListFilesMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void deleteFile(com.spaceuptech.space_api.proto.DeleteFileRequest request,
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getDeleteFileMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.UploadFileRequest> uploadFile(
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response> responseObserver) {
+      return asyncClientStreamingCall(
+          getChannel().newCall(getUploadFileMethod(), getCallOptions()), responseObserver);
+    }
+
+    /**
+     */
+    public void downloadFile(com.spaceuptech.space_api.proto.DownloadFileRequest request,
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.FilePayload> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getDownloadFileMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -935,6 +1205,35 @@ public final class SpaceCloudGrpc {
     public com.spaceuptech.space_api.proto.Response signUp(com.spaceuptech.space_api.proto.SignUpRequest request) {
       return blockingUnaryCall(
           getChannel(), getSignUpMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.spaceuptech.space_api.proto.Response createFolder(com.spaceuptech.space_api.proto.CreateFolderRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getCreateFolderMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.spaceuptech.space_api.proto.Response listFiles(com.spaceuptech.space_api.proto.ListFilesRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getListFilesMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.spaceuptech.space_api.proto.Response deleteFile(com.spaceuptech.space_api.proto.DeleteFileRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getDeleteFileMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<com.spaceuptech.space_api.proto.FilePayload> downloadFile(
+        com.spaceuptech.space_api.proto.DownloadFileRequest request) {
+      return blockingServerStreamingCall(
+          getChannel(), getDownloadFileMethod(), getCallOptions(), request);
     }
   }
 
@@ -1051,6 +1350,30 @@ public final class SpaceCloudGrpc {
       return futureUnaryCall(
           getChannel().newCall(getSignUpMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.spaceuptech.space_api.proto.Response> createFolder(
+        com.spaceuptech.space_api.proto.CreateFolderRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getCreateFolderMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.spaceuptech.space_api.proto.Response> listFiles(
+        com.spaceuptech.space_api.proto.ListFilesRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getListFilesMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.spaceuptech.space_api.proto.Response> deleteFile(
+        com.spaceuptech.space_api.proto.DeleteFileRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getDeleteFileMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE = 0;
@@ -1065,8 +1388,13 @@ public final class SpaceCloudGrpc {
   private static final int METHODID_EDIT_PROFILE = 9;
   private static final int METHODID_SIGN_IN = 10;
   private static final int METHODID_SIGN_UP = 11;
-  private static final int METHODID_REAL_TIME = 12;
-  private static final int METHODID_SERVICE = 13;
+  private static final int METHODID_CREATE_FOLDER = 12;
+  private static final int METHODID_LIST_FILES = 13;
+  private static final int METHODID_DELETE_FILE = 14;
+  private static final int METHODID_DOWNLOAD_FILE = 15;
+  private static final int METHODID_REAL_TIME = 16;
+  private static final int METHODID_SERVICE = 17;
+  private static final int METHODID_UPLOAD_FILE = 18;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1133,6 +1461,22 @@ public final class SpaceCloudGrpc {
           serviceImpl.signUp((com.spaceuptech.space_api.proto.SignUpRequest) request,
               (io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response>) responseObserver);
           break;
+        case METHODID_CREATE_FOLDER:
+          serviceImpl.createFolder((com.spaceuptech.space_api.proto.CreateFolderRequest) request,
+              (io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response>) responseObserver);
+          break;
+        case METHODID_LIST_FILES:
+          serviceImpl.listFiles((com.spaceuptech.space_api.proto.ListFilesRequest) request,
+              (io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response>) responseObserver);
+          break;
+        case METHODID_DELETE_FILE:
+          serviceImpl.deleteFile((com.spaceuptech.space_api.proto.DeleteFileRequest) request,
+              (io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response>) responseObserver);
+          break;
+        case METHODID_DOWNLOAD_FILE:
+          serviceImpl.downloadFile((com.spaceuptech.space_api.proto.DownloadFileRequest) request,
+              (io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.FilePayload>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -1149,6 +1493,9 @@ public final class SpaceCloudGrpc {
         case METHODID_SERVICE:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.service(
               (io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.FunctionsPayload>) responseObserver);
+        case METHODID_UPLOAD_FILE:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.uploadFile(
+              (io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -1214,6 +1561,11 @@ public final class SpaceCloudGrpc {
               .addMethod(getEditProfileMethod())
               .addMethod(getSignInMethod())
               .addMethod(getSignUpMethod())
+              .addMethod(getCreateFolderMethod())
+              .addMethod(getListFilesMethod())
+              .addMethod(getDeleteFileMethod())
+              .addMethod(getUploadFileMethod())
+              .addMethod(getDownloadFileMethod())
               .build();
         }
       }

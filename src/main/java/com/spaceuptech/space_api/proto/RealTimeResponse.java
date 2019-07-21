@@ -23,13 +23,6 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  @SuppressWarnings({"unused"})
-  protected java.lang.Object newInstance(
-      UnusedPrivateParameter unused) {
-    return new RealTimeResponse();
-  }
-
-  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
     return this.unknownFields;
@@ -77,9 +70,9 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 42: {
-            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+            if (!((mutable_bitField0_ & 0x00000010) != 0)) {
               feedData_ = new java.util.ArrayList<com.spaceuptech.space_api.proto.FeedData>();
-              mutable_bitField0_ |= 0x00000001;
+              mutable_bitField0_ |= 0x00000010;
             }
             feedData_.add(
                 input.readMessage(com.spaceuptech.space_api.proto.FeedData.parser(), extensionRegistry));
@@ -100,7 +93,7 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000001) != 0)) {
+      if (((mutable_bitField0_ & 0x00000010) != 0)) {
         feedData_ = java.util.Collections.unmodifiableList(feedData_);
       }
       this.unknownFields = unknownFields.build();
@@ -120,6 +113,7 @@ private static final long serialVersionUID = 0L;
             com.spaceuptech.space_api.proto.RealTimeResponse.class, com.spaceuptech.space_api.proto.RealTimeResponse.Builder.class);
   }
 
+  private int bitField0_;
   public static final int GROUP_FIELD_NUMBER = 1;
   private volatile java.lang.Object group_;
   /**
@@ -514,7 +508,7 @@ private static final long serialVersionUID = 0L;
 
       if (feedDataBuilder_ == null) {
         feedData_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000010);
       } else {
         feedDataBuilder_.clear();
       }
@@ -545,19 +539,21 @@ private static final long serialVersionUID = 0L;
     public com.spaceuptech.space_api.proto.RealTimeResponse buildPartial() {
       com.spaceuptech.space_api.proto.RealTimeResponse result = new com.spaceuptech.space_api.proto.RealTimeResponse(this);
       int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
       result.group_ = group_;
       result.id_ = id_;
       result.ack_ = ack_;
       result.error_ = error_;
       if (feedDataBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) != 0)) {
+        if (((bitField0_ & 0x00000010) != 0)) {
           feedData_ = java.util.Collections.unmodifiableList(feedData_);
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.feedData_ = feedData_;
       } else {
         result.feedData_ = feedDataBuilder_.build();
       }
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
@@ -625,7 +621,7 @@ private static final long serialVersionUID = 0L;
         if (!other.feedData_.isEmpty()) {
           if (feedData_.isEmpty()) {
             feedData_ = other.feedData_;
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000010);
           } else {
             ensureFeedDataIsMutable();
             feedData_.addAll(other.feedData_);
@@ -638,7 +634,7 @@ private static final long serialVersionUID = 0L;
             feedDataBuilder_.dispose();
             feedDataBuilder_ = null;
             feedData_ = other.feedData_;
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000010);
             feedDataBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getFeedDataFieldBuilder() : null;
@@ -913,9 +909,9 @@ private static final long serialVersionUID = 0L;
     private java.util.List<com.spaceuptech.space_api.proto.FeedData> feedData_ =
       java.util.Collections.emptyList();
     private void ensureFeedDataIsMutable() {
-      if (!((bitField0_ & 0x00000001) != 0)) {
+      if (!((bitField0_ & 0x00000010) != 0)) {
         feedData_ = new java.util.ArrayList<com.spaceuptech.space_api.proto.FeedData>(feedData_);
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000010;
        }
     }
 
@@ -1065,7 +1061,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearFeedData() {
       if (feedDataBuilder_ == null) {
         feedData_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
       } else {
         feedDataBuilder_.clear();
@@ -1142,7 +1138,7 @@ private static final long serialVersionUID = 0L;
         feedDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             com.spaceuptech.space_api.proto.FeedData, com.spaceuptech.space_api.proto.FeedData.Builder, com.spaceuptech.space_api.proto.FeedDataOrBuilder>(
                 feedData_,
-                ((bitField0_ & 0x00000001) != 0),
+                ((bitField0_ & 0x00000010) != 0),
                 getParentForChildren(),
                 isClean());
         feedData_ = null;

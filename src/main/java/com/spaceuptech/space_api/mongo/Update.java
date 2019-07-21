@@ -20,8 +20,8 @@ public class Update {
     }
 
     public Update where(Condition... conds) {
-        if (conds.length == 1) this.find = Mongo.generateFind(conds[0]);
-        else this.find = Mongo.generateFind(And.create(conds));
+        if (conds.length == 1) this.find = Condition.generateFind(conds[0]);
+        else this.find = Condition.generateFind(And.create(conds));
         return this;
     }
 
@@ -93,5 +93,33 @@ public class Update {
 
     public void apply(Utils.ResponseListener listener) {
         Transport.update(config.stub, this.find, this.operation, this.update, this.meta, listener);
+    }
+
+    String getProjectID() {
+        return config.projectId;
+    }
+
+    String getDBType() {
+        return meta.getDbType();
+    }
+
+    String getToken() {
+        return config.token;
+    }
+
+    String getCollection() {
+        return meta.getCol();
+    }
+
+    String getOperation() {
+        return operation;
+    }
+
+    Object getFind() {
+        return find;
+    }
+
+    Object getUpdate() {
+        return update;
     }
 }

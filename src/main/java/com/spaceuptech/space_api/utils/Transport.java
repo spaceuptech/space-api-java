@@ -2,9 +2,19 @@ package com.spaceuptech.space_api.utils;
 
 import com.google.gson.*;
 import com.google.protobuf.ByteString;
+import com.google.protobuf.MessageLite;
 import com.spaceuptech.space_api.proto.*;
 import com.spaceuptech.space_api.proto.Response;
+import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.concurrent.CountDownLatch;
 
 public class Transport {
 
@@ -67,7 +77,7 @@ public class Transport {
         stub.read(readRequest, makeStreamObserver(listener));
     }
 
-    public static void update(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, Object update, Meta meta, Utils.ResponseListener listener) {
+    public static void update(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, HashMap<String, Object> update, Meta meta, Utils.ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(find);
@@ -98,19 +108,38 @@ public class Transport {
         stub.delete(deleteRequest, makeStreamObserver(listener));
     }
 
+    public static void aggregate(SpaceCloudGrpc.SpaceCloudStub stub, Object pipe, String operation, Meta meta, Utils.ResponseListener listener) {
+
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(pipe);
+        byte[] bytes = jsonString.getBytes();
+
+        AggregateRequest aggregateRequest = AggregateRequest.newBuilder()
+                .setPipeline(ByteString.copyFrom(bytes))
+                .setOperation(operation)
+                .setMeta(meta)
+                .build();
+
+        stub.aggregate(aggregateRequest, makeStreamObserver(listener));
+    }
+
+    public static void batch(SpaceCloudGrpc.SpaceCloudStub stub, ArrayList<AllRequest> requests, Meta meta, Utils.ResponseListener listener) {
+        BatchRequest batchRequest = BatchRequest.newBuilder().setMeta(meta).addAllBatchrequest(requests).build();
+        stub.batch(batchRequest, makeStreamObserver(listener));
+    }
+
     public static void call(SpaceCloudGrpc.SpaceCloudStub stub, Object params, int timeout, String service, String function, String token, Utils.ResponseListener listener) {
         Gson gson = new Gson();
         String jsonString = gson.toJson(params);
         byte[] bytes = jsonString.getBytes();
 
-        FunctionsRequest functionsRequest = FunctionsRequest.newBuilder()
+        FunctionsRequest.Builder builder = FunctionsRequest.newBuilder()
                 .setParams(ByteString.copyFrom(bytes))
                 .setTimeout(timeout)
                 .setService(service)
-                .setFunction(function)
-                .setToken(token).build();
-
-        stub.call(functionsRequest, makeStreamObserver(listener));
+                .setFunction(function);
+        if (token != null) builder.setToken(token);
+        stub.call(builder.build(), makeStreamObserver(listener));
     }
 
     public static void profile(SpaceCloudGrpc.SpaceCloudStub stub, String id, Meta meta, Utils.ResponseListener listener) {
@@ -162,5 +191,94 @@ public class Transport {
         }
         EditProfileRequest editProfileRequest = builder.build();
         stub.editProfile(editProfileRequest, makeStreamObserver(listener));
+    }
+
+    public static void createFolder(SpaceCloudGrpc.SpaceCloudStub stub, String path, String name, Meta meta, Utils.ResponseListener listener) {
+        CreateFolderRequest createFolderRequest = CreateFolderRequest.newBuilder()
+                .setPath(path)
+                .setName(name)
+                .setMeta(meta)
+                .build();
+        stub.createFolder(createFolderRequest, makeStreamObserver(listener));
+    }
+
+    public static void deleteFile(SpaceCloudGrpc.SpaceCloudStub stub, String path, Meta meta, Utils.ResponseListener listener) {
+        DeleteFileRequest deleteFileRequest = DeleteFileRequest.newBuilder()
+                .setPath(path)
+                .setMeta(meta)
+                .build();
+        stub.deleteFile(deleteFileRequest, makeStreamObserver(listener));
+    }
+
+    public static void listFiles(SpaceCloudGrpc.SpaceCloudStub stub, String path, Meta meta, Utils.ResponseListener listener) {
+        ListFilesRequest listFilesRequest = ListFilesRequest.newBuilder()
+                .setPath(path)
+                .setMeta(meta)
+                .build();
+        stub.listFiles(listFilesRequest, makeStreamObserver(listener));
+    }
+
+    public static void uploadFile(SpaceCloudGrpc.SpaceCloudStub stub, String path, String name, Meta meta, InputStream stream, Utils.ResponseListener listener) {
+        StreamObserver<Response> responseObserver = new StreamObserver<Response>() {
+            @Override
+            public void onNext(Response response) {
+                listener.onResponse(response.getStatus(), new com.spaceuptech.space_api.utils.Response(response));
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                listener.onError(new Exception(t));
+            }
+
+            @Override
+            public void onCompleted() {
+            }
+        };
+        StreamObserver<UploadFileRequest> requestObserver = stub.uploadFile(responseObserver);
+        requestObserver.onNext(UploadFileRequest.newBuilder().setPath(path).setName(name).setMeta(meta).build());
+        try {
+            byte[] buffer = new byte[Constants.PAYLOAD_SIZE];
+            while (stream.read(buffer) != -1) {
+                requestObserver.onNext(UploadFileRequest.newBuilder().setPayload(ByteString.copyFrom(buffer)).build());
+            }
+            stream.close();
+        } catch (RuntimeException | IOException e) {
+            requestObserver.onError(e);
+            listener.onError(e);
+        }
+        requestObserver.onCompleted();
+    }
+
+    public static void downloadFile(SpaceCloudGrpc.SpaceCloudStub stub, String path, Meta meta, OutputStream stream, Utils.ResponseListener listener){
+        DownloadFileRequest downloadFileRequest = DownloadFileRequest.newBuilder()
+                .setPath(path)
+                .setMeta(meta)
+                .build();
+        final int[] status = {200};
+        stub.downloadFile(downloadFileRequest, new StreamObserver<FilePayload>() {
+            @Override
+            public void onNext(FilePayload payload) {
+                if(payload.getStatus()==200) {
+                    try {
+                        stream.write(payload.getPayload().toByteArray());
+                    } catch (IOException e) {
+                        listener.onError(e);
+                    }
+                } else {
+                    status[0] = payload.getStatus();
+                    listener.onError(new Exception(payload.getError()));
+                }
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                listener.onError(new Exception(t));
+            }
+
+            @Override
+            public void onCompleted() {
+                listener.onResponse(200, null);
+            }
+        });
     }
 }

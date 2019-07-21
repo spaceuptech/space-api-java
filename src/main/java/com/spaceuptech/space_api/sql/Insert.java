@@ -40,4 +40,32 @@ public class Insert {
             listener.onError(new Exception("Operation not specified"));
         }
     }
+
+    String getProjectID() {
+        return config.projectId;
+    }
+
+    String getDBType() {
+        return meta.getDbType();
+    }
+
+    String getToken() {
+        return config.token;
+    }
+
+    String getCollection() {
+        return meta.getCol();
+    }
+
+    String getOperation() {
+        return operation;
+    }
+
+    Object getAllDocs() {
+        if (this.operation.equals(Constants.ONE)) {
+            return doc;
+        } else {
+            return docs;
+        }
+    }
 }
