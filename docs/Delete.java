@@ -5,7 +5,7 @@ import com.spaceuptech.space_api.utils.*;
 public class Delete {
     public static void main(String[] args) {
         // Delete one
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         SQL db = api.MySQL();
         db.deleteOne("books").apply(new Utils.ResponseListener() {
             @Override
@@ -24,7 +24,7 @@ public class Delete {
         });
 
         // Delete all
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         SQL db = api.MySQL();
         db.delete("books").apply(new Utils.ResponseListener() {
             @Override
@@ -43,7 +43,7 @@ public class Delete {
         });
 
         // Delete where
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         SQL db = api.MySQL();
         db.delete("books").where(new Cond("name", "==", "aBook")).apply(new Utils.ResponseListener() {
             @Override
@@ -62,7 +62,7 @@ public class Delete {
         });
 
         // Delete multiple conditions
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         SQL db = api.MySQL();
         db.delete("books").where(And.create(new Cond("name", "==", "aBook"), new Cond("author", "==", "myelf"))).apply(new Utils.ResponseListener() {
             @Override

@@ -7,7 +7,7 @@ public class Service {
 
     public static void main(String[] args) throws Throwable {
         // Start a service
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
 
         Service service = api.service("service");
         service.registerFunc("echo_func", new ServiceFunction() {
@@ -19,7 +19,7 @@ public class Service {
         service.start(); // Is blocking
 
         // Call a function
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
 
         Utils.ResponseListener responseListener = new Utils.ResponseListener() {
             @Override

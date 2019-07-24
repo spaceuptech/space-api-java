@@ -35,7 +35,7 @@ public class Get {
         }
 
         // Update
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         SQL db = api.MySQL();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
@@ -56,7 +56,7 @@ public class Get {
         });
 
         // Update One
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         SQL db = api.MySQL();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
@@ -77,7 +77,7 @@ public class Get {
         });
 
         // Upsert
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
@@ -98,7 +98,7 @@ public class Get {
         });
 
         // Update Multiple Conditions
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         SQL db = api.MySQL();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
@@ -119,7 +119,7 @@ public class Get {
         });
 
         // Push
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
         HashMap<String, Object> push = new HashMap<>();
         push.put("name", "Book1");
@@ -140,7 +140,7 @@ public class Get {
         });
 
         // Remove
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
         db.update("books").where(new Cond("id", "==", 1)).remove("author").apply(new Utils.ResponseListener() {
             @Override
@@ -159,7 +159,7 @@ public class Get {
         });
 
         // Rename
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
         HashMap<String, Object> rename = new HashMap<>();
         rename.put("name", "bookName");
@@ -180,7 +180,7 @@ public class Get {
         });
 
         // Increment
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
         HashMap<String, Object> increment = new HashMap<>();
         increment.put("likes", 1);
@@ -201,7 +201,7 @@ public class Get {
         });
 
         // Multiply
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
         HashMap<String, Object> mul = new HashMap<>();
         mul.put("likes", 2);
@@ -222,7 +222,7 @@ public class Get {
         });
 
         // Max
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
         HashMap<String, Object> max = new HashMap<>();
         max.put("likes", 100);
@@ -243,7 +243,7 @@ public class Get {
         });
 
         // Min
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
         HashMap<String, Object> min = new HashMap<>();
         min.put("likes", 100);
@@ -264,7 +264,7 @@ public class Get {
         });
 
         // Current Timestamp
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
         db.update("books").where(new Cond("id", "==", 1)).currentTimestamp("last_read").apply(new Utils.ResponseListener() {
             @Override
@@ -283,7 +283,7 @@ public class Get {
         });
 
         // Current Date
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
         db.update("books").where(new Cond("id", "==", 1)).currentDate("last_read").apply(new Utils.ResponseListener() {
             @Override

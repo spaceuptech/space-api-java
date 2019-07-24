@@ -37,7 +37,7 @@ public class LiveQuery {
 
     public static void main(String[] args) throws Throwable {
         // WITH DEFAULT OPTIONS
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         SQL db = api.MySQL();
         LiveQueryUnsubscribe unsubscribe = db.liveQuery("books").subscribe(new LiveDataListener() {
             @Override
@@ -66,7 +66,7 @@ public class LiveQuery {
 
 
         // WITH ADDITIONAL OPTIONS
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         SQL db = api.MySQL();
         LiveQueryUnsubscribe unsubscribe = db.liveQuery("books")
                 .options(LiveQueryOptions.Builder().setChangesOnly(false)).subscribe(new LiveDataListener() {
