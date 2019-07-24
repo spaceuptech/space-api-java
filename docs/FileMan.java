@@ -6,7 +6,7 @@ import java.io.*;
 public class FileMan {
     public static void main(String[] args) {
         // Create Folder
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
 
         fileStore.createFolder("\\", "aNewFolder", new Utils.ResponseListener() {
@@ -27,7 +27,7 @@ public class FileMan {
 
 
         // Delete File
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
 
         fileStore.deleteFile("\\aNewFolder", new Utils.ResponseListener() {
@@ -48,7 +48,7 @@ public class FileMan {
 
 
         // List Files
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
 
         fileStore.listFiles("\\", new Utils.ResponseListener() {
@@ -78,7 +78,7 @@ public class FileMan {
 
 
         // Upload File
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
         InputStream inputStream = new FileInputStream("input.txt");
         fileStore.uploadFile("\\", "file.txt", inputStream, new Utils.ResponseListener() {
@@ -99,7 +99,7 @@ public class FileMan {
 
 
         // Download File
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
         OutputStream outputStream = new FileOutputStream("output.txt";);
         fileStore.downloadFile("\\file.txt", outputStream, new Utils.ResponseListener() {

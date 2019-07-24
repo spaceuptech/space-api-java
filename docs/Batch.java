@@ -9,7 +9,7 @@ import java.util.Map;
 public class Batch {
 
     public static void main(String[] args) throws Exception {
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         SQL db = api.MySQL();
         Batch batch = db.beginBatch();
         Map<String, String> document = new HashMap<>();

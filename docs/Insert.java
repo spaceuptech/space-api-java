@@ -8,7 +8,7 @@ import java.util.Map;
 public class Insert {
     public static void main(String[] args) {
         // Insert one
-        API api = new API("books-app", "localhost", 8081);
+        API api = new API("books-app", "localhost", 4124);
         SQL db = api.MySQL();
         Map<String, String> document = new HashMap<>();
         document.put("name", "aBook");
