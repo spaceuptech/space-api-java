@@ -1,4 +1,4 @@
-package com.spaceuptech.space_api.mongo;
+package com.spaceuptech.space_api.db;
 
 import com.spaceuptech.space_api.proto.Meta;
 import com.spaceuptech.space_api.proto.AllRequest;
@@ -8,27 +8,27 @@ import java.util.ArrayList;
 
 
 public class Batch {
-    private String db;
-    private ArrayList<AllRequest> requests;
+    private String dbType;
+    private ArrayList<AllRequest> requests = new ArrayList<>();
     private Meta meta;
     private Config config;
 
-    public Batch(String db, Config config) {
-        this.db = db;
+    public Batch(String dbType, Config config) {
+        this.dbType = dbType;
         this.config = config;
-        this.meta = Transport.makeMeta(config.projectId, null, db, config.token);
+        this.meta = Transport.makeMeta(config.projectId, null, dbType, config.token);
     }
 
     public Batch add(Insert request) throws  Exception{
         if(!this.config.projectId.equals(request.getProjectID())) {
             throw new Exception("Cannot Batch Requests of Different Projects");
         }
-        if(!this.db.equals(request.getDBType())) {
+        if(!this.dbType.equals(request.getDBType())) {
             throw new Exception("Cannot Batch Requests of Different Database Types");
         }
-        if(!this.config.token.equals(request.getToken())) {
-            throw new Exception("Cannot Batch Requests using Different Tokens");
-        }
+//        if(!this.config.token.equals(request.getToken())) {
+//            throw new Exception("Cannot Batch Requests using Different Tokens");
+//        }
         AllRequest.Builder allRequestBuilder = AllRequest.newBuilder();
         allRequestBuilder.setCol(request.getCollection());
         allRequestBuilder.setDocument(Utils.objectToByteString(request.getAllDocs()));
@@ -42,12 +42,12 @@ public class Batch {
         if(!this.config.projectId.equals(request.getProjectID())) {
             throw new Exception("Cannot Batch Requests of Different Projects");
         }
-        if(!this.db.equals(request.getDBType())) {
+        if(!this.dbType.equals(request.getDBType())) {
             throw new Exception("Cannot Batch Requests of Different Database Types");
         }
-        if(!this.config.token.equals(request.getToken())) {
-            throw new Exception("Cannot Batch Requests using Different Tokens");
-        }
+//        if(!this.config.token.equals(request.getToken())) {
+//            throw new Exception("Cannot Batch Requests using Different Tokens");
+//        }
         AllRequest.Builder allRequestBuilder = AllRequest.newBuilder();
         allRequestBuilder.setCol(request.getCollection());
         allRequestBuilder.setOperation(request.getOperation());
@@ -62,12 +62,12 @@ public class Batch {
         if(!this.config.projectId.equals(request.getProjectID())) {
             throw new Exception("Cannot Batch Requests of Different Projects");
         }
-        if(!this.db.equals(request.getDBType())) {
+        if(!this.dbType.equals(request.getDBType())) {
             throw new Exception("Cannot Batch Requests of Different Database Types");
         }
-        if(!this.config.token.equals(request.getToken())) {
-            throw new Exception("Cannot Batch Requests using Different Tokens");
-        }
+//        if(!this.config.token.equals(request.getToken())) {
+//            throw new Exception("Cannot Batch Requests using Different Tokens");
+//        }
         AllRequest.Builder allRequestBuilder = AllRequest.newBuilder();
         allRequestBuilder.setCol(request.getCollection());
         allRequestBuilder.setOperation(request.getOperation());

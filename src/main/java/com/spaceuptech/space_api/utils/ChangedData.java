@@ -3,9 +3,6 @@ package com.spaceuptech.space_api.utils;
 import com.google.gson.Gson;
 import com.google.protobuf.ByteString;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ChangedData {
     private ByteString data;
 

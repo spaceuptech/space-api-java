@@ -1,4 +1,4 @@
-package com.spaceuptech.space_api.mongo;
+package com.spaceuptech.space_api.db;
 
 import com.spaceuptech.space_api.proto.Meta;
 import com.spaceuptech.space_api.utils.*;
@@ -12,10 +12,10 @@ public class Aggregate {
     private HashMap<String, Object>[] params;
     private Config config;
 
-    Aggregate(Config config, String collection, String operation) {
+    Aggregate(String dbType, Config config, String collection, String operation) {
         this.operation = operation;
         this.config = config;
-        this.meta = Transport.makeMeta(config.projectId, collection, Constants.MONGO, config.token);
+        this.meta = Transport.makeMeta(config.projectId, collection, dbType, config.token);
     }
 
     public Aggregate pipe(HashMap<String, Object>[] pipeObj) {

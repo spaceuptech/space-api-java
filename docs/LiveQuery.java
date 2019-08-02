@@ -1,5 +1,5 @@
 import com.spaceuptech.space_api.API;
-import com.spaceuptech.space_api.sql.SQL;
+import com.spaceuptech.space_api.db.DB;
 import com.spaceuptech.space_api.utils.*;
 
 import java.util.concurrent.CountDownLatch;
@@ -38,7 +38,7 @@ public class LiveQuery {
     public static void main(String[] args) throws Throwable {
         // WITH DEFAULT OPTIONS
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         LiveQueryUnsubscribe unsubscribe = db.liveQuery("books").subscribe(new LiveDataListener() {
             @Override
             public void onSnapshot(LiveData data, String type, ChangedData changedData) {
@@ -67,7 +67,7 @@ public class LiveQuery {
 
         // WITH ADDITIONAL OPTIONS
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         LiveQueryUnsubscribe unsubscribe = db.liveQuery("books")
                 .options(LiveQueryOptions.Builder().setChangesOnly(false)).subscribe(new LiveDataListener() {
                     @Override

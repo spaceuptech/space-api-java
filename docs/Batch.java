@@ -1,6 +1,6 @@
 import com.spaceuptech.space_api.API;
-import com.spaceuptech.space_api.sql.Batch;
-import com.spaceuptech.space_api.sql.SQL;
+import com.spaceuptech.space_api.db.Batch;
+import com.spaceuptech.space_api.db.DB;
 import com.spaceuptech.space_api.utils.*;
 
 import java.util.HashMap;
@@ -10,7 +10,7 @@ public class Batch {
 
     public static void main(String[] args) throws Exception {
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         Batch batch = db.beginBatch();
         Map<String, String> document = new HashMap<>();
         document.put("name", "aBook");

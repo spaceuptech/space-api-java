@@ -1,4 +1,4 @@
-package com.spaceuptech.space_api.mongo;
+package com.spaceuptech.space_api.db;
 
 import com.spaceuptech.space_api.proto.Meta;
 import com.spaceuptech.space_api.utils.*;
@@ -12,10 +12,10 @@ public class Update {
     private Meta meta;
     private HashMap<String, Object> find, update;
 
-    public Update(Config config, String collection, String operation) {
+    public Update(String dbType, Config config, String collection, String operation) {
         this.operation = operation;
         this.config = config;
-        this.meta = Transport.makeMeta(config.projectId, collection, Constants.MONGO, config.token);
+        this.meta = Transport.makeMeta(config.projectId, collection, dbType, config.token);
         this.update = new HashMap<>();
     }
 
