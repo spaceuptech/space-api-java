@@ -7,7 +7,6 @@ import io.grpc.ConnectivityState;
 import io.grpc.ManagedChannel;
 import io.grpc.stub.StreamObserver;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +29,7 @@ public class LiveQuery {
     private CountDownLatch finishedLatch;
     private ArrayList<Storage> store;
     private LiveDataListener liveDataListener;
+    private LiveQuerySubscription subscription;
     private StreamObserver<RealTimeResponse> receiveStream = new StreamObserver<RealTimeResponse>() {
         @Override
         public void onNext(RealTimeResponse response) {
@@ -82,7 +82,7 @@ public class LiveQuery {
         return this;
     }
 
-    public LiveQueryUnsubscribe subscribe(LiveDataListener listener) {
+    public LiveQuerySubscription subscribe(LiveDataListener listener) {
         liveDataListener = listener;
         new Runnable() {
             @Override
@@ -137,7 +137,8 @@ public class LiveQuery {
                 }
             }
         }.run();
-        return LiveQuery.this::unsubscribe;
+        this.subscription = new LiveQuerySubscription(LiveQuery.this::unsubscribe, new LiveData(new ArrayList<>()));
+        return subscription;
     }
 
     private void snapshotCallback(List<FeedData> feedDataList) {
@@ -192,18 +193,26 @@ public class LiveQuery {
                 String changeType = feedDataList.get(0).getType();
                 if (changeType.equals(Constants.TYPE_INITIAL)) {
                     if (!options.getSkipInitial()) {
-                        this.liveDataListener.onSnapshot(new LiveData(store), changeType, new ChangedData());
+                        LiveData liveData = new LiveData(store);
+                        this.subscription.snapshot = liveData;
+                        this.liveDataListener.onSnapshot(liveData, changeType, new ChangedData());
                     }
                 } else { // There is definitely only 1 row
                     if (!changeType.equals(Constants.TYPE_DELETE)) {
-                        this.liveDataListener.onSnapshot(new LiveData(store), changeType, new ChangedData(feedDataList.get(0).getPayload()));
+                        LiveData liveData = new LiveData(store);
+                        this.subscription.snapshot = liveData;
+                        this.liveDataListener.onSnapshot(liveData, changeType, new ChangedData(feedDataList.get(0).getPayload()));
                     } else {
                         if (dbType.equals(Constants.MONGO)) {
                             ByteString b = ByteString.copyFromUtf8("{\"_id\":" + feedDataList.get(0).getDocId() + "}");
-                            this.liveDataListener.onSnapshot(new LiveData(store), changeType, new ChangedData(b));
+                            LiveData liveData = new LiveData(store);
+                            this.subscription.snapshot = liveData;
+                            this.liveDataListener.onSnapshot(liveData, changeType, new ChangedData(b));
                         } else {
                             ByteString b = ByteString.copyFromUtf8("{\"id\": " + Integer.parseInt(feedDataList.get(0).getDocId()) + "}");
-                            this.liveDataListener.onSnapshot(new LiveData(store), changeType, new ChangedData(b));
+                            LiveData liveData = new LiveData(store);
+                            this.subscription.snapshot = liveData;
+                            this.liveDataListener.onSnapshot(liveData, changeType, new ChangedData(b));
                         }
                     }
                 }

@@ -22,4 +22,8 @@ public class LiveData {
         }
         return data;
     }
+
+    public int size() {
+        return dataList.size();
+    }
 }
