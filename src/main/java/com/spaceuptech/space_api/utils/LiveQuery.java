@@ -55,7 +55,7 @@ public class LiveQuery {
         }
     };
 
-    public LiveQuery(Config config, String col, String dbType) {
+    public LiveQuery(String dbType, Config config, String col) {
         this.config = config;
         this.col = col;
         this.dbType = dbType;

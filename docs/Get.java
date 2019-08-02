@@ -1,6 +1,6 @@
 import com.spaceuptech.space_api.API;
-import com.spaceuptech.space_api.sql.SQL;
-import com.spaceuptech.space_api.mongo.Mongo;
+import com.spaceuptech.space_api.db.DB;
+import com.spaceuptech.space_api.db.Mongo;
 import com.spaceuptech.space_api.utils.*;
 
 public class Get {
@@ -36,7 +36,7 @@ public class Get {
 
         // Get One
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         db.getOne("books").apply(new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -59,7 +59,7 @@ public class Get {
 
         // Get One Conditional
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         db.getOne("books").where(new Cond("id", "==", 1)).apply(new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -82,7 +82,7 @@ public class Get {
 
         // Get all
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         db.get("books").where(new Cond("author", "==", "myself")).apply(new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -151,7 +151,7 @@ public class Get {
 
         // Get Multiple Conditions
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         db.get("books").where(Or.create(new Cond("author", "==", "myself"), new Cond("author", "==", "someAuthor"))).apply(new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -174,7 +174,7 @@ public class Get {
 
         // Select
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         HashMap<String, Integer> select = new HashMap<>();
         select.put("name", 1);
         db.get("books").select(select).apply(new Utils.ResponseListener() {
@@ -199,7 +199,7 @@ public class Get {
 
         // Sort
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         db.get("books").sort("id", "-name").apply(new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -222,7 +222,7 @@ public class Get {
 
         // Skip
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         db.get("books").skip(2).apply(new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -245,7 +245,7 @@ public class Get {
 
         // Limit
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         db.get("books").limit(2).apply(new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {

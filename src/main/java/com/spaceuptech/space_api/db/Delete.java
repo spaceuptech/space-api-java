@@ -1,6 +1,5 @@
-package com.spaceuptech.space_api.sql;
+package com.spaceuptech.space_api.db;
 
-import com.spaceuptech.space_api.mongo.Mongo;
 import com.spaceuptech.space_api.proto.Meta;
 import com.spaceuptech.space_api.utils.*;
 
@@ -13,10 +12,10 @@ public class Delete {
     private HashMap<String, Object> find;
     private Config config;
 
-    public Delete(String db, Config config, String table, String operation) {
+    public Delete(String dbType, Config config, String collection, String operation) {
         this.operation = operation;
         this.config = config;
-        this.meta = Transport.makeMeta(config.projectId, table, db, config.token);
+        this.meta = Transport.makeMeta(config.projectId, collection, dbType, config.token);
     }
 
     public Delete where(Condition... conds) {

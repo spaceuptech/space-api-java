@@ -1,5 +1,5 @@
 import com.spaceuptech.space_api.API;
-import com.spaceuptech.space_api.sql.SQL;
+import com.spaceuptech.space_api.db.DB;
 import com.spaceuptech.space_api.utils.*;
 
 import java.util.Map;
@@ -8,7 +8,7 @@ public class Get {
     public static void main(String[] args) {
         // Sign Up
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         db.signUp("email", "name", "password", "role", new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -31,7 +31,7 @@ public class Get {
 
         // Sign In
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         db.signIn("email", "password", new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -54,7 +54,7 @@ public class Get {
 
         // Profile
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         db.profile("userId", new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -77,7 +77,7 @@ public class Get {
 
         // Profiles
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         db.profiles(new Utils.ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {

@@ -1,9 +1,9 @@
-package com.spaceuptech.space_api.sql;
+package com.spaceuptech.space_api.db;
 
-import com.spaceuptech.space_api.mongo.Mongo;
 import com.spaceuptech.space_api.proto.Meta;
 import com.spaceuptech.space_api.proto.ReadOptions;
 import com.spaceuptech.space_api.utils.*;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +16,10 @@ public class Get {
     private HashMap<String, Object> find;
     private Config config;
 
-    public Get(String db, Config config, String table, String operation) {
+    public Get(String dbType, Config config, String collection, String operation) {
         this.operation = operation;
         this.config = config;
-        this.meta = Transport.makeMeta(config.projectId, table, db, config.token);
+        this.meta = Transport.makeMeta(config.projectId, collection, dbType, config.token);
         this.readOptions = ReadOptions.newBuilder();
     }
 
@@ -36,8 +36,8 @@ public class Get {
 
     public Get sort(String... sort) {
         HashMap<String, Integer> s = new HashMap<>();
-        for (String condition: sort) {
-            if(condition.startsWith("-")) {
+        for (String condition : sort) {
+            if (condition.startsWith("-")) {
                 s.put(condition.substring(1), -1);
             } else {
                 s.put(condition, 1);
@@ -54,6 +54,11 @@ public class Get {
 
     public Get limit(int limit) {
         this.readOptions.setLimit(limit);
+        return this;
+    }
+
+    public Get key(String key) {
+        this.readOptions.setDistinct(key);
         return this;
     }
 

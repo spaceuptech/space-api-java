@@ -19,6 +19,8 @@ public class Constants {
     public static final String TYPE_REALTIME_FEED = "realtime-feed";
 
     public static final String MONGO = "mongo";
+    public static final String MYSQL = "sql-mysql";
+    public static final String POSTGRES = "sql-postgres";
 
     public static final String TYPE_DELETE = "delete";
     public static final String TYPE_UPDATE = "update";

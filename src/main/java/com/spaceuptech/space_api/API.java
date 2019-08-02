@@ -1,12 +1,7 @@
 package com.spaceuptech.space_api;
 
-import com.spaceuptech.space_api.mongo.Mongo;
-import com.spaceuptech.space_api.sql.SQL;
-import com.spaceuptech.space_api.utils.Config;
-import com.spaceuptech.space_api.utils.Transport;
-import com.spaceuptech.space_api.utils.Utils;
-import com.spaceuptech.space_api.utils.Service;
-import com.spaceuptech.space_api.utils.FileStore;
+import com.spaceuptech.space_api.db.DB;
+import com.spaceuptech.space_api.utils.*;
 
 public class API {
     private Config config;
@@ -23,16 +18,16 @@ public class API {
         this.config.projectId = projectId;
     }
 
-    public Mongo Mongo() {
-        return new Mongo(this.config);
+    public DB Mongo() {
+        return new DB(Constants.MONGO, this.config);
     }
 
-    public SQL MySQL() {
-        return new SQL("sql-mysql", this.config);
+    public DB MySQL() {
+        return new DB(Constants.MYSQL, this.config);
     }
 
-    public SQL Postgres() {
-        return new SQL("sql-postgres", this.config);
+    public DB Postgres() {
+        return new DB(Constants.POSTGRES, this.config);
     }
 
     public void call(String serviceName, String funcName, int timeout, Object params, Utils.ResponseListener listener) {

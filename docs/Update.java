@@ -1,6 +1,6 @@
 import com.spaceuptech.space_api.API;
-import com.spaceuptech.space_api.sql.SQL;
-import com.spaceuptech.space_api.mongo.Mongo;
+import com.spaceuptech.space_api.db.DB;
+import com.spaceuptech.space_api.db.Mongo;
 import com.spaceuptech.space_api.utils.*;
 
 public class Get {
@@ -36,7 +36,7 @@ public class Get {
 
         // Update
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
         db.update("books").where(new Cond("id", "==", 1)).set(set).apply(new Utils.ResponseListener() {
@@ -57,7 +57,7 @@ public class Get {
 
         // Update One
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
         db.updateOne("books").where(new Cond("id", "==", 1)).set(set).apply(new Utils.ResponseListener() {
@@ -99,7 +99,7 @@ public class Get {
 
         // Update Multiple Conditions
         API api = new API("books-app", "localhost", 4124);
-        SQL db = api.MySQL();
+        DB db = api.MySQL();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
         db.update("books").where(Or.create(new Cond("id", "==", 1), new Cond("name", "==", "aBook"))).set(set).apply(new Utils.ResponseListener() {
