@@ -1,5 +1,5 @@
 import com.spaceuptech.space_api.API;
-import com.spaceuptech.space_api.db.DB;
+import com.spaceuptech.space_api.db.*;
 import com.spaceuptech.space_api.utils.*;
 
 import java.util.concurrent.CountDownLatch;
@@ -39,7 +39,7 @@ public class LiveQuery {
         // WITH DEFAULT OPTIONS
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        LiveQueryUnsubscribe unsubscribe = db.liveQuery("books").subscribe(new LiveDataListener() {
+        LiveQuerySubscription subscription = db.liveQuery("books").subscribe(new LiveDataListener() {
             @Override
             public void onSnapshot(LiveData data, String type, ChangedData changedData) {
                 System.out.println(type);
@@ -47,7 +47,7 @@ public class LiveQuery {
                     System.out.printf("ID:%d, Name:%s, Author:%s\n", book.getId(), book.getName(), book.getAuthor());
                 }
                 Book book = changedData.getValue(Book.class);
-                if (book!=null) {
+                if (book != null) {
                     System.out.println("CHANGED: ");
                     System.out.printf("ID:%d, Name:%s, Author:%s\n", book.getId(), book.getName(), book.getAuthor());
                     System.out.println();
@@ -62,13 +62,13 @@ public class LiveQuery {
         });
 
         // After some condition
-        unsubscribe.unsubscribe();
+        subscription.unsubscribe();
 
 
         // WITH ADDITIONAL OPTIONS
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        LiveQueryUnsubscribe unsubscribe = db.liveQuery("books")
+        LiveQuerySubscription subscription = db.liveQuery("books")
                 .options(LiveQueryOptions.Builder().setChangesOnly(false)).subscribe(new LiveDataListener() {
                     @Override
                     public void onSnapshot(LiveData data, String type, ChangedData changedData) {
@@ -77,7 +77,7 @@ public class LiveQuery {
                             System.out.printf("ID:%d, Name:%s, Author:%s\n", book.getId(), book.getName(), book.getAuthor());
                         }
                         Book book = changedData.getValue(Book.class);
-                        if (book!=null) {
+                        if (book != null) {
                             System.out.println("CHANGED: ");
                             System.out.printf("ID:%d, Name:%s, Author:%s\n", book.getId(), book.getName(), book.getAuthor());
                             System.out.println();
@@ -90,7 +90,9 @@ public class LiveQuery {
                         System.out.println(error);
                     }
                 });
+        // To view the current snapshot
+        LiveData snapshot = subscription.getSnapshot();
         // After some condition
-        unsubscribe.unsubscribe();
+        subscription.unsubscribe();
     }
 }
