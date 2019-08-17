@@ -281,4 +281,18 @@ public class Transport {
             }
         });
     }
+
+    public static void pubsubPublish(SpaceCloudGrpc.SpaceCloudStub stub, String subject, Object msg, Meta meta, Utils.ResponseListener listener) {
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(msg);
+        byte[] bytes = jsonString.getBytes();
+
+        PubsubPublishRequest publishRequest = PubsubPublishRequest.newBuilder()
+                .setSubject(subject)
+                .setMsg(ByteString.copyFrom(bytes))
+                .setMeta(meta)
+                .build();
+
+        stub.pubsubPublish(publishRequest, makeStreamObserver(listener));
+    }
 }

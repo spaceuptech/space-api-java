@@ -24,7 +24,7 @@ public class LiveQuery {
     private HashMap<String, Object> find;
     private Gson gson;
     private LiveQueryOptions options = LiveQueryOptions.Builder().setChangesOnly(false);
-    private final String[] msgs = new String[1];
+    private final String[] msgs;
     private AtomicReference<StreamObserver<RealTimeRequest>> sendStreamRef;
     private CountDownLatch finishedLatch;
     private ArrayList<Storage> store;
@@ -64,6 +64,7 @@ public class LiveQuery {
         this.gson = new Gson();
         this.store = new ArrayList<>();  // relating to the collection col
         this.sendStreamRef = new AtomicReference<>();
+        this.msgs = new String[1];
     }
 
     public LiveQuery where(Condition... conds) {
@@ -147,14 +148,14 @@ public class LiveQuery {
                 for (FeedData feedData : feedDataList) {
                     if (!(options.getSkipInitial() && feedData.getType().equals(Constants.TYPE_INITIAL))) {
                         if (!feedData.getType().equals(Constants.TYPE_DELETE)) {
-                            this.liveDataListener.onSnapshot(new LiveData(new ArrayList<>()), feedData.getType(), new ChangedData(feedData.getPayload()));
+                            this.liveDataListener.onSnapshot(new LiveData(new ArrayList<>()), feedData.getType(), new Data(feedData.getPayload()));
                         } else {
                             if (dbType.equals(Constants.MONGO)) {
                                 ByteString b = ByteString.copyFromUtf8("{\"_id\":" + feedData.getDocId() + "}");
-                                this.liveDataListener.onSnapshot(new LiveData(new ArrayList<>()), feedData.getType(), new ChangedData(b));
+                                this.liveDataListener.onSnapshot(new LiveData(new ArrayList<>()), feedData.getType(), new Data(b));
                             } else {
                                 ByteString b = ByteString.copyFromUtf8("{\"id\": " + Integer.parseInt(feedData.getDocId()) + "}");
-                                this.liveDataListener.onSnapshot(new LiveData(new ArrayList<>()), feedData.getType(), new ChangedData(b));
+                                this.liveDataListener.onSnapshot(new LiveData(new ArrayList<>()), feedData.getType(), new Data(b));
                             }
                         }
                     }
@@ -195,24 +196,24 @@ public class LiveQuery {
                     if (!options.getSkipInitial()) {
                         LiveData liveData = new LiveData(store);
                         this.subscription.snapshot = liveData;
-                        this.liveDataListener.onSnapshot(liveData, changeType, new ChangedData());
+                        this.liveDataListener.onSnapshot(liveData, changeType, new Data());
                     }
                 } else { // There is definitely only 1 row
                     if (!changeType.equals(Constants.TYPE_DELETE)) {
                         LiveData liveData = new LiveData(store);
                         this.subscription.snapshot = liveData;
-                        this.liveDataListener.onSnapshot(liveData, changeType, new ChangedData(feedDataList.get(0).getPayload()));
+                        this.liveDataListener.onSnapshot(liveData, changeType, new Data(feedDataList.get(0).getPayload()));
                     } else {
                         if (dbType.equals(Constants.MONGO)) {
                             ByteString b = ByteString.copyFromUtf8("{\"_id\":" + feedDataList.get(0).getDocId() + "}");
                             LiveData liveData = new LiveData(store);
                             this.subscription.snapshot = liveData;
-                            this.liveDataListener.onSnapshot(liveData, changeType, new ChangedData(b));
+                            this.liveDataListener.onSnapshot(liveData, changeType, new Data(b));
                         } else {
                             ByteString b = ByteString.copyFromUtf8("{\"id\": " + Integer.parseInt(feedDataList.get(0).getDocId()) + "}");
                             LiveData liveData = new LiveData(store);
                             this.subscription.snapshot = liveData;
-                            this.liveDataListener.onSnapshot(liveData, changeType, new ChangedData(b));
+                            this.liveDataListener.onSnapshot(liveData, changeType, new Data(b));
                         }
                     }
                 }

@@ -42,4 +42,8 @@ public class API {
         return new FileStore(config);
     }
 
+    public Pubsub pubsub() {
+        return new Pubsub(config);
+    }
+
 }
