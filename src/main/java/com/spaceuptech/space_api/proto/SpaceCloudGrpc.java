@@ -635,6 +635,70 @@ public final class SpaceCloudGrpc {
      return getDownloadFileMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.PubsubPublishRequest,
+      com.spaceuptech.space_api.proto.Response> getPubsubPublishMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "PubsubPublish",
+      requestType = com.spaceuptech.space_api.proto.PubsubPublishRequest.class,
+      responseType = com.spaceuptech.space_api.proto.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.PubsubPublishRequest,
+      com.spaceuptech.space_api.proto.Response> getPubsubPublishMethod() {
+    io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.PubsubPublishRequest, com.spaceuptech.space_api.proto.Response> getPubsubPublishMethod;
+    if ((getPubsubPublishMethod = SpaceCloudGrpc.getPubsubPublishMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getPubsubPublishMethod = SpaceCloudGrpc.getPubsubPublishMethod) == null) {
+          SpaceCloudGrpc.getPubsubPublishMethod = getPubsubPublishMethod = 
+              io.grpc.MethodDescriptor.<com.spaceuptech.space_api.proto.PubsubPublishRequest, com.spaceuptech.space_api.proto.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "PubsubPublish"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.PubsubPublishRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("PubsubPublish"))
+                  .build();
+          }
+        }
+     }
+     return getPubsubPublishMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.PubsubSubscribeRequest,
+      com.spaceuptech.space_api.proto.PubsubMsgResponse> getPubsubSubscribeMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "PubsubSubscribe",
+      requestType = com.spaceuptech.space_api.proto.PubsubSubscribeRequest.class,
+      responseType = com.spaceuptech.space_api.proto.PubsubMsgResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.PubsubSubscribeRequest,
+      com.spaceuptech.space_api.proto.PubsubMsgResponse> getPubsubSubscribeMethod() {
+    io.grpc.MethodDescriptor<com.spaceuptech.space_api.proto.PubsubSubscribeRequest, com.spaceuptech.space_api.proto.PubsubMsgResponse> getPubsubSubscribeMethod;
+    if ((getPubsubSubscribeMethod = SpaceCloudGrpc.getPubsubSubscribeMethod) == null) {
+      synchronized (SpaceCloudGrpc.class) {
+        if ((getPubsubSubscribeMethod = SpaceCloudGrpc.getPubsubSubscribeMethod) == null) {
+          SpaceCloudGrpc.getPubsubSubscribeMethod = getPubsubSubscribeMethod = 
+              io.grpc.MethodDescriptor.<com.spaceuptech.space_api.proto.PubsubSubscribeRequest, com.spaceuptech.space_api.proto.PubsubMsgResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "proto.SpaceCloud", "PubsubSubscribe"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.PubsubSubscribeRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.spaceuptech.space_api.proto.PubsubMsgResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new SpaceCloudMethodDescriptorSupplier("PubsubSubscribe"))
+                  .build();
+          }
+        }
+     }
+     return getPubsubSubscribeMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -795,6 +859,20 @@ public final class SpaceCloudGrpc {
       asyncUnimplementedUnaryCall(getDownloadFileMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void pubsubPublish(com.spaceuptech.space_api.proto.PubsubPublishRequest request,
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getPubsubPublishMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.PubsubSubscribeRequest> pubsubSubscribe(
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.PubsubMsgResponse> responseObserver) {
+      return asyncUnimplementedStreamingCall(getPubsubSubscribeMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -930,6 +1008,20 @@ public final class SpaceCloudGrpc {
                 com.spaceuptech.space_api.proto.DownloadFileRequest,
                 com.spaceuptech.space_api.proto.FilePayload>(
                   this, METHODID_DOWNLOAD_FILE)))
+          .addMethod(
+            getPubsubPublishMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.spaceuptech.space_api.proto.PubsubPublishRequest,
+                com.spaceuptech.space_api.proto.Response>(
+                  this, METHODID_PUBSUB_PUBLISH)))
+          .addMethod(
+            getPubsubSubscribeMethod(),
+            asyncBidiStreamingCall(
+              new MethodHandlers<
+                com.spaceuptech.space_api.proto.PubsubSubscribeRequest,
+                com.spaceuptech.space_api.proto.PubsubMsgResponse>(
+                  this, METHODID_PUBSUB_SUBSCRIBE)))
           .build();
     }
   }
@@ -1103,6 +1195,22 @@ public final class SpaceCloudGrpc {
       asyncServerStreamingCall(
           getChannel().newCall(getDownloadFileMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void pubsubPublish(com.spaceuptech.space_api.proto.PubsubPublishRequest request,
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getPubsubPublishMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.PubsubSubscribeRequest> pubsubSubscribe(
+        io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.PubsubMsgResponse> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(getPubsubSubscribeMethod(), getCallOptions()), responseObserver);
+    }
   }
 
   /**
@@ -1234,6 +1342,13 @@ public final class SpaceCloudGrpc {
         com.spaceuptech.space_api.proto.DownloadFileRequest request) {
       return blockingServerStreamingCall(
           getChannel(), getDownloadFileMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.spaceuptech.space_api.proto.Response pubsubPublish(com.spaceuptech.space_api.proto.PubsubPublishRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getPubsubPublishMethod(), getCallOptions(), request);
     }
   }
 
@@ -1374,6 +1489,14 @@ public final class SpaceCloudGrpc {
       return futureUnaryCall(
           getChannel().newCall(getDeleteFileMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.spaceuptech.space_api.proto.Response> pubsubPublish(
+        com.spaceuptech.space_api.proto.PubsubPublishRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getPubsubPublishMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE = 0;
@@ -1392,9 +1515,11 @@ public final class SpaceCloudGrpc {
   private static final int METHODID_LIST_FILES = 13;
   private static final int METHODID_DELETE_FILE = 14;
   private static final int METHODID_DOWNLOAD_FILE = 15;
-  private static final int METHODID_REAL_TIME = 16;
-  private static final int METHODID_SERVICE = 17;
-  private static final int METHODID_UPLOAD_FILE = 18;
+  private static final int METHODID_PUBSUB_PUBLISH = 16;
+  private static final int METHODID_REAL_TIME = 17;
+  private static final int METHODID_SERVICE = 18;
+  private static final int METHODID_UPLOAD_FILE = 19;
+  private static final int METHODID_PUBSUB_SUBSCRIBE = 20;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1477,6 +1602,10 @@ public final class SpaceCloudGrpc {
           serviceImpl.downloadFile((com.spaceuptech.space_api.proto.DownloadFileRequest) request,
               (io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.FilePayload>) responseObserver);
           break;
+        case METHODID_PUBSUB_PUBLISH:
+          serviceImpl.pubsubPublish((com.spaceuptech.space_api.proto.PubsubPublishRequest) request,
+              (io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -1496,6 +1625,9 @@ public final class SpaceCloudGrpc {
         case METHODID_UPLOAD_FILE:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.uploadFile(
               (io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.Response>) responseObserver);
+        case METHODID_PUBSUB_SUBSCRIBE:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.pubsubSubscribe(
+              (io.grpc.stub.StreamObserver<com.spaceuptech.space_api.proto.PubsubMsgResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -1566,6 +1698,8 @@ public final class SpaceCloudGrpc {
               .addMethod(getDeleteFileMethod())
               .addMethod(getUploadFileMethod())
               .addMethod(getDownloadFileMethod())
+              .addMethod(getPubsubPublishMethod())
+              .addMethod(getPubsubSubscribeMethod())
               .build();
         }
       }

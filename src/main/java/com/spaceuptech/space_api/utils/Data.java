@@ -3,14 +3,14 @@ package com.spaceuptech.space_api.utils;
 import com.google.gson.Gson;
 import com.google.protobuf.ByteString;
 
-public class ChangedData {
+public class Data {
     private ByteString data;
 
-    ChangedData(ByteString data) {
+    Data(ByteString data) {
         this.data = data;
     }
 
-    ChangedData() {
+    Data() {
         this.data = ByteString.copyFromUtf8("");
     }
 

@@ -18,6 +18,11 @@ public class Constants {
     public static final String TYPE_REALTIME_UNSUBSCRIBE = "realtime-unsubscribe";
     public static final String TYPE_REALTIME_FEED = "realtime-feed";
 
+    public static final String TYPE_PUBSUB_SUBSCRIBE = "pubsub-subscribe";
+    public static final String TYPE_PUBSUB_SUBSCRIBE_FEED = "pubsub-subscribe-feed";
+    public static final String TYPE_PUBSUB_UNSUBSCRIBE = "pubsub-unsubscribe";
+    public static final String TYPE_PUBSUB_UNSUBSCRIBE_ALL = "pubsub-unsubscribe-all";
+
     public static final String MONGO = "mongo";
     public static final String MYSQL = "sql-mysql";
     public static final String POSTGRES = "sql-postgres";
