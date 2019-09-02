@@ -1,31 +1,35 @@
 package com.spaceuptech.space_api.db;
 
 import com.spaceuptech.space_api.proto.Meta;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.utils.condition.*;
+import com.spaceuptech.space_api.utils.Config;
+import com.spaceuptech.space_api.utils.Transport;
+import com.spaceuptech.space_api.utils.ResponseListener;
 
 import java.util.HashMap;
 
 public class Delete {
 
-    private Meta meta;
-    private String operation;
+    private String operation, dbType, collection;
     private HashMap<String, Object> find;
     private Config config;
 
-    public Delete(String dbType, Config config, String collection, String operation) {
+    Delete(String dbType, Config config, String collection, String operation) {
         this.operation = operation;
+        this.dbType = dbType;
+        this.collection = collection;
         this.config = config;
-        this.meta = Transport.makeMeta(config.projectId, collection, dbType, config.token);
     }
 
-    public Delete where(Condition... conds) {
-        if (conds.length == 1) this.find = Condition.generateFind(conds[0]);
-        else this.find = Condition.generateFind(And.create(conds));
+    public Delete where(Condition... conditions) {
+        if (conditions.length == 1) find = Condition.generateFind(conditions[0]);
+        else find = Condition.generateFind(And.create(conditions));
         return this;
     }
 
-    public void apply(Utils.ResponseListener listener) {
-        Transport.delete(config.stub, this.find, this.operation, this.meta, listener);
+    public void apply(ResponseListener listener) {
+        Meta m = Transport.makeMeta(config.projectId, collection, dbType, config.token);
+        Transport.delete(config.stub, find, operation, m, listener);
     }
 
     String getProjectID() {
@@ -33,7 +37,7 @@ public class Delete {
     }
 
     String getDBType() {
-        return meta.getDbType();
+        return dbType;
     }
 
     String getToken() {
@@ -41,7 +45,7 @@ public class Delete {
     }
 
     String getCollection() {
-        return meta.getCol();
+        return collection;
     }
 
     String getOperation() {

@@ -1,6 +1,7 @@
 import com.spaceuptech.space_api.API;
 import com.spaceuptech.space_api.db.DB;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.utils.ResponseListener;
+import com.spaceuptech.space_api.utils.Response;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,7 @@ public class Insert {
         DB db = api.MySQL();
         Map<String, String> document = new HashMap<>();
         document.put("name", "aBook");
-        db.insert("books").doc(document).apply(new Utils.ResponseListener() {
+        db.insert("books").doc(document).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {

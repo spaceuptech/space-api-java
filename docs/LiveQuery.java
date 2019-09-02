@@ -1,8 +1,10 @@
 import com.spaceuptech.space_api.API;
 import com.spaceuptech.space_api.db.*;
-import com.spaceuptech.space_api.utils.*;
-
-import java.util.concurrent.CountDownLatch;
+import com.spaceuptech.space_api.realtime.LiveData;
+import com.spaceuptech.space_api.realtime.LiveDataListener;
+import com.spaceuptech.space_api.realtime.LiveQuerySubscription;
+import com.spaceuptech.space_api.realtime.LiveQueryOptions;
+import com.spaceuptech.space_api.utils.Data;
 
 public class LiveQuery {
 
@@ -41,7 +43,7 @@ public class LiveQuery {
         DB db = api.MySQL();
         LiveQuerySubscription subscription = db.liveQuery("books").subscribe(new LiveDataListener() {
             @Override
-            public void onSnapshot(LiveData data, String type, ChangedData changedData) {
+            public void onSnapshot(LiveData data, String type, Data changedData) {
                 System.out.println(type);
                 for (Book book : data.getValue(Book.class)) {
                     System.out.printf("ID:%d, Name:%s, Author:%s\n", book.getId(), book.getName(), book.getAuthor());
@@ -71,7 +73,7 @@ public class LiveQuery {
         LiveQuerySubscription subscription = db.liveQuery("books")
                 .options(LiveQueryOptions.Builder().setChangesOnly(false)).subscribe(new LiveDataListener() {
                     @Override
-                    public void onSnapshot(LiveData data, String type, ChangedData changedData) {
+                    public void onSnapshot(LiveData data, String type, Data changedData) {
                         System.out.println(type);
                         for (Book book : data.getValue(Book.class)) {
                             System.out.printf("ID:%d, Name:%s, Author:%s\n", book.getId(), book.getName(), book.getAuthor());

@@ -2,10 +2,8 @@ package com.spaceuptech.space_api.utils;
 
 import com.google.gson.*;
 import com.google.protobuf.ByteString;
-import com.google.protobuf.MessageLite;
 import com.spaceuptech.space_api.proto.*;
 import com.spaceuptech.space_api.proto.Response;
-import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;
@@ -13,8 +11,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.concurrent.CountDownLatch;
 
 public class Transport {
 
@@ -30,7 +26,7 @@ public class Transport {
         return metaBuilder.build();
     }
 
-    private static StreamObserver<Response> makeStreamObserver(Utils.ResponseListener listener) {
+    private static StreamObserver<Response> makeStreamObserver(ResponseListener listener) {
         return new StreamObserver<Response>() {
             @Override
             public void onNext(Response value) {
@@ -48,7 +44,7 @@ public class Transport {
         };
     }
 
-    public static void create(SpaceCloudGrpc.SpaceCloudStub stub, Object doc, String operation, Meta meta, Utils.ResponseListener listener) {
+    public static void create(SpaceCloudGrpc.SpaceCloudStub stub, Object doc, String operation, Meta meta, ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(doc);
@@ -62,7 +58,7 @@ public class Transport {
         stub.create(createRequest, makeStreamObserver(listener));
     }
 
-    public static void read(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, ReadOptions options, Meta meta, Utils.ResponseListener listener) {
+    public static void read(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, ReadOptions options, Meta meta, ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(find);
@@ -77,7 +73,7 @@ public class Transport {
         stub.read(readRequest, makeStreamObserver(listener));
     }
 
-    public static void update(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, HashMap<String, Object> update, Meta meta, Utils.ResponseListener listener) {
+    public static void update(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, HashMap<String, Object> update, Meta meta, ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(find);
@@ -94,7 +90,7 @@ public class Transport {
         stub.update(updateRequest, makeStreamObserver(listener));
     }
 
-    public static void delete(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, Meta meta, Utils.ResponseListener listener) {
+    public static void delete(SpaceCloudGrpc.SpaceCloudStub stub, Object find, String operation, Meta meta, ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(find);
@@ -108,7 +104,7 @@ public class Transport {
         stub.delete(deleteRequest, makeStreamObserver(listener));
     }
 
-    public static void aggregate(SpaceCloudGrpc.SpaceCloudStub stub, Object pipe, String operation, Meta meta, Utils.ResponseListener listener) {
+    public static void aggregate(SpaceCloudGrpc.SpaceCloudStub stub, Object pipe, String operation, Meta meta, ResponseListener listener) {
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(pipe);
@@ -123,12 +119,12 @@ public class Transport {
         stub.aggregate(aggregateRequest, makeStreamObserver(listener));
     }
 
-    public static void batch(SpaceCloudGrpc.SpaceCloudStub stub, ArrayList<AllRequest> requests, Meta meta, Utils.ResponseListener listener) {
+    public static void batch(SpaceCloudGrpc.SpaceCloudStub stub, ArrayList<AllRequest> requests, Meta meta, ResponseListener listener) {
         BatchRequest batchRequest = BatchRequest.newBuilder().setMeta(meta).addAllBatchrequest(requests).build();
         stub.batch(batchRequest, makeStreamObserver(listener));
     }
 
-    public static void call(SpaceCloudGrpc.SpaceCloudStub stub, Object params, int timeout, String service, String function, String token, Utils.ResponseListener listener) {
+    public static void call(SpaceCloudGrpc.SpaceCloudStub stub, Object params, int timeout, String service, String function, String token, ResponseListener listener) {
         Gson gson = new Gson();
         String jsonString = gson.toJson(params);
         byte[] bytes = jsonString.getBytes();
@@ -142,20 +138,20 @@ public class Transport {
         stub.call(builder.build(), makeStreamObserver(listener));
     }
 
-    public static void profile(SpaceCloudGrpc.SpaceCloudStub stub, String id, Meta meta, Utils.ResponseListener listener) {
+    public static void profile(SpaceCloudGrpc.SpaceCloudStub stub, String id, Meta meta, ResponseListener listener) {
         ProfileRequest profileRequest = ProfileRequest.newBuilder()
                 .setId(id)
                 .setMeta(meta).build();
         stub.profile(profileRequest, makeStreamObserver(listener));
     }
 
-    public static void profiles(SpaceCloudGrpc.SpaceCloudStub stub, Meta meta, Utils.ResponseListener listener) {
+    public static void profiles(SpaceCloudGrpc.SpaceCloudStub stub, Meta meta, ResponseListener listener) {
         ProfilesRequest profilesRequest = ProfilesRequest.newBuilder()
                 .setMeta(meta).build();
         stub.profiles(profilesRequest, makeStreamObserver(listener));
     }
 
-    public static void signIn(SpaceCloudGrpc.SpaceCloudStub stub, String email, String password, Meta meta, Utils.ResponseListener listener) {
+    public static void signIn(SpaceCloudGrpc.SpaceCloudStub stub, String email, String password, Meta meta, ResponseListener listener) {
         SignInRequest signInRequest = SignInRequest.newBuilder()
                 .setEmail(email)
                 .setPassword(password)
@@ -163,7 +159,7 @@ public class Transport {
         stub.signIn(signInRequest, makeStreamObserver(listener));
     }
 
-    public static void signUp(SpaceCloudGrpc.SpaceCloudStub stub, String email, String name, String password, String role, Meta meta, Utils.ResponseListener listener) {
+    public static void signUp(SpaceCloudGrpc.SpaceCloudStub stub, String email, String name, String password, String role, Meta meta, ResponseListener listener) {
         SignUpRequest.Builder builder = SignUpRequest.newBuilder()
                 .setEmail(email)
                 .setName(name)
@@ -176,7 +172,7 @@ public class Transport {
         stub.signUp(signUpRequest, makeStreamObserver(listener));
     }
 
-    public static void editProfile(SpaceCloudGrpc.SpaceCloudStub stub, String id, String email, String name, String password, Meta meta, Utils.ResponseListener listener) {
+    public static void editProfile(SpaceCloudGrpc.SpaceCloudStub stub, String id, String email, String name, String password, Meta meta, ResponseListener listener) {
         EditProfileRequest.Builder builder = EditProfileRequest.newBuilder()
                 .setId(id)
                 .setMeta(meta);
@@ -193,7 +189,7 @@ public class Transport {
         stub.editProfile(editProfileRequest, makeStreamObserver(listener));
     }
 
-    public static void createFolder(SpaceCloudGrpc.SpaceCloudStub stub, String path, String name, Meta meta, Utils.ResponseListener listener) {
+    public static void createFolder(SpaceCloudGrpc.SpaceCloudStub stub, String path, String name, Meta meta, ResponseListener listener) {
         CreateFolderRequest createFolderRequest = CreateFolderRequest.newBuilder()
                 .setPath(path)
                 .setName(name)
@@ -202,7 +198,7 @@ public class Transport {
         stub.createFolder(createFolderRequest, makeStreamObserver(listener));
     }
 
-    public static void deleteFile(SpaceCloudGrpc.SpaceCloudStub stub, String path, Meta meta, Utils.ResponseListener listener) {
+    public static void deleteFile(SpaceCloudGrpc.SpaceCloudStub stub, String path, Meta meta, ResponseListener listener) {
         DeleteFileRequest deleteFileRequest = DeleteFileRequest.newBuilder()
                 .setPath(path)
                 .setMeta(meta)
@@ -210,7 +206,7 @@ public class Transport {
         stub.deleteFile(deleteFileRequest, makeStreamObserver(listener));
     }
 
-    public static void listFiles(SpaceCloudGrpc.SpaceCloudStub stub, String path, Meta meta, Utils.ResponseListener listener) {
+    public static void listFiles(SpaceCloudGrpc.SpaceCloudStub stub, String path, Meta meta, ResponseListener listener) {
         ListFilesRequest listFilesRequest = ListFilesRequest.newBuilder()
                 .setPath(path)
                 .setMeta(meta)
@@ -218,7 +214,7 @@ public class Transport {
         stub.listFiles(listFilesRequest, makeStreamObserver(listener));
     }
 
-    public static void uploadFile(SpaceCloudGrpc.SpaceCloudStub stub, String path, String name, Meta meta, InputStream stream, Utils.ResponseListener listener) {
+    public static void uploadFile(SpaceCloudGrpc.SpaceCloudStub stub, String path, String name, Meta meta, InputStream stream, ResponseListener listener) {
         StreamObserver<Response> responseObserver = new StreamObserver<Response>() {
             @Override
             public void onNext(Response response) {
@@ -249,23 +245,21 @@ public class Transport {
         requestObserver.onCompleted();
     }
 
-    public static void downloadFile(SpaceCloudGrpc.SpaceCloudStub stub, String path, Meta meta, OutputStream stream, Utils.ResponseListener listener){
+    public static void downloadFile(SpaceCloudGrpc.SpaceCloudStub stub, String path, Meta meta, OutputStream stream, ResponseListener listener) {
         DownloadFileRequest downloadFileRequest = DownloadFileRequest.newBuilder()
                 .setPath(path)
                 .setMeta(meta)
                 .build();
-        final int[] status = {200};
         stub.downloadFile(downloadFileRequest, new StreamObserver<FilePayload>() {
             @Override
             public void onNext(FilePayload payload) {
-                if(payload.getStatus()==200) {
+                if (payload.getStatus() == 200) {
                     try {
                         stream.write(payload.getPayload().toByteArray());
                     } catch (IOException e) {
                         listener.onError(e);
                     }
                 } else {
-                    status[0] = payload.getStatus();
                     listener.onError(new Exception(payload.getError()));
                 }
             }
@@ -282,7 +276,7 @@ public class Transport {
         });
     }
 
-    public static void pubsubPublish(SpaceCloudGrpc.SpaceCloudStub stub, String subject, Object msg, Meta meta, Utils.ResponseListener listener) {
+    public static void pubsubPublish(SpaceCloudGrpc.SpaceCloudStub stub, String subject, Object msg, Meta meta, ResponseListener listener) {
         Gson gson = new Gson();
         String jsonString = gson.toJson(msg);
         byte[] bytes = jsonString.getBytes();

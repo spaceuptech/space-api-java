@@ -1,7 +1,9 @@
 import com.spaceuptech.space_api.API;
 import com.spaceuptech.space_api.db.Batch;
 import com.spaceuptech.space_api.db.DB;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.utils.condition.*;
+import com.spaceuptech.space_api.utils.ResponseListener;
+import com.spaceuptech.space_api.utils.Response;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class Batch {
         set.put("name", "Book1");
         batch.add(db.update("books").where(new Cond("id", "==", 1)).set(set));
         batch.add(db.delete("books").where(new Cond("id", "==", 1)));
-        batch.apply(new Utils.ResponseListener() {
+        batch.apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {

@@ -1,7 +1,13 @@
 package com.spaceuptech.space_api;
 
 import com.spaceuptech.space_api.db.DB;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.filestore.FileStore;
+import com.spaceuptech.space_api.pubsub.Pubsub;
+import com.spaceuptech.space_api.service.Service;
+import com.spaceuptech.space_api.utils.Config;
+import com.spaceuptech.space_api.utils.Constants;
+import com.spaceuptech.space_api.utils.ResponseListener;
+import com.spaceuptech.space_api.utils.Transport;
 
 public class API {
     private Config config;
@@ -30,7 +36,7 @@ public class API {
         return new DB(Constants.POSTGRES, this.config);
     }
 
-    public void call(String serviceName, String funcName, int timeout, Object params, Utils.ResponseListener listener) {
+    public void call(String serviceName, String funcName, int timeout, Object params, ResponseListener listener) {
         Transport.call(config.stub, params, timeout, serviceName, funcName, config.token, listener);
     }
 

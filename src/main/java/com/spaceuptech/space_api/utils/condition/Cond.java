@@ -1,4 +1,4 @@
-package com.spaceuptech.space_api.utils;
+package com.spaceuptech.space_api.utils.condition;
 
 public class Cond extends Condition {
     public String f1;

@@ -4,38 +4,39 @@ import com.spaceuptech.space_api.proto.Meta;
 import com.spaceuptech.space_api.utils.Config;
 import com.spaceuptech.space_api.utils.Constants;
 import com.spaceuptech.space_api.utils.Transport;
-import com.spaceuptech.space_api.utils.Utils;
+import com.spaceuptech.space_api.utils.ResponseListener;
 
 public class Insert {
 
-    private Meta meta;
     private Config config;
     private Object doc = null;
-    private String operation;
+    private String operation, dbType, collection;
     private Object[] docs = null;
 
-    public Insert(String dbType, Config config, String collection) {
+    Insert(String dbType, Config config, String collection) {
         this.config = config;
-        this.meta = Transport.makeMeta(config.projectId, collection, dbType, config.token);
+        this.dbType = dbType;
+        this.collection = collection;
     }
 
     public Insert doc(Object doc) {
-        this.operation = Constants.ONE;
-        this.doc = doc;
+        operation = Constants.ONE;
+        doc = doc;
         return this;
     }
 
     public Insert docs(Object[] docs) {
-        this.operation = Constants.ALL;
-        this.docs = docs;
+        operation = Constants.ALL;
+        docs = docs;
         return this;
     }
 
-    public void apply(Utils.ResponseListener listener) {
-        if (this.operation.equals(Constants.ONE)) {
-            Transport.create(config.stub, doc, this.operation, this.meta, listener);
-        } else if (this.operation.equals(Constants.ALL)) {
-            Transport.create(config.stub, docs, this.operation, this.meta, listener);
+    public void apply(ResponseListener listener) {
+        Meta m = Transport.makeMeta(config.projectId, collection, dbType, config.token);
+        if (operation.equals(Constants.ONE)) {
+            Transport.create(config.stub, doc, operation, m, listener);
+        } else if (operation.equals(Constants.ALL)) {
+            Transport.create(config.stub, docs, operation, m, listener);
         } else {
             listener.onError(new Exception("Operation not specified"));
         }
@@ -46,7 +47,7 @@ public class Insert {
     }
 
     String getDBType() {
-        return meta.getDbType();
+        return dbType;
     }
 
     String getToken() {
@@ -54,7 +55,7 @@ public class Insert {
     }
 
     String getCollection() {
-        return meta.getCol();
+        return collection;
     }
 
     String getOperation() {
@@ -62,7 +63,7 @@ public class Insert {
     }
 
     Object getAllDocs() {
-        if (this.operation.equals(Constants.ONE)) {
+        if (operation.equals(Constants.ONE)) {
             return doc;
         } else {
             return docs;

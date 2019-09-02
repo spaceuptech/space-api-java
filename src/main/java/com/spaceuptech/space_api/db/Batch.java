@@ -2,7 +2,11 @@ package com.spaceuptech.space_api.db;
 
 import com.spaceuptech.space_api.proto.Meta;
 import com.spaceuptech.space_api.proto.AllRequest;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.utils.Config;
+import com.spaceuptech.space_api.utils.Transport;
+import com.spaceuptech.space_api.utils.ResponseListener;
+import com.spaceuptech.space_api.utils.Utils;
+import com.spaceuptech.space_api.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -10,25 +14,20 @@ import java.util.ArrayList;
 public class Batch {
     private String dbType;
     private ArrayList<AllRequest> requests = new ArrayList<>();
-    private Meta meta;
     private Config config;
 
-    public Batch(String dbType, Config config) {
+    Batch(String dbType, Config config) {
         this.dbType = dbType;
         this.config = config;
-        this.meta = Transport.makeMeta(config.projectId, null, dbType, config.token);
     }
 
-    public Batch add(Insert request) throws  Exception{
-        if(!this.config.projectId.equals(request.getProjectID())) {
+    public Batch add(Insert request) throws Exception {
+        if (!config.projectId.equals(request.getProjectID())) {
             throw new Exception("Cannot Batch Requests of Different Projects");
         }
-        if(!this.dbType.equals(request.getDBType())) {
+        if (!dbType.equals(request.getDBType())) {
             throw new Exception("Cannot Batch Requests of Different Database Types");
         }
-//        if(!this.config.token.equals(request.getToken())) {
-//            throw new Exception("Cannot Batch Requests using Different Tokens");
-//        }
         AllRequest.Builder allRequestBuilder = AllRequest.newBuilder();
         allRequestBuilder.setCol(request.getCollection());
         allRequestBuilder.setDocument(Utils.objectToByteString(request.getAllDocs()));
@@ -38,16 +37,13 @@ public class Batch {
         return this;
     }
 
-    public Batch add(Update request) throws  Exception{
-        if(!this.config.projectId.equals(request.getProjectID())) {
+    public Batch add(Update request) throws Exception {
+        if (!config.projectId.equals(request.getProjectID())) {
             throw new Exception("Cannot Batch Requests of Different Projects");
         }
-        if(!this.dbType.equals(request.getDBType())) {
+        if (!dbType.equals(request.getDBType())) {
             throw new Exception("Cannot Batch Requests of Different Database Types");
         }
-//        if(!this.config.token.equals(request.getToken())) {
-//            throw new Exception("Cannot Batch Requests using Different Tokens");
-//        }
         AllRequest.Builder allRequestBuilder = AllRequest.newBuilder();
         allRequestBuilder.setCol(request.getCollection());
         allRequestBuilder.setOperation(request.getOperation());
@@ -58,16 +54,13 @@ public class Batch {
         return this;
     }
 
-    public Batch add(Delete request) throws  Exception{
-        if(!this.config.projectId.equals(request.getProjectID())) {
+    public Batch add(Delete request) throws Exception {
+        if (!config.projectId.equals(request.getProjectID())) {
             throw new Exception("Cannot Batch Requests of Different Projects");
         }
-        if(!this.dbType.equals(request.getDBType())) {
+        if (!dbType.equals(request.getDBType())) {
             throw new Exception("Cannot Batch Requests of Different Database Types");
         }
-//        if(!this.config.token.equals(request.getToken())) {
-//            throw new Exception("Cannot Batch Requests using Different Tokens");
-//        }
         AllRequest.Builder allRequestBuilder = AllRequest.newBuilder();
         allRequestBuilder.setCol(request.getCollection());
         allRequestBuilder.setOperation(request.getOperation());
@@ -77,7 +70,8 @@ public class Batch {
         return this;
     }
 
-    public void apply(Utils.ResponseListener listener) {
-        Transport.batch(config.stub, this.requests, this.meta, listener);
+    public void apply(ResponseListener listener) {
+        Meta m = Transport.makeMeta(config.projectId, null, dbType, config.token);
+        Transport.batch(config.stub, requests, m, listener);
     }
 }

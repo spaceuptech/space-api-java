@@ -1,8 +1,14 @@
-package com.spaceuptech.space_api.utils;
+package com.spaceuptech.space_api.service;
+
+import com.spaceuptech.space_api.proto.FunctionsPayload;
+import com.spaceuptech.space_api.utils.Config;
+import com.spaceuptech.space_api.utils.Constants;
+import com.spaceuptech.space_api.utils.Data;
+
+import static com.spaceuptech.space_api.utils.Utils.objectToByteString;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.spaceuptech.space_api.proto.FunctionsPayload;
 import io.grpc.ConnectivityState;
 import io.grpc.ManagedChannel;
 import io.grpc.stub.StreamObserver;
@@ -40,20 +46,17 @@ public class Service {
             } else if (payload.getType().equals(Constants.TYPE_SERVICE_REQUEST)) {
                 if (methods.containsKey(payload.getFunction())) {
                     try {
-                        methods.get(payload.getFunction()).onInvocation(new Message(payload.getParams()), new Message(payload.getAuth()), new ReturnCallback() {
-                            @Override
-                            public void send(String type, Object answer) {
-                                if (type.equals("response")) {
-                                    sendStreamRef.get().onNext(FunctionsPayload.newBuilder()
-                                            .setId(payload.getId())
-                                            .setType(Constants.TYPE_SERVICE_REQUEST)
-                                            .setService(serviceName)
-                                            .setParams(Utils.objectToByteString(answer))
-                                            .build());
-                                } else {
-                                    throwables[0] = new Throwable("type must be 'response'");
-                                    finishedLatch.countDown();
-                                }
+                        methods.get(payload.getFunction()).onInvocation(new Data(payload.getParams()), new Data(payload.getAuth()), (type, answer) -> {
+                            if (type.equals("response")) {
+                                sendStreamRef.get().onNext(FunctionsPayload.newBuilder()
+                                        .setId(payload.getId())
+                                        .setType(Constants.TYPE_SERVICE_REQUEST)
+                                        .setService(serviceName)
+                                        .setParams(objectToByteString(answer))
+                                        .build());
+                            } else {
+                                throwables[0] = new Throwable("type must be 'response'");
+                                finishedLatch.countDown();
                             }
                         });
                     } catch (Exception e) {

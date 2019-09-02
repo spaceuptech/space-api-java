@@ -1,11 +1,14 @@
-package com.spaceuptech;
-
 import com.spaceuptech.space_api.API;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.pubsub.Pubsub;
+import com.spaceuptech.space_api.pubsub.PubsubListener;
+import com.spaceuptech.space_api.pubsub.PubsubSubscription;
+import com.spaceuptech.space_api.utils.Data;
+import com.spaceuptech.space_api.utils.Response;
+import com.spaceuptech.space_api.utils.ResponseListener;
 
 import java.util.HashMap;
 
-public class Pubsub {
+public class PubSub {
     public static void main(String[] args) throws Exception {
         API api = new API("books-app", "localhost", 4124);
         Pubsub pubsub = api.pubsub();
@@ -28,7 +31,7 @@ public class Pubsub {
             h.put("key2", "sdfadsf");
             h.put("key3", 7.58);
             h.put("key4", true);
-            pubsub.publish("/subject/a/", h, new Utils.ResponseListener() {
+            pubsub.publish("/subject/a/", h, new ResponseListener() {
                 @Override
                 public void onResponse(int statusCode, Response response) {
                     if (statusCode == 200) {

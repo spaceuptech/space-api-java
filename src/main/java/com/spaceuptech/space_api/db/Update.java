@@ -1,37 +1,40 @@
 package com.spaceuptech.space_api.db;
 
 import com.spaceuptech.space_api.proto.Meta;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.utils.condition.*;
+import com.spaceuptech.space_api.utils.Config;
+import com.spaceuptech.space_api.utils.Transport;
+import com.spaceuptech.space_api.utils.ResponseListener;
 
 import java.util.HashMap;
 
 public class Update {
 
     private Config config;
-    private String operation;
-    private Meta meta;
+    private String operation, dbType, collection;
     private HashMap<String, Object> find, update;
 
-    public Update(String dbType, Config config, String collection, String operation) {
+    Update(String dbType, Config config, String collection, String operation) {
         this.operation = operation;
         this.config = config;
-        this.meta = Transport.makeMeta(config.projectId, collection, dbType, config.token);
+        this.dbType = dbType;
+        this.collection = collection;
         this.update = new HashMap<>();
     }
 
-    public Update where(Condition... conds) {
-        if (conds.length == 1) this.find = Condition.generateFind(conds[0]);
-        else this.find = Condition.generateFind(And.create(conds));
+    public Update where(Condition... conditions) {
+        if (conditions.length == 1) find = Condition.generateFind(conditions[0]);
+        else find = Condition.generateFind(And.create(conditions));
         return this;
     }
 
     public Update set(HashMap<String, Object> obj) {
-        this.update.put("$set", obj);
+        update.put("$set", obj);
         return this;
     }
 
     public Update push(HashMap<String, Object> obj) {
-        this.update.put("$push", obj);
+        update.put("$push", obj);
         return this;
     }
 
@@ -40,59 +43,60 @@ public class Update {
         for (String field : fields) {
             map.put(field, "");
         }
-        this.update.put("$unset", map);
+        update.put("$unset", map);
         return this;
     }
 
     public Update rename(HashMap<String, Object> obj) {
-        this.update.put("$rename", obj);
+        update.put("$rename", obj);
         return this;
     }
 
     public Update inc(HashMap<String, Object> obj) {
-        this.update.put("$inc", obj);
+        update.put("$inc", obj);
         return this;
     }
 
     public Update max(HashMap<String, Object> obj) {
-        this.update.put("$max", obj);
+        update.put("$max", obj);
         return this;
     }
 
     public Update min(HashMap<String, Object> obj) {
-        this.update.put("$min", obj);
+        update.put("$min", obj);
         return this;
     }
 
     public Update mul(HashMap<String, Object> obj) {
-        this.update.put("$mul", obj);
+        update.put("$mul", obj);
         return this;
     }
 
     public Update currentTimestamp(String... fields) {
-        HashMap map = this.update.containsKey("$currentDate") ? (HashMap) this.update.get("$currentDate") : new HashMap<String, Object>();
+        HashMap map = update.containsKey("$currentDate") ? (HashMap) update.get("$currentDate") : new HashMap<String, Object>();
         for (String field : fields) {
             HashMap temp = new HashMap<String, String>();
             temp.put("$type", "timestamp");
             map.put(field, temp);
         }
-        this.update.put("$currentDate", map);
+        update.put("$currentDate", map);
         return this;
     }
 
     public Update currentDate(String... fields) {
-        HashMap map = this.update.containsKey("$currentDate") ? (HashMap) this.update.get("$currentDate") : new HashMap<String, Object>();
+        HashMap map = update.containsKey("$currentDate") ? (HashMap) update.get("$currentDate") : new HashMap<String, Object>();
         for (String field : fields) {
             HashMap temp = new HashMap<String, String>();
             temp.put("$type", "date");
             map.put(field, temp);
         }
-        this.update.put("$currentDate", map);
+        update.put("$currentDate", map);
         return this;
     }
 
-    public void apply(Utils.ResponseListener listener) {
-        Transport.update(config.stub, this.find, this.operation, this.update, this.meta, listener);
+    public void apply(ResponseListener listener) {
+        Meta m  = Transport.makeMeta(config.projectId, collection, dbType, config.token);
+        Transport.update(config.stub, find, operation, update, m, listener);
     }
 
     String getProjectID() {
@@ -100,7 +104,7 @@ public class Update {
     }
 
     String getDBType() {
-        return meta.getDbType();
+        return dbType;
     }
 
     String getToken() {
@@ -108,7 +112,7 @@ public class Update {
     }
 
     String getCollection() {
-        return meta.getCol();
+        return collection;
     }
 
     String getOperation() {

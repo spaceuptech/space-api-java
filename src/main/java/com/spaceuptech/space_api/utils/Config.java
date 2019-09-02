@@ -15,4 +15,3 @@ public class Config {
         stub = SpaceCloudGrpc.newStub(channel);
     }
 }
-

@@ -1,10 +1,10 @@
-package com.spaceuptech.space_api.utils;
+package com.spaceuptech.space_api.realtime;
 
 public class LiveQuerySubscription {
     LiveData snapshot;
-    private Unsubscribe liveQueryUnsubscribe;
+    private LiveQueryUnsubscribe liveQueryUnsubscribe;
 
-    LiveQuerySubscription(Unsubscribe liveQueryUnsubscribe, LiveData liveData) {
+    LiveQuerySubscription(LiveQueryUnsubscribe liveQueryUnsubscribe, LiveData liveData) {
         this.liveQueryUnsubscribe = liveQueryUnsubscribe;
         this.snapshot = liveData;
     }
