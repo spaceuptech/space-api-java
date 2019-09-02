@@ -1,4 +1,6 @@
-package com.spaceuptech.space_api.utils;
+package com.spaceuptech.space_api.utils.condition;
+
+import static com.spaceuptech.space_api.utils.Utils.createMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +17,7 @@ public class Condition {
             case AND: {
                 And and = (And) condition;
                 HashMap<String, Object> map = new HashMap<>();
-                for (Condition cond : and.conds) {
+                for (Condition cond : and.conditions) {
                     HashMap<String, Object> generated = generateFind(cond);
                     if(cond.condType == CondType.COND) {
                         Cond c = (Cond) cond;
@@ -33,13 +35,13 @@ public class Condition {
             }
             case OR: {
                 Or or = (Or) condition;
-                ArrayList<HashMap<String, Object>> conds = new ArrayList<>();
-                for (Condition cond : or.conds) {
-                    conds.add(generateFind(cond));
+                ArrayList<HashMap<String, Object>> conditions = new ArrayList<>();
+                for (Condition cond : or.conditions) {
+                    conditions.add(generateFind(cond));
                 }
 
                 HashMap<String, Object> map2 = new HashMap<>();
-                map2.put("$or", conds);
+                map2.put("$or", conditions);
                 return map2;
             }
             case COND: {
@@ -53,25 +55,25 @@ public class Condition {
                         map.put(f1, f2);
                         break;
                     case ">":
-                        map.put(f1, Utils.createMap("$gt", f2));
+                        map.put(f1, createMap("$gt", f2));
                         break;
                     case "<":
-                        map.put(f1, Utils.createMap("$lt", f2));
+                        map.put(f1, createMap("$lt", f2));
                         break;
                     case ">=":
-                        map.put(f1, Utils.createMap("$gte", f2));
+                        map.put(f1, createMap("$gte", f2));
                         break;
                     case "<=":
-                        map.put(f1, Utils.createMap("$lte", f2));
+                        map.put(f1, createMap("$lte", f2));
                         break;
                     case "!=":
-                        map.put(f1, Utils.createMap("$ne", f2));
+                        map.put(f1, createMap("$ne", f2));
                         break;
                     case "in":
-                        map.put(f1, Utils.createMap("$in", f2));
+                        map.put(f1, createMap("$in", f2));
                         break;
                     case "notIn":
-                        map.put(f1, Utils.createMap("$nin", f2));
+                        map.put(f1, createMap("$nin", f2));
                         break;
                 }
                 return map;

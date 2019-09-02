@@ -28,7 +28,7 @@ public class Pubsub {
             h.put("key2", "sdfadsf");
             h.put("key3", 7.58);
             h.put("key4", true);
-            pubsub.publish("/subject/a/", h, new Utils.ResponseListener() {
+            pubsub.publish("/subject/a/", h, new ResponseListener() {
                 @Override
                 public void onResponse(int statusCode, Response response) {
                     if (statusCode == 200) {

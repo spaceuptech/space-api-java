@@ -12,7 +12,7 @@ public class Insert {
         DB db = api.MySQL();
         Map<String, String> document = new HashMap<>();
         document.put("name", "aBook");
-        db.insert("books").doc(document).apply(new Utils.ResponseListener() {
+        db.insert("books").doc(document).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {

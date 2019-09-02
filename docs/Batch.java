@@ -19,7 +19,7 @@ public class Batch {
         set.put("name", "Book1");
         batch.add(db.update("books").where(new Cond("id", "==", 1)).set(set));
         batch.add(db.delete("books").where(new Cond("id", "==", 1)));
-        batch.apply(new Utils.ResponseListener() {
+        batch.apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {

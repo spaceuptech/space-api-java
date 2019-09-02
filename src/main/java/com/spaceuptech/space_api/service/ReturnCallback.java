@@ -1,4 +1,4 @@
-package com.spaceuptech.space_api.utils;
+package com.spaceuptech.space_api.service;
 
 @FunctionalInterface
 public interface ReturnCallback {

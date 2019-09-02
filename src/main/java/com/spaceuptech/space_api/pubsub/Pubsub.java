@@ -1,8 +1,14 @@
-package com.spaceuptech.space_api.utils;
+package com.spaceuptech.space_api.pubsub;
+
+import com.spaceuptech.space_api.proto.*;
+import com.spaceuptech.space_api.utils.Constants;
+import com.spaceuptech.space_api.utils.Config;
+import com.spaceuptech.space_api.utils.ResponseListener;
+import com.spaceuptech.space_api.utils.Transport;
+import com.spaceuptech.space_api.utils.Data;
 
 import com.google.gson.Gson;
 import com.google.protobuf.ByteString;
-import com.spaceuptech.space_api.proto.*;
 import io.grpc.ConnectivityState;
 import io.grpc.ManagedChannel;
 import io.grpc.stub.StreamObserver;
@@ -15,7 +21,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class Pubsub {
     private static final String STATE_READY = "READY";
     private static final String RETRY = "Retry connecting..."; // Unique string for internal use as a flag
-    private static final String UNSUBSCRIBE = "SpaceCloud Unsubscribe..."; // Unique string for internal use as a flag
+    private static final String UNSUBSCRIBE = "SpaceCloud LiveQueryUnsubscribe..."; // Unique string for internal use as a flag
 
     private Config config;
     private String uuid;
@@ -120,7 +126,7 @@ public class Pubsub {
         return new PubsubSubscription(subject, this::unsubscribe);
     }
 
-    public void publish(String subject, Object msg, Utils.ResponseListener listener) {
+    public void publish(String subject, Object msg, ResponseListener listener) {
         Meta.Builder metaBuilder = Meta.newBuilder()
                 .setProject(config.projectId);
         if (config.token != null)

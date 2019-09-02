@@ -6,11 +6,11 @@ import com.google.protobuf.ByteString;
 public class Data {
     private ByteString data;
 
-    Data(ByteString data) {
+    public Data(ByteString data) {
         this.data = data;
     }
 
-    Data() {
+    public Data() {
         this.data = ByteString.copyFromUtf8("");
     }
 

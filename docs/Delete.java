@@ -7,7 +7,7 @@ public class Delete {
         // Delete one
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        db.deleteOne("books").apply(new Utils.ResponseListener() {
+        db.deleteOne("books").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -26,7 +26,7 @@ public class Delete {
         // Delete all
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        db.delete("books").apply(new Utils.ResponseListener() {
+        db.delete("books").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -45,7 +45,7 @@ public class Delete {
         // Delete where
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        db.delete("books").where(new Cond("name", "==", "aBook")).apply(new Utils.ResponseListener() {
+        db.delete("books").where(new Cond("name", "==", "aBook")).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -64,7 +64,7 @@ public class Delete {
         // Delete multiple conditions
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        db.delete("books").where(And.create(new Cond("name", "==", "aBook"), new Cond("author", "==", "myelf"))).apply(new Utils.ResponseListener() {
+        db.delete("books").where(And.create(new Cond("name", "==", "aBook"), new Cond("author", "==", "myelf"))).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {

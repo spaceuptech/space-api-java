@@ -21,7 +21,7 @@ public class Service {
         // Call a function
         API api = new API("books-app", "localhost", 4124);
 
-        Utils.ResponseListener responseListener = new Utils.ResponseListener() {
+        ResponseListener responseListener = new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 try {

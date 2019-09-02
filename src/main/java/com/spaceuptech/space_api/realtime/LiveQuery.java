@@ -1,11 +1,16 @@
-package com.spaceuptech.space_api.utils;
+package com.spaceuptech.space_api.realtime;
 
 import com.google.gson.Gson;
 import com.google.protobuf.ByteString;
-import com.spaceuptech.space_api.proto.*;
 import io.grpc.ConnectivityState;
 import io.grpc.ManagedChannel;
 import io.grpc.stub.StreamObserver;
+
+import com.spaceuptech.space_api.proto.*;
+import com.spaceuptech.space_api.utils.Config;
+import com.spaceuptech.space_api.utils.Constants;
+import com.spaceuptech.space_api.utils.Data;
+import com.spaceuptech.space_api.utils.condition.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +22,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class LiveQuery {
     private static final String STATE_READY = "READY";
     private static final String RETRY = "Retry connecting..."; // Unique string for internal use as a flag
-    private static final String UNSUBSCRIBE = "SpaceCloud Unsubscribe..."; // Unique string for internal use as a flag
+    private static final String UNSUBSCRIBE = "SpaceCloud LiveQueryUnsubscribe..."; // Unique string for internal use as a flag
 
     private Config config;
     private String col, dbType, uuid;
@@ -67,9 +72,9 @@ public class LiveQuery {
         this.msgs = new String[1];
     }
 
-    public LiveQuery where(Condition... conds) {
-        if (conds.length == 1) this.find = Condition.generateFind(conds[0]);
-        else this.find = Condition.generateFind(And.create(conds));
+    public LiveQuery where(Condition... conditions) {
+        if (conditions.length == 1) this.find = Condition.generateFind(conditions[0]);
+        else this.find = Condition.generateFind(And.create(conditions));
         return this;
     }
 

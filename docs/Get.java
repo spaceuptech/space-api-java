@@ -37,7 +37,7 @@ public class Get {
         // Get One
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        db.getOne("books").apply(new Utils.ResponseListener() {
+        db.getOne("books").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -60,7 +60,7 @@ public class Get {
         // Get One Conditional
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        db.getOne("books").where(new Cond("id", "==", 1)).apply(new Utils.ResponseListener() {
+        db.getOne("books").where(new Cond("id", "==", 1)).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -83,7 +83,7 @@ public class Get {
         // Get all
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        db.get("books").where(new Cond("author", "==", "myself")).apply(new Utils.ResponseListener() {
+        db.get("books").where(new Cond("author", "==", "myself")).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -106,7 +106,7 @@ public class Get {
         // Distinct
         API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
-        db.distinct("books").apply(new Utils.ResponseListener() {
+        db.distinct("books").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if(statusCode==200) {
@@ -129,7 +129,7 @@ public class Get {
         // Count
         API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
-        db.count("books").apply(new Utils.ResponseListener() {
+        db.count("books").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if(statusCode==200) {
@@ -152,7 +152,7 @@ public class Get {
         // Get Multiple Conditions
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        db.get("books").where(Or.create(new Cond("author", "==", "myself"), new Cond("author", "==", "someAuthor"))).apply(new Utils.ResponseListener() {
+        db.get("books").where(Or.create(new Cond("author", "==", "myself"), new Cond("author", "==", "someAuthor"))).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -177,7 +177,7 @@ public class Get {
         DB db = api.MySQL();
         HashMap<String, Integer> select = new HashMap<>();
         select.put("name", 1);
-        db.get("books").select(select).apply(new Utils.ResponseListener() {
+        db.get("books").select(select).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -200,7 +200,7 @@ public class Get {
         // Sort
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        db.get("books").sort("id", "-name").apply(new Utils.ResponseListener() {
+        db.get("books").sort("id", "-name").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -223,7 +223,7 @@ public class Get {
         // Skip
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        db.get("books").skip(2).apply(new Utils.ResponseListener() {
+        db.get("books").skip(2).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -246,7 +246,7 @@ public class Get {
         // Limit
         API api = new API("books-app", "localhost", 4124);
         DB db = api.MySQL();
-        db.get("books").limit(2).apply(new Utils.ResponseListener() {
+        db.get("books").limit(2).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -284,7 +284,7 @@ public class Get {
         h2.put("total", h3);
         hm2.put("$group", h2);
         pipe[1] = hm2;
-        db.aggr("books").pipe(pipe).apply(new Utils.ResponseListener() {
+        db.aggr("books").pipe(pipe).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {

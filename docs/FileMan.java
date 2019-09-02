@@ -9,7 +9,7 @@ public class FileMan {
         API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
 
-        fileStore.createFolder("\\", "aNewFolder", new Utils.ResponseListener() {
+        fileStore.createFolder("\\", "aNewFolder", new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -30,7 +30,7 @@ public class FileMan {
         API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
 
-        fileStore.deleteFile("\\aNewFolder", new Utils.ResponseListener() {
+        fileStore.deleteFile("\\aNewFolder", new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -51,7 +51,7 @@ public class FileMan {
         API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
 
-        fileStore.listFiles("\\", new Utils.ResponseListener() {
+        fileStore.listFiles("\\", new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 System.out.println(statusCode);
@@ -81,7 +81,7 @@ public class FileMan {
         API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
         InputStream inputStream = new FileInputStream("input.txt");
-        fileStore.uploadFile("\\", "file.txt", inputStream, new Utils.ResponseListener() {
+        fileStore.uploadFile("\\", "file.txt", inputStream, new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -102,7 +102,7 @@ public class FileMan {
         API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
         OutputStream outputStream = new FileOutputStream("output.txt";);
-        fileStore.downloadFile("\\file.txt", outputStream, new Utils.ResponseListener() {
+        fileStore.downloadFile("\\file.txt", outputStream, new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {

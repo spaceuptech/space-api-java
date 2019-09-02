@@ -39,7 +39,7 @@ public class Get {
         DB db = api.MySQL();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
-        db.update("books").where(new Cond("id", "==", 1)).set(set).apply(new Utils.ResponseListener() {
+        db.update("books").where(new Cond("id", "==", 1)).set(set).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -60,7 +60,7 @@ public class Get {
         DB db = api.MySQL();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
-        db.updateOne("books").where(new Cond("id", "==", 1)).set(set).apply(new Utils.ResponseListener() {
+        db.updateOne("books").where(new Cond("id", "==", 1)).set(set).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -81,7 +81,7 @@ public class Get {
         Mongo db = api.Mongo();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
-        db.upsert("books").where(new Cond("id", "==", 1)).set(set).apply(new Utils.ResponseListener() {
+        db.upsert("books").where(new Cond("id", "==", 1)).set(set).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -102,7 +102,7 @@ public class Get {
         DB db = api.MySQL();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
-        db.update("books").where(Or.create(new Cond("id", "==", 1), new Cond("name", "==", "aBook"))).set(set).apply(new Utils.ResponseListener() {
+        db.update("books").where(Or.create(new Cond("id", "==", 1), new Cond("name", "==", "aBook"))).set(set).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -123,7 +123,7 @@ public class Get {
         Mongo db = api.Mongo();
         HashMap<String, Object> push = new HashMap<>();
         push.put("name", "Book1");
-        db.update("books").where(new Cond("id", "==", 1)).push(push).apply(new Utils.ResponseListener() {
+        db.update("books").where(new Cond("id", "==", 1)).push(push).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -142,7 +142,7 @@ public class Get {
         // Remove
         API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
-        db.update("books").where(new Cond("id", "==", 1)).remove("author").apply(new Utils.ResponseListener() {
+        db.update("books").where(new Cond("id", "==", 1)).remove("author").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -163,7 +163,7 @@ public class Get {
         Mongo db = api.Mongo();
         HashMap<String, Object> rename = new HashMap<>();
         rename.put("name", "bookName");
-        db.update("books").where(new Cond("id", "==", 1)).rename(rename).apply(new Utils.ResponseListener() {
+        db.update("books").where(new Cond("id", "==", 1)).rename(rename).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -184,7 +184,7 @@ public class Get {
         Mongo db = api.Mongo();
         HashMap<String, Object> increment = new HashMap<>();
         increment.put("likes", 1);
-        db.update("books").where(new Cond("id", "==", 1)).inc(increment).apply(new Utils.ResponseListener() {
+        db.update("books").where(new Cond("id", "==", 1)).inc(increment).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -205,7 +205,7 @@ public class Get {
         Mongo db = api.Mongo();
         HashMap<String, Object> mul = new HashMap<>();
         mul.put("likes", 2);
-        db.update("books").where(new Cond("id", "==", 1)).mul(mul).apply(new Utils.ResponseListener() {
+        db.update("books").where(new Cond("id", "==", 1)).mul(mul).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -226,7 +226,7 @@ public class Get {
         Mongo db = api.Mongo();
         HashMap<String, Object> max = new HashMap<>();
         max.put("likes", 100);
-        db.update("books").where(new Cond("id", "==", 1)).max(max).apply(new Utils.ResponseListener() {
+        db.update("books").where(new Cond("id", "==", 1)).max(max).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -247,7 +247,7 @@ public class Get {
         Mongo db = api.Mongo();
         HashMap<String, Object> min = new HashMap<>();
         min.put("likes", 100);
-        db.update("books").where(new Cond("id", "==", 1)).min(min).apply(new Utils.ResponseListener() {
+        db.update("books").where(new Cond("id", "==", 1)).min(min).apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -266,7 +266,7 @@ public class Get {
         // Current Timestamp
         API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
-        db.update("books").where(new Cond("id", "==", 1)).currentTimestamp("last_read").apply(new Utils.ResponseListener() {
+        db.update("books").where(new Cond("id", "==", 1)).currentTimestamp("last_read").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
@@ -285,7 +285,7 @@ public class Get {
         // Current Date
         API api = new API("books-app", "localhost", 4124);
         Mongo db = api.Mongo();
-        db.update("books").where(new Cond("id", "==", 1)).currentDate("last_read").apply(new Utils.ResponseListener() {
+        db.update("books").where(new Cond("id", "==", 1)).currentDate("last_read").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
                 if (statusCode == 200) {
