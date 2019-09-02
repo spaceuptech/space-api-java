@@ -1,11 +1,14 @@
-package com.spaceuptech;
-
 import com.spaceuptech.space_api.API;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.pubsub.Pubsub;
+import com.spaceuptech.space_api.pubsub.PubsubListener;
+import com.spaceuptech.space_api.pubsub.PubsubSubscription;
+import com.spaceuptech.space_api.utils.Data;
+import com.spaceuptech.space_api.utils.Response;
+import com.spaceuptech.space_api.utils.ResponseListener;
 
 import java.util.HashMap;
 
-public class Pubsub {
+public class PubSub {
     public static void main(String[] args) throws Exception {
         API api = new API("books-app", "localhost", 4124);
         Pubsub pubsub = api.pubsub();

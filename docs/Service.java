@@ -1,7 +1,10 @@
-package com.spaceuptech;
-
 import com.spaceuptech.space_api.API;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.service.ReturnCallback;
+import com.spaceuptech.space_api.service.Service;
+import com.spaceuptech.space_api.service.ServiceFunction;
+import com.spaceuptech.space_api.utils.Data;
+import com.spaceuptech.space_api.utils.Response;
+import com.spaceuptech.space_api.utils.ResponseListener;
 
 public class Service {
 
@@ -12,7 +15,7 @@ public class Service {
         Service service = api.service("service");
         service.registerFunc("echo_func", new ServiceFunction() {
             @Override
-            public void onInvocation(Message params, Message auth, ReturnCallback cb) {
+            public void onInvocation(Data params, Data auth, ReturnCallback cb) {
                 cb.send("response", params.getValue(Object.class));
             }
         });

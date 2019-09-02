@@ -1,9 +1,12 @@
 import com.spaceuptech.space_api.API;
 import com.spaceuptech.space_api.db.DB;
-import com.spaceuptech.space_api.db.Mongo;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.utils.Response;
+import com.spaceuptech.space_api.utils.ResponseListener;
+import com.spaceuptech.space_api.utils.condition.*;
 
-public class Get {
+import java.util.HashMap;
+
+public class Update {
     public static void main(String[] args) {
         class Book {
             private int id;
@@ -78,7 +81,7 @@ public class Get {
 
         // Upsert
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         HashMap<String, Object> set = new HashMap<>();
         set.put("name", "Book1");
         db.upsert("books").where(new Cond("id", "==", 1)).set(set).apply(new ResponseListener() {
@@ -120,7 +123,7 @@ public class Get {
 
         // Push
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         HashMap<String, Object> push = new HashMap<>();
         push.put("name", "Book1");
         db.update("books").where(new Cond("id", "==", 1)).push(push).apply(new ResponseListener() {
@@ -141,7 +144,7 @@ public class Get {
 
         // Remove
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         db.update("books").where(new Cond("id", "==", 1)).remove("author").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -160,7 +163,7 @@ public class Get {
 
         // Rename
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         HashMap<String, Object> rename = new HashMap<>();
         rename.put("name", "bookName");
         db.update("books").where(new Cond("id", "==", 1)).rename(rename).apply(new ResponseListener() {
@@ -181,7 +184,7 @@ public class Get {
 
         // Increment
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         HashMap<String, Object> increment = new HashMap<>();
         increment.put("likes", 1);
         db.update("books").where(new Cond("id", "==", 1)).inc(increment).apply(new ResponseListener() {
@@ -202,7 +205,7 @@ public class Get {
 
         // Multiply
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         HashMap<String, Object> mul = new HashMap<>();
         mul.put("likes", 2);
         db.update("books").where(new Cond("id", "==", 1)).mul(mul).apply(new ResponseListener() {
@@ -223,7 +226,7 @@ public class Get {
 
         // Max
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         HashMap<String, Object> max = new HashMap<>();
         max.put("likes", 100);
         db.update("books").where(new Cond("id", "==", 1)).max(max).apply(new ResponseListener() {
@@ -244,7 +247,7 @@ public class Get {
 
         // Min
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         HashMap<String, Object> min = new HashMap<>();
         min.put("likes", 100);
         db.update("books").where(new Cond("id", "==", 1)).min(min).apply(new ResponseListener() {
@@ -265,7 +268,7 @@ public class Get {
 
         // Current Timestamp
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         db.update("books").where(new Cond("id", "==", 1)).currentTimestamp("last_read").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -284,7 +287,7 @@ public class Get {
 
         // Current Date
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         db.update("books").where(new Cond("id", "==", 1)).currentDate("last_read").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {

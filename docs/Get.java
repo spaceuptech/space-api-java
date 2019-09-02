@@ -1,7 +1,10 @@
 import com.spaceuptech.space_api.API;
 import com.spaceuptech.space_api.db.DB;
-import com.spaceuptech.space_api.db.Mongo;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.utils.condition.*;
+import com.spaceuptech.space_api.utils.ResponseListener;
+import com.spaceuptech.space_api.utils.Response;
+
+import java.util.HashMap;
 
 public class Get {
     public static void main(String[] args) {
@@ -105,7 +108,7 @@ public class Get {
 
         // Distinct
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         db.distinct("books").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -128,7 +131,7 @@ public class Get {
 
         // Count
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         db.count("books").apply(new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
@@ -269,7 +272,7 @@ public class Get {
 
         // Aggregate
         API api = new API("books-app", "localhost", 4124);
-        Mongo db = api.Mongo();
+        DB db = api.Mongo();
         HashMap[] pipe = new HashMap[2];
         HashMap<String, Object> hm1 = new HashMap<>();
         HashMap<String, Object> h1 = new HashMap<>();

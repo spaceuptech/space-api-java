@@ -1,10 +1,13 @@
 import com.spaceuptech.space_api.API;
-import com.spaceuptech.space_api.utils.*;
+import com.spaceuptech.space_api.filestore.FileStore;
+import com.spaceuptech.space_api.utils.ResponseListener;
+import com.spaceuptech.space_api.utils.Response;
 
 import java.io.*;
+import java.util.Map;
 
 public class FileMan {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         // Create Folder
         API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
@@ -101,7 +104,7 @@ public class FileMan {
         // Download File
         API api = new API("books-app", "localhost", 4124);
         FileStore fileStore = api.fileStore();
-        OutputStream outputStream = new FileOutputStream("output.txt";);
+        OutputStream outputStream = new FileOutputStream("output.txt");
         fileStore.downloadFile("\\file.txt", outputStream, new ResponseListener() {
             @Override
             public void onResponse(int statusCode, Response response) {
